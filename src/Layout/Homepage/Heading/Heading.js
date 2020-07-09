@@ -5,12 +5,12 @@ import {
   Nav,
   NavItem,
   NavLink,
+  NavbarToggler,
   UncontrolledDropdown,
   DropdownToggle,
   DropdownItem,
   DropdownMenu,
   Collapse,
-  NavbarToggler,
 } from "reactstrap";
 
 class Heading extends Component {
@@ -45,6 +45,7 @@ class Heading extends Component {
             <DropdownMenu>
               <DropdownItem>Log In</DropdownItem>
               <DropdownItem>Log Out</DropdownItem>
+              <DropdownItem>Anonymous</DropdownItem>
             </DropdownMenu>
           </UncontrolledDropdown>
         </Collapse>
