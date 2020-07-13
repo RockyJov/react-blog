@@ -1,6 +1,6 @@
 .ArticleCard {
   width: 325px;
-  display: inline-block !important;
+  /*display: inline-block !important;*/
   margin: 15px;
 }
 

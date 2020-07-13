@@ -1,6 +1,5 @@
 import React from "react";
 import Main from "./Layout/Homepage/Main/Main.js";
-import "./App.css";
 import Heading from "./Layout/Homepage/Heading/Heading.js";
 function App() {
   return (

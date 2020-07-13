@@ -9,6 +9,8 @@ import {
 } from "reactstrap";
 import classes from "./ArticleCard.module.css";
 
+// data yyyy/mm/dd formatu
+
 export function timeStampToString(ts) {
   const date = new Date(ts * 1000);
   return (

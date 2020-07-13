@@ -1,5 +1,5 @@
 import * as firebase from "firebase";
-
+// firebase informacija
 const firebaseConfig = {
   apiKey: "AIzaSyA1YZtMb3vyqkdAVpclIghDM6GAHaZocpM",
   authDomain: "react-blog-a39d2.firebaseapp.com",

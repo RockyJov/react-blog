@@ -12,7 +12,8 @@ import {
   DropdownMenu,
   Collapse,
 } from "reactstrap";
-
+// kokia sios klases paskirtis? Naudoju kelis reactstrap componentus headeri. Collapse componentas turi isOpen property, kuri default bus
+// false. naudojant toggle metoda, paspaudus atnaujinam isOpen property is false i true, kodel? nezinau
 class Heading extends Component {
   constructor(props) {
     super(props);
@@ -30,7 +31,7 @@ class Heading extends Component {
   render() {
     return (
       <Navbar color="light" light expand="md">
-        <NavbarBrand href="3">My blog</NavbarBrand>
+        <NavbarBrand href="#">My blog</NavbarBrand>
         <NavbarToggler onClick={this.toggle} />
         <Collapse isOpen={this.state.isOpen} navbar>
           <Nav className="mr-auto" navbar>

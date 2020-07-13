@@ -3,6 +3,7 @@ import { Container } from "reactstrap";
 import ArticleCard from "../../../Component/ArticleCard/ArticleCard";
 import firebase from "../../../Config/firebase";
 
+// prieinam prie duomenu bazes firestorei
 const db = firebase.firestore();
 
 class Main extends Component {
@@ -17,6 +18,8 @@ class Main extends Component {
   componentDidMount() {
     this.getMyArticles();
   }
+  // imam colletiona pavadinimu "Articles", sukuriu array allArticles, tada imu kiekviena elementa is Articles, ir idedu i articles[] array,
+  //  kuris yra konstruktoriuje, naudodamas setState, kartu ir pakeiciu isLoaded i true
 
   getMyArticles = () => {
     db.collection("Articles")
@@ -47,6 +50,7 @@ class Main extends Component {
   };
 
   render() {
+    // jei isLoaded yra true, tada einu per kiekviena article ir renderinu kievkiena article, jei isLoaded yra flase, nedarau nieko
     return (
       <div>
         <Container>
