@@ -22,7 +22,12 @@ export function timeStampToString(ts) {
 const ArticleCard = (props) => {
   return (
     <Card className={classes.ArticleCard}>
-      <Link to={"article/" + props.data.id}>
+      <Link
+        to={{
+          pathname: "article/" + props.data.id,
+          state: { article: props.data },
+        }}
+      >
         {" "}
         <CardImg
           top
@@ -34,7 +39,16 @@ const ArticleCard = (props) => {
       </Link>
 
       <CardBody className={classes.CardBody}>
-        <CardTitle className={classes.CardTitle}>{props.data.title}</CardTitle>
+        <CardTitle className={classes.CardTitle}>
+          <Link
+            to={{
+              pathname: "article/" + props.data.id,
+              state: { article: props.data },
+            }}
+          >
+            {props.data.title}
+          </Link>
+        </CardTitle>
         <CardSubtitle className={classes.CardSubtitle}>
           <Badge className={classes.ArticleLabel}>
             {props.data.categoryLabel}

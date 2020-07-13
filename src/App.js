@@ -5,6 +5,7 @@
 // react-dom;
 // firebase;
 // react-router-dom
+// htlm-react-parser
 import React from "react";
 import Main from "./Layout/Homepage/Main/Main.js";
 import Heading from "./Layout/Homepage/Heading/Heading.js";
