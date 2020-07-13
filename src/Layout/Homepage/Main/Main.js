@@ -30,7 +30,7 @@ class Main extends Component {
           let allArticles = [];
           docs.forEach(function (doc) {
             const article = {
-              id: doc,
+              id: doc.id,
               ...doc.data(),
             };
             allArticles.push(article);
