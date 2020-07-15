@@ -32,7 +32,7 @@ const ArticleCard = (props) => {
         <CardImg
           top
           width="100%"
-          src="http://placeimg.com/354/300/any"
+          src={props.data.featureImage}
           alt="Card Image"
           className={classes.CardImage}
         />

@@ -3,6 +3,9 @@ import classes from "./ViewArticle.module.css";
 import { withRouter } from "react-router-dom";
 import parse from "html-react-parser";
 import { Container } from "reactstrap";
+import firebase from "../../../src/Config/firebase";
+
+const db = firebase.firestore();
 
 class ViewArticle extends Component {
   constructor(props) {
@@ -28,8 +31,32 @@ class ViewArticle extends Component {
           }
         );
       }
+    } else {
+      this.getArticleByID(this.props.match.params.id);
     }
   }
+
+  getArticleByID = (aid) => {
+    db.collection("Articles")
+      .doc(aid)
+      .get()
+      .then((doc) => {
+        if (doc.exists) {
+          this.setState(
+            {
+              article: doc.data(),
+            },
+            () => {
+              this.setState({
+                isLoaded: true,
+              });
+            }
+          );
+        } else {
+          this.props.history.push({ pathname: "/" });
+        }
+      });
+  };
 
   timeStampToString = (ts) => {
     const date = new Date(ts * 1000);
