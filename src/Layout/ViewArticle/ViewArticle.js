@@ -15,8 +15,6 @@ class ViewArticle extends Component {
       article: {},
       isLoaded: false,
     };
-
-    console.log(this.props);
   }
 
   componentDidMount() {
@@ -36,6 +34,7 @@ class ViewArticle extends Component {
     }
   }
 
+  // ka sita funkcija daro??
   getArticleByID = (aid) => {
     db.collection("Articles")
       .doc(aid)
