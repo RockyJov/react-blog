@@ -33,6 +33,18 @@ class Heading extends Component {
     });
   };
 
+  //react-blog-server folder
+  componentWillReceiveProps(nextProps, nextContext) {
+    if (!nextProps.auth.isEmpty) {
+      firebase
+        .auth()
+        .currentUser.getIdTokenResult()
+        .then((claim) => {
+          console.log(claim);
+        });
+    }
+  }
+
   render() {
     return (
       <Navbar color="light" light expand="md">
