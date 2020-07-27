@@ -22,6 +22,7 @@ import { Provider } from "react-redux";
 import { getReduxStore, getRrfProp } from "./Config/firebase-redux";
 import { ReactReduxFirebaseProvider } from "react-redux-firebase";
 import LoginPage from "./Layout/LoginPage/LoginPage";
+import RouterManager from "./Layout/RouterManager/RouterManager";
 
 function App() {
   return (
@@ -30,21 +31,7 @@ function App() {
       <Provider store={getReduxStore()}>
         <ReactReduxFirebaseProvider {...getRrfProp()}>
           <Router>
-            <Heading />
-            <Switch>
-              <Route path="/" exact>
-                <Main />
-              </Route>
-              <Route path="/login">
-                <LoginPage />
-              </Route>
-              <Route path="/article/:id">
-                <ViewArticle />
-              </Route>
-              <Route path="/new-article">
-                <NewArticle />
-              </Route>
-            </Switch>
+            <RouterManager />
           </Router>
         </ReactReduxFirebaseProvider>
       </Provider>
