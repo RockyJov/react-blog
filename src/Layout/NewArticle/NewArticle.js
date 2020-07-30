@@ -103,6 +103,8 @@ class NewArticle extends Component {
     });
   };
 
+  // seconds not defined
+
   submitArticle = () => {
     const article = this.state.article;
     article.createUserID = this.props.auth.uid;
