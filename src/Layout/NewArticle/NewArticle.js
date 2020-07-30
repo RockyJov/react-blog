@@ -15,6 +15,9 @@ import {
 import classes from "./NewArticle.module.css";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import firebase from "../../Config/firebase";
+
+const db = firebase.firestore();
 
 class NewArticle extends Component {
   constructor(props) {
@@ -100,6 +103,17 @@ class NewArticle extends Component {
     });
   };
 
+  submitArticle = () => {
+    const article = this.state.article;
+    article.createUserID = this.props.auth.uid;
+    db.collection("Articles")
+      .add(article)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => console.log(err));
+  };
+
   render() {
     return (
       <Container>
@@ -145,10 +159,7 @@ class NewArticle extends Component {
                   </Input>
                 </FormGroup>
                 <FormGroup>
-                  <Button
-                    color="danger"
-                    onClick={(e) => console.log(this.state.article)}
-                  >
+                  <Button color="danger" onClick={(e) => this.submitArticle()}>
                     {" "}
                     Submit
                   </Button>

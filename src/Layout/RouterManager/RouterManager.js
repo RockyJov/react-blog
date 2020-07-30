@@ -45,7 +45,7 @@ const AdminOnly = (ComposedComponent, auth) => {
           <ComposedComponent
             location={this.props.location}
             history={this.props.history}
-            auth={this.props.auth}
+            auth={auth}
           />
         );
       } else {
