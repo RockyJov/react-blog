@@ -16,8 +16,10 @@ import classes from "./NewArticle.module.css";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import firebase from "../../Config/firebase";
+import { v4 as uuidv4 } from "uuid";
 
 const db = firebase.firestore();
+const storageRef = firebase.storage();
 
 class NewArticle extends Component {
   constructor(props) {
@@ -116,6 +118,27 @@ class NewArticle extends Component {
       .catch((err) => console.log(err));
   };
 
+  uploadImageCallBack = (e) => {
+    return new Promise(async (resolve, reject) => {
+      const file = e.target.files[0];
+      const fileName = uuidv4();
+      storageRef
+        .ref()
+        .child("Articles/" + fileName)
+        .put(file)
+        .then(async (snapshot) => {
+          const downloadURL = await storageRef
+            .ref()
+            .child("Articles/" + fileName)
+            .getDownloadURL();
+          resolve({
+            success: true,
+            data: { link: downloadURL },
+          });
+        });
+    });
+  };
+
   render() {
     return (
       <Container>
@@ -159,6 +182,37 @@ class NewArticle extends Component {
                     <option>False</option>
                     <option>True</option>
                   </Input>
+                </FormGroup>
+
+                <FormGroup>
+                  <Label className={classes.Label}>Feature Image</Label>
+                  <Input
+                    type="file"
+                    accept="image/*"
+                    className={classes.ImageUploader}
+                    onChange={async (e) => {
+                      const uploadState = await this.uploadImageCallBack(e);
+                      if (uploadState.success) {
+                        this.setState({
+                          hasFeatureImage: true,
+                          article: {
+                            ...this.state.article,
+                            featureImage: uploadState.data.link,
+                          },
+                        });
+                      }
+                      console.log("sdfsdf" + uploadState.data.link);
+                    }}
+                  ></Input>
+
+                  {this.state.hasFeatureImage ? (
+                    <img
+                      src={this.state.article.featureImage}
+                      className={classes.FeatureImg}
+                    />
+                  ) : (
+                    ""
+                  )}
                 </FormGroup>
                 <FormGroup>
                   <Button color="danger" onClick={(e) => this.submitArticle()}>

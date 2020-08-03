@@ -11,7 +11,8 @@
 // react-firebaseui
 // react-redux
 // redux
-//in react-blog-server: express; firebase-admin
+// uuid
+//in react-blog-server(different directory): express; firebase-admin
 import React from "react";
 import Main from "./Layout/Homepage/Main/Main.js";
 import Heading from "./Layout/Homepage/Heading/Heading.js";

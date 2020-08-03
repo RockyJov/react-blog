@@ -39,9 +39,7 @@ class Heading extends Component {
       firebase
         .auth()
         .currentUser.getIdTokenResult()
-        .then((claim) => {
-          console.log(claim);
-        });
+        .then((claim) => {});
     }
   }
 
