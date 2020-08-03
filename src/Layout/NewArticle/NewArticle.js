@@ -30,7 +30,7 @@ class NewArticle extends Component {
         createDate: new Date(),
         featureImage: "",
         isPublish: "",
-        lasModified: new Date(),
+        lastModified: new Date(),
         createUserID: "",
       },
     };

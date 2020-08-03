@@ -78,11 +78,12 @@ class ViewArticle extends Component {
             </div>
             <div className={classes.ArticleInfo}>
               <h1 className={classes.Title}>{this.state.article.title}</h1>
-              {/* <div className={classes.Date}> ***seconds error for written articles
+              <div className={classes.Date}>
+                {" "}
                 {this.timeStampToString(
                   this.state.article.lastModified.seconds
                 )}
-              </div> */}
+              </div>
             </div>
             <div className={classes.ArticleMain}>
               {parse(this.state.article.content)}
