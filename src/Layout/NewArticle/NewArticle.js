@@ -17,6 +17,7 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import firebase from "../../Config/firebase";
 import { v4 as uuidv4 } from "uuid";
+import Compressor from "compressorjs";
 
 const db = firebase.firestore();
 const storageRef = firebase.storage();
@@ -54,6 +55,9 @@ class NewArticle extends Component {
         ["clean"],
         ["code-block"],
       ],
+      handlers: {
+        image: () => this.quillImageCallBack(),
+      },
     },
     clipboard: {
       matchVisual: false,
@@ -116,6 +120,57 @@ class NewArticle extends Component {
         console.log(res);
       })
       .catch((err) => console.log(err));
+  };
+
+  fileCompress = (file) => {
+    return new Promise((resolve, reject) => {
+      new Compressor(file, {
+        file: "File",
+        quality: 0.5,
+        maxWidth: 640,
+        maxHeight: 640,
+        success(file) {
+          return resolve({
+            success: true,
+            file: file,
+          });
+        },
+        error(err) {
+          return resolve({
+            success: false,
+            message: err.message,
+          });
+        },
+      });
+    });
+  };
+
+  quillImageCallBack = () => {
+    const input = document.createElement("input");
+    input.setAttribute("type", "file");
+    input.setAttribute("accept", "image/*");
+    input.click();
+
+    input.onchange = async () => {
+      const file = input.files[0];
+      const compressState = await this.fileCompress(file);
+      if (compressState.success) {
+        const fileName = uuidv4();
+        storageRef
+          .ref()
+          .child("Articles/" + fileName)
+          .put(compressState.file)
+          .then(async (snapshot) => {
+            const downloadURL = await storageRef
+              .ref()
+              .child("Articles/" + fileName)
+              .getDownloadURL();
+            let quill = this.quill.getEditor();
+            const range = quill.getSelection(true);
+            quill.insertEmbed(range.index, "image", downloadURL);
+          });
+      }
+    };
   };
 
   uploadImageCallBack = (e) => {
