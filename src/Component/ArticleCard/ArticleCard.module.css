@@ -1,11 +1,13 @@
 .ArticleCard {
-  width: 325px;
+  width: 90%;
   /*display: inline-block !important;*/
-  margin: 15px;
+  margin: 2px;
 }
 
 .CardImage {
   max-height: 180px;
+  max-width: 180px;
+  float: left;
 }
 
 .CardBody {
@@ -13,6 +15,7 @@
 }
 
 .CardTitle {
+  float: right;
   font-size: 16px;
   height: 45px;
   text-overflow: ellipsis;
