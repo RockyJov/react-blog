@@ -28,7 +28,7 @@ const ArticleCard = (props) => {
       {" "}
       <Container>
         <Row>
-          <Col>
+          <Col xs="2">
             {" "}
             <Link
               className={classes.CardLink}
@@ -61,6 +61,7 @@ const ArticleCard = (props) => {
                 </Link>
               </CardTitle>
               <CardSubtitle className={classes.CardSubtitle}>
+                {props.data.content}
                 <Badge className={classes.ArticleLabel}>
                   {props.data.categoryLabel}
                 </Badge>
