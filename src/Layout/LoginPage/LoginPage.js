@@ -3,11 +3,15 @@ import { Container, Button } from "reactstrap";
 import { connect } from "react-redux";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import firebase from "../../Config/firebase";
+import { Link } from "react-router-dom";
 
 const uiConfig = {
   signInFlow: "popup",
   signInSuccessUrl: "/",
-  signInOptions: [firebase.auth.GoogleAuthProvider.PROVIDER_ID],
+  signInOptions: [
+    firebase.auth.signInAnonymously,
+    firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+  ],
 };
 
 class LoginPage extends Component {
@@ -22,13 +26,16 @@ class LoginPage extends Component {
           uiConfig={uiConfig}
           firebaseAuth={firebase.auth()}
         />
+
         <Button
+          uiConfig={uiConfig}
+          firebaseAuth={firebase.auth()}
+          block
           onClick={() => {
-            firebase.app().auth().signInAnonymously();
-            console.log(this.props.auth);
+            firebase.auth().signInAnonymously();
           }}
         >
-          Hi
+          Anon
         </Button>
       </Container>
     );

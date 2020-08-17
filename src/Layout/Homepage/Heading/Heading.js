@@ -39,7 +39,9 @@ class Heading extends Component {
       firebase
         .auth()
         .currentUser.getIdTokenResult()
-        .then((claim) => {});
+        .then((claim) => {
+          console.log(claim);
+        });
     }
   }
 
@@ -71,8 +73,6 @@ class Heading extends Component {
                   </Button>
                 </DropdownItem>
               )}
-
-              <DropdownItem>Anonymous</DropdownItem>
             </DropdownMenu>
           </UncontrolledDropdown>
         </Collapse>

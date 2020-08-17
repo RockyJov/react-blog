@@ -27,7 +27,8 @@ const AdminOnly = (ComposedComponent, auth) => {
           .auth()
           .currentUser.getIdTokenResult()
           .then((getIdTokenResult) => {
-            if (getIdTokenResult.claims.type === "administrator") {
+            // if (getIdTokenResult.claims.type === "administrator") {
+            if (!auth.isEmpty) {
               this.setState({
                 isPass: true,
               });
