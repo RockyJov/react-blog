@@ -22,7 +22,10 @@ const AdminOnly = (ComposedComponent, auth) => {
       };
     }
     componentWillMount() {
-      if (!auth.isEmpty) {
+      if (auth.isEmpty) {
+        firebase.auth().signInAnonymously();
+      } else {
+        // this.props.history.push("/login");
         firebase
           .auth()
           .currentUser.getIdTokenResult()
@@ -32,12 +35,12 @@ const AdminOnly = (ComposedComponent, auth) => {
               this.setState({
                 isPass: true,
               });
-            } else {
-              this.props.history.push("/login");
             }
+            //else {
+            // this.props.history.push("/login");
+            //firebase.auth().signInAnonymously();
+            //}
           });
-      } else {
-        this.props.history.push("/login");
       }
     }
     render() {

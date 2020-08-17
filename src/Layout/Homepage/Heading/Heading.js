@@ -56,8 +56,10 @@ class Heading extends Component {
               <NavLink href="/new-article">New Article</NavLink>
             </NavItem>
           </Nav>
-          {this.props.auth.isEmpty ? "" : "Hi, " + this.props.auth.uid}
-          <UncontrolledDropdown>
+          {this.props.auth.isEmpty
+            ? ""
+            : "Hi, " + this.props.auth.uid.slice(0, 10)}
+          {/* <UncontrolledDropdown>
             <DropdownToggle nav caret>
               Options
             </DropdownToggle>
@@ -74,7 +76,8 @@ class Heading extends Component {
                 </DropdownItem>
               )}
             </DropdownMenu>
-          </UncontrolledDropdown>
+          </UncontrolledDropdown> */}
+          <Button onClick={() => firebase.auth().signOut()}>Logout</Button>
         </Collapse>
       </Navbar>
     );
