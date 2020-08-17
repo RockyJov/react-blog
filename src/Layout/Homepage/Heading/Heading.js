@@ -54,7 +54,7 @@ class Heading extends Component {
               <NavLink href="/new-article">New Article</NavLink>
             </NavItem>
           </Nav>
-          {this.props.auth.isEmpty ? "" : this.props.auth.displayName}
+          {this.props.auth.isEmpty ? "" : "Hi, " + this.props.auth.uid}
           <UncontrolledDropdown>
             <DropdownToggle nav caret>
               Options

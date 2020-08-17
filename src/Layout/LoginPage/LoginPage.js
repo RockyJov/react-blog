@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Container } from "reactstrap";
+import { Container, Button } from "reactstrap";
 import { connect } from "react-redux";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import firebase from "../../Config/firebase";
@@ -22,6 +22,14 @@ class LoginPage extends Component {
           uiConfig={uiConfig}
           firebaseAuth={firebase.auth()}
         />
+        <Button
+          onClick={() => {
+            firebase.app().auth().signInAnonymously();
+            console.log(this.props.auth);
+          }}
+        >
+          Hi
+        </Button>
       </Container>
     );
   }
