@@ -69,7 +69,7 @@ class ViewArticle extends Component {
       return (
         <Container>
           <div className={classes.Article}>
-            <div className={classes.ImageContaier}>
+            <div className={classes.ImageConainer}>
               <img
                 className={classes.Image}
                 src={this.state.article.featureImage}
@@ -84,6 +84,7 @@ class ViewArticle extends Component {
                   this.state.article.lastModified.seconds
                 )}
               </div>
+              <h2>Posted by: {this.state.article.createUserID.slice(0, 10)}</h2>
             </div>
             <div className={classes.ArticleMain}>
               {parse(this.state.article.content)}

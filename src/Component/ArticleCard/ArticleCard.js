@@ -69,7 +69,9 @@ const ArticleCard = (props) => {
                   {timeStampToString(props.data.createDate.seconds)}
                 </Badge>
                 <div></div>
-                <Badge>Created by: {props.data.createUserID}</Badge>
+                <Badge>
+                  Created by: {props.data.createUserID.slice(0, 10)}
+                </Badge>
               </CardSubtitle>
             </CardBody>
           </Col>
