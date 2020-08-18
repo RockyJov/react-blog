@@ -100,14 +100,14 @@ class NewComment extends Component {
     });
   };
 
-  onChangePublish = (value) => {
-    this.setState({
-      article: {
-        ...this.state.article,
-        isPublish: value === "True",
-      },
-    });
-  };
+  // onChangePublish = (value) => {
+  //   this.setState({
+  //     article: {
+  //       ...this.state.article,
+  //       isPublish: value === "True",
+  //     },
+  //   });
+  // };
 
   // seconds not defined
 
@@ -199,8 +199,8 @@ class NewComment extends Component {
       <Container>
         <Row>
           <Col xl={9} lg={8} md={8} sn={12}>
-            <h2 className={classes.SectionTitle}>New Article</h2>
-            <FormGroup>
+            <h2 className={classes.SectionTitle}>Comment</h2>
+            {/* <FormGroup>
               <Label className={classes.Label}>Title</Label>
               <Input
                 type="text"
@@ -210,7 +210,7 @@ class NewComment extends Component {
                 onChange={(e) => this.onChangeArticleTitle(e.target.value)}
                 value={this.state.article.title}
               />
-            </FormGroup>
+            </FormGroup> */}
             <FormGroup>
               <ReactQuill
                 ref={(el) => (this.quill = el)}
@@ -224,9 +224,9 @@ class NewComment extends Component {
           </Col>
           <Col xl={3} lg={3} md={4} sn={12}>
             <Card>
-              <CardHeader>Article Settings</CardHeader>
+              <CardHeader>Comment Settings</CardHeader>
               <CardBody>
-                <FormGroup>
+                {/* <FormGroup>
                   <Label className={classes.Label}>Publish</Label>
                   <Input
                     type="select"
@@ -237,7 +237,7 @@ class NewComment extends Component {
                     <option>False</option>
                     <option>True</option>
                   </Input>
-                </FormGroup>
+                </FormGroup> */}
 
                 <FormGroup>
                   <Label className={classes.Label}>Feature Image</Label>
