@@ -28,12 +28,13 @@ class NewComment extends Component {
 
     this.state = {
       comment: {
-        title: "",
+        //title: "",
+        articleID: "",
         content: "",
         createDate: new Date(),
-        featureImage: "",
+        //featureImage: "",
         isPublish: "True",
-        lastModified: new Date(),
+        //lastModified: new Date(),
         createUserID: "",
       },
     };
@@ -114,13 +115,12 @@ class NewComment extends Component {
   submitComment = () => {
     const comment = this.state.comment;
     comment.createUserID = this.props.auth.uid;
-    console.log(comment);
-    // db.collection("Articles")
-    //   .add(comment)
-    //   .then((res) => {
-    //     console.log(res);
-    //   })
-    //   .catch((err) => console.log(err));
+    db.collection("Comments")
+      .add(comment)
+      .then((res) => {
+        console.log(res);
+      });
+    // .catch((err) => console.log(err));
   };
 
   fileCompress = (file) => {
@@ -223,9 +223,11 @@ class NewComment extends Component {
               />
             </FormGroup>
           </Col>
+
           <Col xl={3} lg={3} md={4} sn={12}>
             <Card>
               <CardHeader>Comment Settings</CardHeader>
+
               <CardBody>
                 {/* <FormGroup>
                   <Label className={classes.Label}>Publish</Label>
@@ -275,6 +277,7 @@ class NewComment extends Component {
                     {" "}
                     Submit
                   </Button>
+                  <Button onClick={() => console.log()}>Click</Button>
                 </FormGroup>
               </CardBody>
             </Card>
