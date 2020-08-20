@@ -1,0 +1,9 @@
+.Label {
+  float: left;
+  font-size: 12px;
+  color: #6c757c;
+}
+.FeatureImg {
+  width: 100%;
+  overflow: hidden;
+}

@@ -27,12 +27,12 @@ class NewComment extends Component {
     super(props);
 
     this.state = {
-      article: {
+      comment: {
         title: "",
         content: "",
         createDate: new Date(),
         featureImage: "",
-        isPublish: "",
+        isPublish: "True",
         lastModified: new Date(),
         createUserID: "",
       },
@@ -82,44 +82,45 @@ class NewComment extends Component {
     "code-block",
   ];
 
-  onChangeArticleTitle = (value) => {
-    this.setState({
-      article: {
-        ...this.state.article,
-        title: value,
-      },
-    });
-  };
+  // onChangeArticleTitle = (value) => {
+  //   this.setState({
+  //     article: {
+  //       ...this.state.article,
+  //       title: value,
+  //     },
+  //   });
+  // };
 
-  onChangeArticleContent = (value) => {
+  onChangeCommentContent = (value) => {
     this.setState({
-      article: {
-        ...this.state.article,
+      comment: {
+        ...this.state.comment,
         content: value,
       },
     });
   };
 
-  // onChangePublish = (value) => {
-  //   this.setState({
-  //     article: {
-  //       ...this.state.article,
-  //       isPublish: value === "True",
-  //     },
-  //   });
-  // };
+  onChangePublish = (value) => {
+    this.setState({
+      comment: {
+        ...this.state.comment,
+        isPublish: value === "True",
+      },
+    });
+  };
 
   // seconds not defined
 
-  submitArticle = () => {
-    const article = this.state.article;
-    article.createUserID = this.props.auth.uid;
-    db.collection("Articles")
-      .add(article)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => console.log(err));
+  submitComment = () => {
+    const comment = this.state.comment;
+    comment.createUserID = this.props.auth.uid;
+    console.log(comment);
+    // db.collection("Articles")
+    //   .add(comment)
+    //   .then((res) => {
+    //     console.log(res);
+    //   })
+    //   .catch((err) => console.log(err));
   };
 
   fileCompress = (file) => {
@@ -214,8 +215,8 @@ class NewComment extends Component {
             <FormGroup>
               <ReactQuill
                 ref={(el) => (this.quill = el)}
-                value={this.state.article.content}
-                onChange={(e) => this.onChangeArticleContent(e)}
+                value={this.state.comment.content}
+                onChange={(e) => this.onChangeCommentContent(e)}
                 theme="snow"
                 modules={this.modules}
                 formats={this.formats}
@@ -270,7 +271,7 @@ class NewComment extends Component {
                   )}
                 </FormGroup>
                 <FormGroup>
-                  <Button color="danger" onClick={(e) => this.submitArticle()}>
+                  <Button color="danger" onClick={(e) => this.submitComment()}>
                     {" "}
                     Submit
                   </Button>

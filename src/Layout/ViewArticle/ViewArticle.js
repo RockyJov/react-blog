@@ -93,10 +93,6 @@ class ViewArticle extends Component {
             <button>+</button>
             <button>-</button>
           </div>
-
-          <div className={classes.Article}>
-            <NewComment />
-          </div>
         </Container>
       );
     } else {
