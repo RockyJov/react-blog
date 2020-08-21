@@ -119,8 +119,8 @@ class NewComment extends Component {
       .add(comment)
       .then((res) => {
         console.log(res);
-      });
-    // .catch((err) => console.log(err));
+      })
+      .catch((err) => console.log(err));
   };
 
   fileCompress = (file) => {
@@ -277,7 +277,6 @@ class NewComment extends Component {
                     {" "}
                     Submit
                   </Button>
-                  <Button onClick={() => console.log()}>Click</Button>
                 </FormGroup>
               </CardBody>
             </Card>
