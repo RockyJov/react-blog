@@ -115,7 +115,9 @@ class NewComment extends Component {
   submitComment = () => {
     const comment = this.state.comment;
     comment.createUserID = this.props.auth.uid;
-    db.collection("Comments")
+    db.collection("Articles")
+      .doc("70VuC1Jpuk6QTeydma1m")
+      .collection("Comments")
       .add(comment)
       .then((res) => {
         console.log(res);
