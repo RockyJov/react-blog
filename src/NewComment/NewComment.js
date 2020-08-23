@@ -115,14 +115,15 @@ class NewComment extends Component {
   submitComment = () => {
     const comment = this.state.comment;
     comment.createUserID = this.props.auth.uid;
-    db.collection("Articles")
-      .doc(this.props.data.id)
-      .collection("Comments")
-      .add(comment)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => console.log(err));
+    console.log(this.props.data.id);
+    // db.collection("Articles")
+    //   .doc()
+    //   .collection("Comments")
+    //   .add(comment)
+    //   .then((res) => {
+    //     console.log(res);
+    //   })
+    //   .catch((err) => console.log(err));
   };
 
   fileCompress = (file) => {
