@@ -86,6 +86,7 @@ class ViewArticle extends Component {
                 )}
               </div>
               <h2>Posted by: {this.state.article.createUserID.slice(0, 10)}</h2>
+              <h2>{this.props.match.params.id}</h2>
             </div>
             <div className={classes.ArticleMain}>
               {parse(this.state.article.content)}

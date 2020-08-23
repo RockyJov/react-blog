@@ -113,9 +113,10 @@ class NewComment extends Component {
   // seconds not defined
 
   submitComment = () => {
+    const id = this.props.match.params.id;
     const comment = this.state.comment;
     comment.createUserID = this.props.auth.uid;
-    console.log(this.props.data.id);
+    console.log(id);
     // db.collection("Articles")
     //   .doc()
     //   .collection("Comments")
