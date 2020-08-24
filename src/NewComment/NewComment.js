@@ -27,7 +27,6 @@ class NewComment extends Component {
     super(props);
 
     this.state = {
-      article: {},
       comment: {
         //title: "",
         articleID: "",
@@ -114,17 +113,18 @@ class NewComment extends Component {
   // seconds not defined
 
   submitComment = () => {
+    const aid = this.props.location.pathname.slice(9);
     const comment = this.state.comment;
     comment.createUserID = this.props.auth.uid;
-    console.log(this.props.location.pathname.slice(2, 10));
-    // db.collection("Articles")
-    //   .doc()
-    //   .collection("Comments")
-    //   .add(comment)
-    //   .then((res) => {
-    //     console.log(res);
-    //   })
-    //   .catch((err) => console.log(err));
+    console.log(aid);
+    db.collection("Articles")
+      .doc(aid)
+      .collection("Comments")
+      .add(comment)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => console.log(err));
   };
 
   fileCompress = (file) => {
