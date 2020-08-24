@@ -4,7 +4,6 @@ import { withRouter } from "react-router-dom";
 import parse from "html-react-parser";
 import { Container } from "reactstrap";
 import firebase from "../../../src/Config/firebase";
-import NewComment from "../../NewComment/NewComment";
 
 const db = firebase.firestore();
 
