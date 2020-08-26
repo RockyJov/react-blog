@@ -92,8 +92,8 @@ class ViewArticle extends Component {
             </div>
             <button>+</button>
             <button>-</button>
-            <Comments />
           </div>
+          <Comments />
         </Container>
       );
     } else {
