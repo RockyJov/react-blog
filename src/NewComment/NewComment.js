@@ -116,7 +116,6 @@ class NewComment extends Component {
     const aid = this.props.location.pathname.slice(9);
     const comment = this.state.comment;
     comment.createUserID = this.props.auth.uid;
-    console.log(aid);
     db.collection("Articles")
       .doc(aid)
       .collection("Comments")

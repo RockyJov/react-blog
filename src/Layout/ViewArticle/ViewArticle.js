@@ -4,7 +4,7 @@ import { withRouter } from "react-router-dom";
 import parse from "html-react-parser";
 import { Container } from "reactstrap";
 import firebase from "../../../src/Config/firebase";
-
+import Comments from "../Comments/Comments";
 const db = firebase.firestore();
 
 class ViewArticle extends Component {
@@ -92,6 +92,7 @@ class ViewArticle extends Component {
             </div>
             <button>+</button>
             <button>-</button>
+            <Comments />
           </div>
         </Container>
       );
