@@ -28,25 +28,16 @@ const CommentCard = (props) => {
       {" "}
       <Container>
         <Row>
-          {/* <Col xs="2">
+          <Col xs="2">
             {" "}
-            <Link
-              className={classes.CardLink}
-              to={{
-                pathname: "article/" + props.data.id,
-                state: { article: props.data },
-              }}
-            >
-              {" "}
-              <CardImg
-                top
-                width="100%"
-                src={props.data.featureImage}
-                alt="Card Image"
-                className={classes.CardImage}
-              />
-            </Link>
-          </Col> */}
+            <CardImg
+              top
+              width="100%"
+              src={props.data.featureImage}
+              alt="Card Image"
+              className={classes.CardImage}
+            />
+          </Col>
           <Col>
             {" "}
             <CardBody className={classes.CardBody}>

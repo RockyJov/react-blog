@@ -32,7 +32,7 @@ class NewComment extends Component {
         articleID: "",
         content: "",
         createDate: new Date(),
-        //featureImage: "",
+        featureImage: "",
         isPublish: "True",
         //lastModified: new Date(),
         createUserID: "",
@@ -162,7 +162,7 @@ class NewComment extends Component {
         const fileName = uuidv4();
         storageRef
           .ref()
-          .child("Articles/" + fileName)
+          .child("Comments/" + fileName)
           .put(compressState.file)
           .then(async (snapshot) => {
             const downloadURL = await storageRef
@@ -183,12 +183,12 @@ class NewComment extends Component {
       const fileName = uuidv4();
       storageRef
         .ref()
-        .child("Articles/" + fileName)
+        .child("Comments/" + fileName)
         .put(file)
         .then(async (snapshot) => {
           const downloadURL = await storageRef
             .ref()
-            .child("Articles/" + fileName)
+            .child("Comments/" + fileName)
             .getDownloadURL();
           resolve({
             success: true,
@@ -256,8 +256,8 @@ class NewComment extends Component {
                       if (uploadState.success) {
                         this.setState({
                           hasFeatureImage: true,
-                          article: {
-                            ...this.state.article,
+                          comment: {
+                            ...this.state.comment,
                             featureImage: uploadState.data.link,
                           },
                         });
@@ -268,7 +268,7 @@ class NewComment extends Component {
 
                   {this.state.hasFeatureImage ? (
                     <img
-                      src={this.state.article.featureImage}
+                      src={this.state.comment.featureImage}
                       className={classes.FeatureImg}
                     />
                   ) : (
