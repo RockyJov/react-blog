@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import firebase from "../../Config/firebase";
 import { Button, Container } from "reactstrap";
 
+const db = firebase.firestore();
+
 class ArticleRate extends Component {
   constructor(props) {
     super(props);
@@ -15,7 +17,7 @@ class ArticleRate extends Component {
     };
   }
 
-  onClickPositive = () => {
+  clickPositive = () => {
     this.setState({
       articleRate: {
         ...this.state.articleRate,
@@ -23,9 +25,10 @@ class ArticleRate extends Component {
         negativeRating: false,
       },
     });
+    console.log(this.props.auth.uid);
   };
 
-  onClickNegative = () => {
+  clickNegative = () => {
     this.setState({
       articleRate: {
         ...this.state.articleRate,
@@ -35,11 +38,25 @@ class ArticleRate extends Component {
     });
   };
 
+  submitRating = () => {
+    const aid = this.props.location.pathname.slice(9);
+    const comment = this.state.comment;
+    comment.createUserID = this.props.auth.uid;
+    db.collection("Articles")
+      .doc(aid)
+      .collection("Comments")
+      .add(comment)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => console.log(err));
+  };
+
   render() {
     return (
       <Container>
-        <Button onClick={this.onClickPositive}>+</Button>
-        <Button onClick={this.onClickNegative}>-</Button>
+        <Button onClick={this.clickPositive}>+</Button>
+        <Button>-</Button>
       </Container>
     );
   }

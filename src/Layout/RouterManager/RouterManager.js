@@ -9,6 +9,7 @@ import LoginPage from "../LoginPage/LoginPage";
 import ViewArticle from "../ViewArticle/ViewArticle";
 import NewArticle from "../NewArticle/NewArticle";
 import NewComment from "../../NewComment/NewComment";
+import ArticleRate from "../ArticleRate/ArticleRate";
 import Main from "../Homepage/Main/Main";
 import Heading from "../Homepage/Heading/Heading";
 import { connect } from "react-redux";
@@ -82,6 +83,10 @@ class RouterManager extends Component {
               <Route
                 path="/article/:id"
                 component={AdminOnly(NewComment, this.props.auth)}
+              />
+              <Route
+                path="/article/:id"
+                component={AdminOnly(ArticleRate, this.props.auth)}
               />
             </Route>
             <Route
