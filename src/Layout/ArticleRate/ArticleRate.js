@@ -25,7 +25,6 @@ class ArticleRate extends Component {
         negativeRating: false,
       },
     });
-    console.log(this.props.auth.uid);
   };
 
   clickNegative = () => {
@@ -44,7 +43,7 @@ class ArticleRate extends Component {
     comment.createUserID = this.props.auth.uid;
     db.collection("Articles")
       .doc(aid)
-      .collection("Comments")
+      .collection("Ratings")
       .add(comment)
       .then((res) => {
         console.log(res);
@@ -55,7 +54,7 @@ class ArticleRate extends Component {
   render() {
     return (
       <Container>
-        <Button onClick={this.clickPositive}>+</Button>
+        <Button>+</Button>
         <Button>-</Button>
       </Container>
     );

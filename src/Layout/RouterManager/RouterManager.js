@@ -84,10 +84,6 @@ class RouterManager extends Component {
                 path="/article/:id"
                 component={AdminOnly(NewComment, this.props.auth)}
               />
-              <Route
-                path="/article/:id"
-                component={AdminOnly(ArticleRate, this.props.auth)}
-              />
             </Route>
             <Route
               path="/new-article"
