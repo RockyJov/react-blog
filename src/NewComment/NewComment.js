@@ -112,6 +112,10 @@ class NewComment extends Component {
 
   // seconds not defined
 
+  test = () => {
+    console.log(this.props.auth);
+  };
+
   submitComment = () => {
     const aid = this.props.location.pathname.slice(9);
     const comment = this.state.comment;
@@ -280,6 +284,7 @@ class NewComment extends Component {
                     {" "}
                     Submit
                   </Button>
+                  <Button onClick={() => this.test()}>-</Button>
                 </FormGroup>
               </CardBody>
             </Card>

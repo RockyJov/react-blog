@@ -17,24 +17,10 @@ class ArticleRate extends Component {
     };
   }
 
-  clickPositive = () => {
-    this.setState({
-      articleRate: {
-        ...this.state.articleRate,
-        positiveRating: true,
-        negativeRating: false,
-      },
-    });
-  };
-
-  clickNegative = () => {
-    this.setState({
-      articleRate: {
-        ...this.state.articleRate,
-        positiveRating: false,
-        negativeRating: true,
-      },
-    });
+  test = () => {
+    const articleRate = this.state.articleRate;
+    articleRate.createUserID = this.props.auth.uid;
+    console.log(articleRate.createUserID);
   };
 
   submitRating = () => {
@@ -55,7 +41,7 @@ class ArticleRate extends Component {
     return (
       <Container>
         <Button>+</Button>
-        <Button>-</Button>
+        <Button onClick={() => this.test()}>-</Button>
       </Container>
     );
   }
