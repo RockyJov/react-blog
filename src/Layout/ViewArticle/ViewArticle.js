@@ -4,8 +4,6 @@ import { withRouter } from "react-router-dom";
 import parse from "html-react-parser";
 import { Container } from "reactstrap";
 import firebase from "../../../src/Config/firebase";
-import Comments from "../Comments/Comments";
-import ArticleRate from "../ArticleRate/ArticleRate";
 
 const db = firebase.firestore();
 
@@ -91,10 +89,8 @@ class ViewArticle extends Component {
             </div>
             <div className={classes.ArticleMain}>
               {parse(this.state.article.content)}
-              <ArticleRate />
             </div>
           </div>
-          <Comments />
         </Container>
       );
     } else {

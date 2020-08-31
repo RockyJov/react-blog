@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import firebase from "../../Config/firebase";
+import classes from "./ArticleRate.module.css";
 import { Button, Container } from "reactstrap";
 
 const db = firebase.firestore();
@@ -40,8 +41,14 @@ class ArticleRate extends Component {
   render() {
     return (
       <Container>
-        <Button>+</Button>
-        <Button onClick={() => this.test()}>-</Button>
+        <div className={classes.Rate}>
+          <h1>Rate this article</h1>
+          <div className={classes.Button}>
+            {" "}
+            <Button>+</Button>
+            <Button onClick={() => this.test()}>-</Button>
+          </div>
+        </div>
       </Container>
     );
   }
