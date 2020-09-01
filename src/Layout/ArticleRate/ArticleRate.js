@@ -18,20 +18,32 @@ class ArticleRate extends Component {
     };
   }
 
-  test = () => {
+  submitNegativeRating = () => {
+    const aid = this.props.location.pathname.slice(9);
     const articleRate = this.state.articleRate;
     articleRate.createUserID = this.props.auth.uid;
-    console.log(articleRate.createUserID);
-  };
-
-  submitRating = () => {
-    const aid = this.props.location.pathname.slice(9);
-    const comment = this.state.comment;
-    comment.createUserID = this.props.auth.uid;
+    articleRate.negativeRating = true;
+    articleRate.positiveRating = false;
     db.collection("Articles")
       .doc(aid)
       .collection("Ratings")
-      .add(comment)
+      .add(articleRate)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  submitPositiveRating = () => {
+    const aid = this.props.location.pathname.slice(9);
+    const articleRate = this.state.articleRate;
+    articleRate.createUserID = this.props.auth.uid;
+    articleRate.positiveRating = true;
+    articleRate.negativeRating = false;
+    db.collection("Articles")
+      .doc(aid)
+      .collection("Ratings")
+      .add(articleRate)
       .then((res) => {
         console.log(res);
       })
@@ -45,8 +57,11 @@ class ArticleRate extends Component {
           <h1>Rate this article</h1>
           <div className={classes.Button}>
             {" "}
-            <Button>+</Button>
-            <Button onClick={() => this.test()}>-</Button>
+            <Button onClick={(e) => this.submitPositiveRating()}>+</Button>
+            <Button onClick={(e) => this.submitNegativeRating()}>-</Button>
+            <Button onClick={() => console.log(this.state.articleRate)}>
+              "Fuck"
+            </Button>
           </div>
         </div>
       </Container>

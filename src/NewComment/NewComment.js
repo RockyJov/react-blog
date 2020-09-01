@@ -284,7 +284,6 @@ class NewComment extends Component {
                     {" "}
                     Submit
                   </Button>
-                  <Button onClick={() => this.test()}>-</Button>
                 </FormGroup>
               </CardBody>
             </Card>
