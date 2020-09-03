@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import firebase from "../../Config/firebase";
 import classes from "./ArticleRate.module.css";
 import { Button, Container } from "reactstrap";
+import { isEmpty } from "react-redux-firebase";
 
 const db = firebase.firestore();
 
@@ -55,14 +56,18 @@ class ArticleRate extends Component {
       <Container>
         <div className={classes.Rate}>
           <h1>Rate this article</h1>
-          <div className={classes.Button}>
-            {" "}
-            <Button onClick={(e) => this.submitPositiveRating()}>+</Button>
-            <Button onClick={(e) => this.submitNegativeRating()}>-</Button>
-            <Button onClick={() => console.log(this.state.articleRate)}>
-              "Fuck"
-            </Button>
-          </div>
+          {this.state.articleRate.positiveRating !== isEmpty ? (
+            <div className={classes.Button}>
+              {" "}
+              <Button onClick={(e) => this.submitPositiveRating()}>+</Button>
+              <Button onClick={(e) => this.submitNegativeRating()}>-</Button>
+              <Button onClick={() => console.log(this.state.articleRate)}>
+                "Fuck"
+              </Button>
+            </div>
+          ) : (
+            ""
+          )}
         </div>
       </Container>
     );
