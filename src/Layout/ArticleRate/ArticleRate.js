@@ -15,6 +15,7 @@ class ArticleRate extends Component {
         createDate: new Date(),
         positiveRating: "",
         negativeRating: "",
+        visible: true,
       },
     };
   }
@@ -56,18 +57,40 @@ class ArticleRate extends Component {
       <Container>
         <div className={classes.Rate}>
           <h1>Rate this article</h1>
-          {this.state.articleRate.positiveRating !== isEmpty ? (
+          {this.state.articleRate.visible ? (
             <div className={classes.Button}>
               {" "}
               <Button onClick={(e) => this.submitPositiveRating()}>+</Button>
               <Button onClick={(e) => this.submitNegativeRating()}>-</Button>
-              <Button onClick={() => console.log(this.state.articleRate)}>
-                "Fuck"
-              </Button>
             </div>
-          ) : (
-            ""
-          )}
+          ) : null}
+          <Button onClick={() => console.log(this.state.articleRate)}>
+            Console
+          </Button>
+          <Button
+            onClick={() => {
+              this.setState({
+                articleRate: {
+                  ...this.state.articleRate,
+                  visible: false,
+                },
+              });
+            }}
+          >
+            Hide
+          </Button>
+          <Button
+            onClick={() => {
+              this.setState({
+                articleRate: {
+                  ...this.state.articleRate,
+                  visible: true,
+                },
+              });
+            }}
+          >
+            Show
+          </Button>
         </div>
       </Container>
     );
