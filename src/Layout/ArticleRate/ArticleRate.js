@@ -5,6 +5,8 @@ import { Button, Container } from "reactstrap";
 import { isEmpty } from "react-redux-firebase";
 
 const db = firebase.firestore();
+const increment = firebase.firestore.FieldValue.increment(1);
+const decrement = firebase.firestore.FieldValue.increment(-1);
 
 class ArticleRate extends Component {
   constructor(props) {
@@ -13,43 +15,23 @@ class ArticleRate extends Component {
       articleRate: {
         createUserID: "",
         createDate: new Date(),
-        positiveRating: "",
-        negativeRating: "",
         visible: true,
       },
     };
   }
 
-  submitNegativeRating = () => {
+  increment = () => {
     const aid = this.props.location.pathname.slice(9);
-    const articleRate = this.state.articleRate;
-    articleRate.createUserID = this.props.auth.uid;
-    articleRate.negativeRating = true;
-    articleRate.positiveRating = false;
-    db.collection("Articles")
-      .doc(aid)
-      .collection("Ratings")
-      .add(articleRate)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => console.log(err));
+
+    const ref = db.collection("Articles").doc(aid);
+    ref.update({ count: increment });
   };
 
-  submitPositiveRating = () => {
+  decrement = () => {
     const aid = this.props.location.pathname.slice(9);
-    const articleRate = this.state.articleRate;
-    articleRate.createUserID = this.props.auth.uid;
-    articleRate.positiveRating = true;
-    articleRate.negativeRating = false;
-    db.collection("Articles")
-      .doc(aid)
-      .collection("Ratings")
-      .add(articleRate)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => console.log(err));
+
+    const ref = db.collection("Articles").doc(aid);
+    ref.update({ count: decrement });
   };
 
   render() {
@@ -60,37 +42,10 @@ class ArticleRate extends Component {
           {this.state.articleRate.visible ? (
             <div className={classes.Button}>
               {" "}
-              <Button onClick={(e) => this.submitPositiveRating()}>+</Button>
-              <Button onClick={(e) => this.submitNegativeRating()}>-</Button>
+              <Button onClick={(e) => this.increment()}>+</Button>
+              <Button onClick={(e) => this.decrement()}>-</Button>
             </div>
           ) : null}
-          <Button onClick={() => console.log(this.state.articleRate)}>
-            Console
-          </Button>
-          <Button
-            onClick={() => {
-              this.setState({
-                articleRate: {
-                  ...this.state.articleRate,
-                  visible: false,
-                },
-              });
-            }}
-          >
-            Hide
-          </Button>
-          <Button
-            onClick={() => {
-              this.setState({
-                articleRate: {
-                  ...this.state.articleRate,
-                  visible: true,
-                },
-              });
-            }}
-          >
-            Show
-          </Button>
         </div>
       </Container>
     );
