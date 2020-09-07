@@ -29,7 +29,8 @@ class ArticleRate extends Component {
           count: doc.data().count,
         });
       } else {
-        console.log("No such doc exists!"); 
+        console.log("No such doc exists!");
+      }
     });
   }
 
