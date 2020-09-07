@@ -12,21 +12,20 @@ class ArticleRate extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      createUserID: "",
-      createDate: new Date(),
+      createUserID: null,
       visible: true,
-      count: null,
+      rating: null,
     };
   }
 
-  async componentDidMount() {
+  componentDidMount() {
     const aid = this.props.location.pathname.slice(9);
 
     const ref = db.collection("Articles").doc(aid);
-    await ref.get().then((doc) => {
+    ref.get().then((doc) => {
       if (doc.exists) {
         this.setState({
-          count: doc.data().count,
+          rating: doc.data().count,
         });
       } else {
         console.log("No such doc exists!");
@@ -38,28 +37,34 @@ class ArticleRate extends Component {
     const aid = this.props.location.pathname.slice(9);
 
     const ref = db.collection("Articles").doc(aid);
-    ref.update({ count: increment });
-    await ref.get().then((doc) => {
+    await ref.update({ count: increment });
+    ref.get().then((doc) => {
       if (doc.exists) {
         this.setState({
-          count: doc.data().count,
+          rating: doc.data().count,
+          createUserID: doc.data().createUserID,
+          visible: false,
         });
+        console.log(this.state);
       } else {
         console.log("No such doc exists!");
       }
     });
   };
 
-  decrement = () => {
+  decrement = async () => {
     const aid = this.props.location.pathname.slice(9);
 
     const ref = db.collection("Articles").doc(aid);
-    ref.update({ count: decrement });
+    await ref.update({ count: decrement });
     ref.get().then((doc) => {
       if (doc.exists) {
         this.setState({
-          count: doc.data().count,
+          rating: doc.data().count,
+          createUserID: doc.data().createUserID,
+          visible: false,
         });
+        console.log(this.state);
       } else {
         console.log("No such doc exists!");
       }
@@ -76,9 +81,9 @@ class ArticleRate extends Component {
               {" "}
               <Button onClick={(e) => this.increment()}>+</Button>
               <Button onClick={(e) => this.decrement()}>-</Button>
-              <h2>{this.state.count}</h2>
             </div>
           ) : null}
+          <h2>{this.state.rating}</h2>
         </div>
       </Container>
     );
