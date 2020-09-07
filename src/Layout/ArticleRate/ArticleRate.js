@@ -12,19 +12,42 @@ class ArticleRate extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      articleRate: {
-        createUserID: "",
-        createDate: new Date(),
-        visible: true,
-      },
+      createUserID: "",
+      createDate: new Date(),
+      visible: true,
+      count: null,
     };
   }
 
-  increment = () => {
+  async componentDidMount() {
+    const aid = this.props.location.pathname.slice(9);
+
+    const ref = db.collection("Articles").doc(aid);
+    await ref.get().then((doc) => {
+      if (doc.exists) {
+        this.setState({
+          count: doc.data().count,
+        });
+      } else {
+        console.log("No such doc exists!");
+      }
+    });
+  }
+
+  increment = async () => {
     const aid = this.props.location.pathname.slice(9);
 
     const ref = db.collection("Articles").doc(aid);
     ref.update({ count: increment });
+    await ref.get().then((doc) => {
+      if (doc.exists) {
+        this.setState({
+          count: doc.data().count,
+        });
+      } else {
+        console.log("No such doc exists!");
+      }
+    });
   };
 
   decrement = () => {
@@ -32,6 +55,15 @@ class ArticleRate extends Component {
 
     const ref = db.collection("Articles").doc(aid);
     ref.update({ count: decrement });
+    ref.get().then((doc) => {
+      if (doc.exists) {
+        this.setState({
+          count: doc.data().count,
+        });
+      } else {
+        console.log("No such doc exists!");
+      }
+    });
   };
 
   render() {
@@ -39,11 +71,12 @@ class ArticleRate extends Component {
       <Container>
         <div className={classes.Rate}>
           <h1>Rate this article</h1>
-          {this.state.articleRate.visible ? (
+          {this.state.visible ? (
             <div className={classes.Button}>
               {" "}
               <Button onClick={(e) => this.increment()}>+</Button>
               <Button onClick={(e) => this.decrement()}>-</Button>
+              <h2>{this.state.count}</h2>
             </div>
           ) : null}
         </div>
