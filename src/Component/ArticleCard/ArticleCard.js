@@ -12,6 +12,7 @@ import {
 } from "reactstrap";
 import classes from "./ArticleCard.module.css";
 import { Link } from "react-router-dom";
+import firebase from "../../Config/firebase";
 
 // data yyyy/mm/dd formatu
 
@@ -68,10 +69,11 @@ const ArticleCard = (props) => {
                 <Badge className={classes.createDate}>
                   {timeStampToString(props.data.createDate.seconds)}
                 </Badge>
-                <div></div>
-                <Badge>
-                  Created by: {props.data.createUserID.slice(0, 10)}
-                </Badge>
+                <div>
+                  <Badge>
+                    Created by: {props.data.createUserID.slice(0, 10)}
+                  </Badge>
+                </div>
               </CardSubtitle>
             </CardBody>
           </Col>

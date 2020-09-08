@@ -33,6 +33,7 @@ class NewArticle extends Component {
         createDate: new Date(),
         featureImage: "",
         isPublish: "",
+        upvotes: null,
         lastModified: new Date(),
         createUserID: "",
       },

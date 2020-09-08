@@ -7,23 +7,17 @@ import { isEmpty } from "react-redux-firebase";
 class ArticleRate extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      visible: true,
-    };
+    this.state = {};
   }
 
   render() {
     return (
       <Container>
         <div className={classes.Rate}>
-          <h1>Rate this article</h1>
-          {this.state.visible ? (
-            <div className={classes.Button}>
-              {" "}
-              <Button>+</Button>
-              <Button>-</Button>
-            </div>
-          ) : null}
+          <div className={classes.Button}>
+            <Button>+</Button>
+            <Button>-</Button>
+          </div>
         </div>
       </Container>
     );
