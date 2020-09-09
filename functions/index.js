@@ -6,6 +6,7 @@ exports.newUserSignup = functions.auth.user().onCreate((user) => {
   return admin.firestore().collection("Users").doc(user.uid).set({
     userID: user.uid,
     positiveRatings: [],
+    negativeRatings: [],
   });
 });
 
