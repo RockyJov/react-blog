@@ -24,6 +24,10 @@ export function timeStampToString(ts) {
 }
 
 const ArticleCard = (props) => {
+  const articleScore =
+    (props.data.positiveRatings /
+      (props.data.negativeRatings + props.data.positiveRatings)) *
+    100;
   return (
     <Card className={classes.ArticleCard}>
       {" "}
@@ -73,6 +77,9 @@ const ArticleCard = (props) => {
                   <Badge>
                     Created by: {props.data.createUserID.slice(0, 10)}
                   </Badge>
+                </div>
+                <div>
+                  <Badge>Ratings Score : {Math.round(articleScore)}%</Badge>
                 </div>
               </CardSubtitle>
             </CardBody>

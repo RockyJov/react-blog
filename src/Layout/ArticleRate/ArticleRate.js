@@ -9,9 +9,7 @@ const db = firebase.firestore();
 class ArticleRate extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      ratingScore: 0,
-    };
+    this.state = {};
   }
 
   // upvoteArticles = (id) => {
@@ -106,7 +104,6 @@ class ArticleRate extends Component {
             <h3> Rate this article</h3>
             <Button onClick={() => this.positiveRating()}>+</Button>
             <Button onClick={() => this.negativeRating()}>-</Button>
-            <h1>Article score: {this.state.ratingScore}</h1>
           </div>
         </div>
       </Container>
