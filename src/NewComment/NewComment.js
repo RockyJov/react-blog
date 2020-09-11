@@ -128,6 +128,11 @@ class NewComment extends Component {
         console.log(res);
       })
       .catch((err) => console.log(err));
+
+    const articleRef = db.collection("Articles").doc(aid);
+    articleRef.update({
+      commentCount: firebase.firestore.FieldValue.increment(1),
+    });
   };
 
   fileCompress = (file) => {

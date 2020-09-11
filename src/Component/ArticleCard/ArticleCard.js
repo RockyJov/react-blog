@@ -11,6 +11,7 @@ import {
   Container,
 } from "reactstrap";
 import classes from "./ArticleCard.module.css";
+import parse from "html-react-parser";
 import { Link } from "react-router-dom";
 import firebase from "../../Config/firebase";
 
@@ -80,6 +81,9 @@ const ArticleCard = (props) => {
                 </div>
                 <div>
                   <Badge>Ratings Score : {Math.round(articleScore)}%</Badge>
+                </div>
+                <div>
+                  <Badge>Comments: {props.data.commentCount}</Badge>
                 </div>
               </CardSubtitle>
             </CardBody>

@@ -6,6 +6,7 @@ import {
   CardSubtitle,
   CardBody,
   Badge,
+  Button,
   Col,
   Row,
   Container,
@@ -41,6 +42,7 @@ const CommentCard = (props) => {
           <Col>
             {" "}
             <CardBody className={classes.CardBody}>
+              <Button color="primary">Reply</Button>
               <CardTitle className={classes.CardTitle}></CardTitle>
               <CardSubtitle className={classes.CardSubtitle}>
                 {props.data.content}

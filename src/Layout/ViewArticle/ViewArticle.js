@@ -80,9 +80,7 @@ class ViewArticle extends Component {
               <h1 className={classes.Title}>{this.state.article.title}</h1>
               <div className={classes.Date}>
                 {" "}
-                {this.timeStampToString(
-                  this.state.article.lastModified.seconds
-                )}
+                {this.timeStampToString(this.state.article.createDate.seconds)}
               </div>
               <h2>Posted by: {this.state.article.createUserID.slice(0, 10)}</h2>
               <h2>{this.props.match.params.id}</h2>
