@@ -36,6 +36,7 @@ class NewComment extends Component {
         isPublish: "True",
         //lastModified: new Date(),
         createUserID: "",
+        reply: "",
       },
     };
   }
@@ -101,6 +102,15 @@ class NewComment extends Component {
     });
   };
 
+  test = () => {
+    this.setState({
+      comment: {
+        ...this.state.comment,
+        reply: "reply",
+      },
+    });
+  };
+
   onChangePublish = (value) => {
     this.setState({
       comment: {
@@ -111,10 +121,6 @@ class NewComment extends Component {
   };
 
   // seconds not defined
-
-  test = () => {
-    console.log(this.props.auth);
-  };
 
   submitComment = () => {
     const aid = this.props.location.pathname.slice(9);
@@ -227,13 +233,15 @@ class NewComment extends Component {
             <FormGroup>
               <ReactQuill
                 ref={(el) => (this.quill = el)}
-                value={this.state.comment.content}
+                value={this.state.comment.reply}
                 onChange={(e) => this.onChangeCommentContent(e)}
                 theme="snow"
                 modules={this.modules}
                 formats={this.formats}
+                placeholder={"Enter your comment"}
               />
             </FormGroup>
+            <Button onClick={() => this.test()}>Test</Button>
           </Col>
 
           <Col xl={3} lg={3} md={4} sn={12}>

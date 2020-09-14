@@ -12,6 +12,7 @@ import {
   Container,
 } from "reactstrap";
 import classes from "./CommentCard.module.css";
+import ReplyComment from "../../Layout/ReplyComment/ReplyComment";
 import { Link } from "react-router-dom";
 
 // data yyyy/mm/dd formatu
@@ -42,7 +43,6 @@ const CommentCard = (props) => {
           <Col>
             {" "}
             <CardBody className={classes.CardBody}>
-              <Button color="primary">Reply</Button>
               <CardTitle className={classes.CardTitle}></CardTitle>
               <CardSubtitle className={classes.CardSubtitle}>
                 {props.data.content}
@@ -61,6 +61,7 @@ const CommentCard = (props) => {
           </Col>
         </Row>
       </Container>
+      <ReplyComment />
     </Card>
   );
 };
