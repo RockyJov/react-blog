@@ -61,7 +61,6 @@ const CommentCard = (props) => {
           </Col>
         </Row>
       </Container>
-      <ReplyComment />
     </Card>
   );
 };

@@ -7,12 +7,22 @@ const db = firebase.firestore();
 class ReplyComment extends Component {
   constructor(props) {
     super(props);
+    this.state = {};
   }
-  scroll = () => {};
+
+  onClickReplyHandler = () => {
+    this.commentsEnd.scrollIntoView({ behaviour: "smooth" });
+  };
+
   render() {
     return (
       <div>
-        <Button>Reply</Button>
+        <Button onClick={() => this.onClickReplyHandler()}>Reply</Button>
+        <div
+          ref={(el) => {
+            this.commentsEnd = el;
+          }}
+        ></div>
       </div>
     );
   }
