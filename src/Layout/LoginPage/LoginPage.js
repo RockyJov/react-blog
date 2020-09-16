@@ -22,20 +22,16 @@ class LoginPage extends Component {
   render() {
     return (
       <Container>
-        <StyledFirebaseAuth
-          uiConfig={uiConfig}
-          firebaseAuth={firebase.auth()}
-        />
-
         <Button
           uiConfig={uiConfig}
+          color="danger"
           firebaseAuth={firebase.auth()}
           block
           onClick={() => {
             firebase.auth().signInAnonymously();
           }}
         >
-          Anon
+          Get my oldthink name
         </Button>
       </Container>
     );

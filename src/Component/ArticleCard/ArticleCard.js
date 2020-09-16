@@ -10,6 +10,7 @@ import {
   Row,
   Container,
 } from "reactstrap";
+import { connect } from "react-redux";
 import classes from "./ArticleCard.module.css";
 import parse from "html-react-parser";
 import { Link } from "react-router-dom";
@@ -93,5 +94,9 @@ const ArticleCard = (props) => {
     </Card>
   );
 };
+const enhance = connect(({ firebase: { auth, profile } }) => ({
+  auth,
+  profile,
+}));
 
-export default ArticleCard;
+export default enhance(ArticleCard);

@@ -25,7 +25,7 @@ const AdminOnly = (ComposedComponent, auth) => {
         isPass: false,
       };
     }
-    componentWillMount() {
+    componentDidMount() {
       if (!auth.isEmpty) {
         firebase
           .auth()
@@ -37,11 +37,11 @@ const AdminOnly = (ComposedComponent, auth) => {
                 isPass: true,
               });
             } else {
-              this.props.history.push("/login");
+              this.props.history.push("/");
             }
           });
       } else {
-        this.props.history.push("/login");
+        this.props.history.push("/");
       }
     }
     render() {
@@ -75,9 +75,6 @@ class RouterManager extends Component {
           <Switch>
             <Route path="/" exact>
               <Main />
-            </Route>
-            <Route path="/login">
-              <LoginPage />
             </Route>
 
             <Route path="/article/:id">

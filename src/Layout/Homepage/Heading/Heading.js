@@ -13,6 +13,7 @@ import {
   Button,
   Collapse,
 } from "reactstrap";
+import classes from "./Heading.module.css";
 import { connect } from "react-redux";
 import firebase from "../../../Config/firebase";
 import { Link } from "react-router-dom";
@@ -48,13 +49,17 @@ class Heading extends Component {
   render() {
     return (
       <Navbar color="light" light expand="md">
-        <NavbarBrand href="/">My blog</NavbarBrand>
-        <NavbarToggler onClick={this.toggle} />
+        <NavbarBrand href="/">Logo</NavbarBrand>
+        {/* <NavbarToggler onClick={this.toggle} /> */}
         <Collapse isOpen={this.state.isOpen} navbar>
           <Nav className="mr-auto" navbar>
-            <NavItem>
-              <NavLink href="/new-article">New Article</NavLink>
-            </NavItem>
+            {this.props.auth.isEmpty ? (
+              ""
+            ) : (
+              <NavItem>
+                <NavLink href="/new-article">New Article</NavLink>
+              </NavItem>
+            )}
           </Nav>
           {this.props.auth.isEmpty
             ? ""
@@ -77,7 +82,15 @@ class Heading extends Component {
               )}
             </DropdownMenu>
           </UncontrolledDropdown> */}
-          <Button onClick={() => firebase.auth().signOut()}>Logout</Button>
+          <Nav className={classes.LoginButton}>
+            {this.props.auth.isEmpty ? (
+              <Button onClick={() => firebase.auth().signInAnonymously()}>
+                Log in
+              </Button>
+            ) : (
+              <Button onClick={() => firebase.auth().signOut()}>Logout</Button>
+            )}
+          </Nav>
         </Collapse>
       </Navbar>
     );
