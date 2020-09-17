@@ -18,6 +18,7 @@ class Comments extends Component {
   componentDidMount() {
     this.getMyComments();
   }
+
   // imam colletiona pavadinimu "Articles", sukuriu array allArticles, tada imu kiekviena elementa is Articles, ir idedu i articles[] array,
   //  kuris yra konstruktoriuje, naudodamas setState, kartu ir pakeiciu isLoaded i true
 

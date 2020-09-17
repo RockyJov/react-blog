@@ -12,7 +12,6 @@ import {
   Container,
 } from "reactstrap";
 import classes from "./CommentCard.module.css";
-import ReplyComment from "../../Layout/ReplyComment/ReplyComment";
 import { Link } from "react-router-dom";
 
 export function timeStampToString(ts) {

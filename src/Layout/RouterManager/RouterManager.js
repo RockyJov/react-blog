@@ -12,7 +12,6 @@ import NewComment from "../../NewComment/NewComment";
 import ArticleRate from "../ArticleRate/ArticleRate";
 import Main from "../Homepage/Main/Main";
 import Heading from "../Homepage/Heading/Heading";
-import ReplyComment from "../ReplyComment/ReplyComment";
 import Comments from "../Comments/Comments";
 
 import { connect } from "react-redux";

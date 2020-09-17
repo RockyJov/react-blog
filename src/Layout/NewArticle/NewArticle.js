@@ -121,6 +121,7 @@ class NewArticle extends Component {
         console.log(res);
       })
       .catch((err) => console.log(err));
+    this.props.history.push("/");
   };
 
   fileCompress = (file) => {

@@ -15,15 +15,11 @@
 // compressorjs
 //in react-blog-server(different directory): express; firebase-admin
 import React from "react";
-import Main from "./Layout/Homepage/Main/Main.js";
-import Heading from "./Layout/Homepage/Heading/Heading.js";
-import ViewArticle from "./Layout/ViewArticle/ViewArticle";
-import NewArticle from "./Layout/NewArticle/NewArticle";
+
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Provider } from "react-redux";
 import { getReduxStore, getRrfProp } from "./Config/firebase-redux";
 import { ReactReduxFirebaseProvider } from "react-redux-firebase";
-import LoginPage from "./Layout/LoginPage/LoginPage";
 import RouterManager from "./Layout/RouterManager/RouterManager";
 
 function App() {
