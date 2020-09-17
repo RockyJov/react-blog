@@ -22,7 +22,7 @@ class Comments extends Component {
   //  kuris yra konstruktoriuje, naudodamas setState, kartu ir pakeiciu isLoaded i true
 
   getMyComments = () => {
-    const aid = window.location.pathname.slice(9);
+    const aid = this.props.location.pathname.slice(9);
 
     db.collection("Articles")
       .doc(aid)

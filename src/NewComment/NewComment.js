@@ -91,15 +91,6 @@ class NewComment extends Component {
     console.log(this.state.comment.content);
   };
 
-  onChangePublish = (value) => {
-    this.setState({
-      comment: {
-        ...this.state.comment,
-        isPublish: value === "True",
-      },
-    });
-  };
-
   submitComment = () => {
     const aid = this.props.location.pathname.slice(9);
     const comment = this.state.comment;

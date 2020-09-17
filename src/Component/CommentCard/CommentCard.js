@@ -15,8 +15,6 @@ import classes from "./CommentCard.module.css";
 import ReplyComment from "../../Layout/ReplyComment/ReplyComment";
 import { Link } from "react-router-dom";
 
-// data yyyy/mm/dd formatu
-
 export function timeStampToString(ts) {
   const date = new Date(ts * 1000);
   return (

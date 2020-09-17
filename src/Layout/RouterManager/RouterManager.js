@@ -14,6 +14,7 @@ import Main from "../Homepage/Main/Main";
 import Heading from "../Homepage/Heading/Heading";
 import ReplyComment from "../ReplyComment/ReplyComment";
 import Comments from "../Comments/Comments";
+
 import { connect } from "react-redux";
 import * as firebase from "firebase";
 
@@ -76,14 +77,19 @@ class RouterManager extends Component {
             <Route path="/" exact>
               <Main />
             </Route>
-
             <Route path="/article/:id">
-              <ViewArticle />
+              <Route
+                path="/article/:id"
+                component={AdminOnly(ViewArticle, this.props.auth)}
+              />
               <Route
                 path="/article/:id"
                 component={AdminOnly(ArticleRate, this.props.auth)}
               />
-              <Comments />
+              <Route
+                path="/article/:id"
+                component={AdminOnly(Comments, this.props.auth)}
+              />
               <Route
                 path="/article/:id"
                 component={AdminOnly(NewComment, this.props.auth)}
