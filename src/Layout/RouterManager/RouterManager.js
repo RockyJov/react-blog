@@ -13,7 +13,6 @@ import ArticleRate from "../ArticleRate/ArticleRate";
 import Main from "../Homepage/Main/Main";
 import Heading from "../Homepage/Heading/Heading";
 import Comments from "../Comments/Comments";
-
 import { connect } from "react-redux";
 import * as firebase from "firebase";
 

@@ -198,7 +198,7 @@ class NewArticle extends Component {
 
   render() {
     return (
-      <Container>
+      <Container className={classes.NewArticleMain}>
         <Row>
           <Col xl={9} lg={8} md={8} sn={12}>
             <h2 className={classes.SectionTitle}>New Article</h2>

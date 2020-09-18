@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Container } from "reactstrap";
 import ArticleCard from "../../../Component/ArticleCard/ArticleCard";
 import firebase from "../../../Config/firebase";
+import classes from "./Main.module.css";
 
 // prieinam prie duomenu bazes firestorei
 const db = firebase.firestore();
@@ -53,7 +54,7 @@ class Main extends Component {
     // jei isLoaded yra true, tada einu per kiekviena article ir renderinu kievkiena article, jei isLoaded yra flase, nedarau nieko
     return (
       <div>
-        <Container>
+        <Container className={classes.Main}>
           {this.state.isLoaded
             ? this.state.articles.map((article, index) => {
                 return <ArticleCard key={index} data={article} />;

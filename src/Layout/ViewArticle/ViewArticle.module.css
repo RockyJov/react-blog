@@ -3,6 +3,10 @@
   outline-style: solid;
 }
 
+.MainViewArticle {
+  padding: 50px;
+}
+
 .ImageContainer {
   width: 100%;
   position: relative;

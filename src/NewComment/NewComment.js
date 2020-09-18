@@ -191,13 +191,15 @@ class NewComment extends Component {
 
             <FormGroup>
               <ReactQuill
-                ref={(el) => (this.quill = el)}
-                value={this.state.comment.content}
-                onChange={(e) => this.onChangeCommentContent(e)}
-                theme="snow"
-                modules={this.modules}
-                formats={this.formats}
-                placeholder={"Enter your comment"}
+                // ref={(el) => (this.quill = el)}
+                // value={this.state.comment.content}
+                // onChange={(e) => this.onChangeCommentContent(e)}
+                // theme="snow"
+                // modules={this.modules}
+                // formats={this.formats}
+                // placeholder={"Enter your comment"}
+                value={this.state.value}
+                onChange={this.onValueUpdated}
               />
             </FormGroup>
           </Col>
