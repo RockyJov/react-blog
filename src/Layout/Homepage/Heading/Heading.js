@@ -41,29 +41,45 @@ class Heading extends Component {
   render() {
     return (
       <Navbar className={classes.NavBar} fixed="top">
-        <NavbarBrand className={classes.Logo} href="/">
-          Logo
+        <NavbarBrand href="/">
+          <img src="LogoMakr_7K8oLF.png" />
         </NavbarBrand>
 
         <Nav>
           {this.props.auth.isEmpty ? (
-            <NavItem>
+            <NavItem className={classes.MainButton}>
               <Button
+                outline
+                color="info"
+                size="sm"
                 onClick={() => firebase.auth().signInAnonymously()}
-              ></Button>
+              >
+                Create my ID
+              </Button>
             </NavItem>
           ) : (
-            <NavItem>
-              <Button href="/new-article">Create a post</Button>
+            <NavItem className={classes.MainButton}>
+              <Button outline color="info" size="sm" href="/new-article">
+                Create a post as {this.props.auth.uid.slice(0, 7)}
+              </Button>
             </NavItem>
           )}
         </Nav>
 
         <Nav className={classes.AboutButton}>
           {this.props.auth.isEmpty ? (
-            <Button>?</Button>
+            <Button outline color="info" size="sm">
+              ?
+            </Button>
           ) : (
-            <Button onClick={() => firebase.auth().signOut()}>!</Button>
+            <Button
+              outline
+              color="info"
+              size="sm"
+              onClick={() => firebase.auth().signOut()}
+            >
+              !
+            </Button>
           )}
         </Nav>
       </Navbar>

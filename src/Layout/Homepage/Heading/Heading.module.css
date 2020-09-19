@@ -1,11 +1,16 @@
 .NavBar {
-  background-color: #dcf4f5;
+  background-color: #ebffff;
   width: 100%;
-  height: 50px;
+  height: 46px;
   position: fixed;
   top: 0;
 }
 
 .MainButton {
-  background-color: white;
+  padding: 0px 35px 10px 0px;
+  margin: 0 auto;
+}
+
+.AboutButton {
+  padding: 0px 0px 10px 0px;
 }
