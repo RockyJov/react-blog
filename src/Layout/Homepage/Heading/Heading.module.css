@@ -1,16 +1,6 @@
-.NavBar {
-  background-color: #ebffff;
-  width: 100%;
-  height: 46px;
-  position: fixed;
-  top: 0;
-}
-
-.MainButton {
-  padding: 0px 35px 10px 0px;
-  margin: 0 auto;
-}
-
-.AboutButton {
-  padding: 0px 0px 10px 0px;
+.Logo {
+  height: auto;
+  width: auto;
+  max-height: 100px;
+  max-width: 150px;
 }

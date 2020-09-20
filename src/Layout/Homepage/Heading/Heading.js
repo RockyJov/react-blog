@@ -23,8 +23,16 @@ import { Link } from "react-router-dom";
 class Heading extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      isOpen: false,
+    };
   }
+
+  toggle = () => {
+    this.setState({
+      isOpen: !this.state.isOpen,
+    });
+  };
 
   //react-blog-server folder
   componentWillReceiveProps(nextProps, nextContext) {
@@ -40,48 +48,59 @@ class Heading extends Component {
 
   render() {
     return (
-      <Navbar className={classes.NavBar} fixed="top">
+      <Navbar color="light" light expand="md" fixed="top">
         <NavbarBrand href="/">
-          <img src="LogoMakr_7K8oLF.png" />
+          {" "}
+          <img
+            className={classes.Logo}
+            src="https://firebasestorage.googleapis.com/v0/b/react-blog-a39d2.appspot.com/o/LogoMakr_85Wfsy.png?alt=media&token=46c44cf2-16d2-4636-ac42-1e4ef459c9c1"
+          />
         </NavbarBrand>
-
-        <Nav>
-          {this.props.auth.isEmpty ? (
-            <NavItem className={classes.MainButton}>
-              <Button
-                outline
-                color="info"
-                size="sm"
-                onClick={() => firebase.auth().signInAnonymously()}
-              >
-                Create my ID
-              </Button>
-            </NavItem>
-          ) : (
-            <NavItem className={classes.MainButton}>
-              <Button outline color="info" size="sm" href="/new-article">
-                Create a post as {this.props.auth.uid.slice(0, 7)}
-              </Button>
-            </NavItem>
-          )}
-        </Nav>
-
-        <Nav className={classes.AboutButton}>
-          {this.props.auth.isEmpty ? (
-            <Button outline color="info" size="sm">
-              ?
-            </Button>
-          ) : (
-            <Button
-              outline
-              color="info"
-              size="sm"
-              onClick={() => firebase.auth().signOut()}
-            >
-              !
-            </Button>
-          )}
-        </Nav>
+        <NavbarToggler onClick={this.toggle} />
+        <Collapse isOpen={this.state.isOpen} navbar>
+          <Nav className="mr-auto" navbar>
+            {this.props.auth.isEmpty ? (
+              <NavItem>
+                <Button
+                  outline
+                  color="info"
+                  size="sm"
+                  onClick={() => firebase.auth().signInAnonymously()}
+                >
+                  Create my ID
+                </Button>
+              </NavItem>
+            ) : (
+              <NavItem>
+                <Button outline color="info" size="sm" href="/new-article">
+                  Create a post as {this.props.auth.uid.slice(0, 7)}
+                </Button>
+              </NavItem>
+            )}
+          </Nav>
+          <Nav navbar>
+            {this.props.auth.isEmpty ? (
+              <NavItem>
+                {" "}
+                <Button outline color="info" size="sm">
+                  Info
+                </Button>
+              </NavItem>
+            ) : (
+              <NavItem>
+                {" "}
+                <Button
+                  outline
+                  color="info"
+                  size="sm"
+                  onClick={() => firebase.auth().signOut()}
+                >
+                  Logout
+                </Button>
+              </NavItem>
+            )}
+          </Nav>
+        </Collapse>
       </Navbar>
     );
   }
