@@ -62,18 +62,25 @@ class Heading extends Component {
             {this.props.auth.isEmpty ? (
               <NavItem>
                 <Button
+                  style={{ borderRadius: 0 }}
                   outline
-                  color="info"
+                  color="dark"
                   size="sm"
                   onClick={() => firebase.auth().signInAnonymously()}
                 >
-                  Create my ID
+                  CREATE MY ID
                 </Button>
               </NavItem>
             ) : (
               <NavItem>
-                <Button outline color="info" size="sm" href="/new-article">
-                  Create a post as {this.props.auth.uid.slice(0, 7)}
+                <Button
+                  style={{ borderRadius: 0 }}
+                  outline
+                  color="dark"
+                  size="sm"
+                  href="/new-article"
+                >
+                  CREATE A POST
                 </Button>
               </NavItem>
             )}
@@ -82,20 +89,26 @@ class Heading extends Component {
             {this.props.auth.isEmpty ? (
               <NavItem>
                 {" "}
-                <Button outline color="info" size="sm">
-                  Info
+                <Button
+                  style={{ borderRadius: 0 }}
+                  outline
+                  color="dark"
+                  size="sm"
+                >
+                  INFO
                 </Button>
               </NavItem>
             ) : (
               <NavItem>
                 {" "}
                 <Button
+                  style={{ borderRadius: 0 }}
                   outline
-                  color="info"
+                  color="dark"
                   size="sm"
                   onClick={() => firebase.auth().signOut()}
                 >
-                  Logout
+                  LOGOUT
                 </Button>
               </NavItem>
             )}

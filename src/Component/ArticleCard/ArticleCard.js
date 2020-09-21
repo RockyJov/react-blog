@@ -31,11 +31,11 @@ const ArticleCard = (props) => {
       (props.data.negativeRatings + props.data.positiveRatings)) *
     100;
   return (
-    <Card className={classes.ArticleCard}>
+    <Card style={{ borderRadius: 0 }} className={classes.ArticleCard}>
       {" "}
       <Container>
         <Row>
-          <Col xs="2">
+          <Col xs="2 px-0">
             {" "}
             {props.auth.isEmpty ? (
               <CardImg
@@ -64,7 +64,7 @@ const ArticleCard = (props) => {
               </Link>
             )}
           </Col>
-          <Col>
+          <Col xs="10 px-0">
             {" "}
             <CardBody className={classes.CardBody}>
               <CardTitle className={classes.CardTitle}>
