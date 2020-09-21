@@ -35,12 +35,11 @@ const ArticleCard = (props) => {
       {" "}
       <Container>
         <Row>
-          <Col xs="2 px-0">
+          <Col xs="2 px-0 ">
             {" "}
             {props.auth.isEmpty ? (
               <CardImg
-                top
-                width="100%"
+                style={{ borderRadius: 0 }}
                 src={props.data.featureImage}
                 alt="Card Image"
                 className={classes.CardImage}
@@ -55,8 +54,7 @@ const ArticleCard = (props) => {
               >
                 {" "}
                 <CardImg
-                  top
-                  width="100%"
+                  style={{ borderRadius: 0 }}
                   src={props.data.featureImage}
                   alt="Card Image"
                   className={classes.CardImage}
@@ -72,23 +70,21 @@ const ArticleCard = (props) => {
               </CardTitle>
               <CardSubtitle className={classes.CardSubtitle}>
                 {props.data.content}
-                <Badge className={classes.ArticleLabel}>
-                  {props.data.categoryLabel}
+              </CardSubtitle>
+              <CardSubtitle classesName={classes.Badges}>
+                <Badge className={classes.CardBadge}>
+                  Ratings Score : {Math.round(articleScore)}%
                 </Badge>
-                <Badge className={classes.createDate}>
+                <Badge className={classes.CardBadge}>
+                  Comments: {props.data.commentCount}
+                </Badge>
+                <Badge className={classes.CardBadge}>
+                  Created by: {props.data.createUserID.slice(0, 10)}
+                </Badge>
+
+                <Badge className={classes.CardBadge}>
                   {timeStampToString(props.data.createDate.seconds)}
                 </Badge>
-                <div>
-                  <Badge>
-                    Created by: {props.data.createUserID.slice(0, 10)}
-                  </Badge>
-                </div>
-                <div>
-                  <Badge>Ratings Score : {Math.round(articleScore)}%</Badge>
-                </div>
-                <div>
-                  <Badge>Comments: {props.data.commentCount}</Badge>
-                </div>
               </CardSubtitle>
             </CardBody>
           </Col>
