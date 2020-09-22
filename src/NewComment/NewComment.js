@@ -32,7 +32,6 @@ class NewComment extends Component {
         content: "",
         createDate: new Date(),
         featureImage: "",
-        isPublish: "True",
         createUserID: "",
       },
     };

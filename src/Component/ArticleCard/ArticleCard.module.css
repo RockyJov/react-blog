@@ -7,11 +7,15 @@
 
 .CardBody {
   padding: 0px 0px 0px 0px !important;
+  float: left;
 }
 
 .CardImage {
-  max-height: auto;
-  max-width: auto;
+  min-height: 150px;
+  min-width: 54px;
+  max-height: 150px;
+  max-width: 150px;
+  border-radius: 0 !important;
 }
 
 .CardBadge {
@@ -25,16 +29,17 @@
 .CardTitle {
   font-size: 20px;
   font-family: sans-serif;
-  padding: 5px 0px 0px 10px;
+  padding: 5px 0px 0px 0px;
   margin: 0px !important;
-  height: 30px;
+  height: 71px;
 }
 
 .CardSubtitle {
-  padding: 0px 0px 0px 10px;
+  padding: 0px 0px 0px 0px;
   font-family: sans-serif;
   font-size: 14px;
   color: black;
+  height: 67px;
 }
 
 .CardLink {

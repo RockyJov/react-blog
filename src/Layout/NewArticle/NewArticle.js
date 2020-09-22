@@ -32,7 +32,6 @@ class NewArticle extends Component {
         content: "",
         createDate: new Date(),
         featureImage: "",
-        isPublish: "",
         positiveRatings: 0,
         negativeRatings: 0,
         createUserID: "",
@@ -43,17 +42,10 @@ class NewArticle extends Component {
   modules = {
     toolbar: {
       container: [
-        [{ header: "1" }, { header: "2" }, { font: [] }],
         [{ size: [] }],
         ["bold", "italic", "underline", "strike", "blockquote"],
-        [
-          { list: "ordered" },
-          { list: "bullet" },
-          { indent: "-1" },
-          { indent: "+1" },
-        ],
+        [{ list: "ordered" }, { list: "bullet" }],
         ["link", "image"],
-        ["clean"],
         ["code-block"],
       ],
       handlers: {
@@ -97,15 +89,6 @@ class NewArticle extends Component {
       article: {
         ...this.state.article,
         content: value,
-      },
-    });
-  };
-
-  onChangePublish = (value) => {
-    this.setState({
-      article: {
-        ...this.state.article,
-        isPublish: value === "True",
       },
     });
   };
@@ -201,7 +184,6 @@ class NewArticle extends Component {
       <Container className={classes.NewArticleMain}>
         <Row>
           <Col xl={9} lg={8} md={8} sn={12}>
-            <h2 className={classes.SectionTitle}>New Article</h2>
             <FormGroup>
               <Label className={classes.Label}>Title</Label>
               <Input
@@ -226,23 +208,11 @@ class NewArticle extends Component {
           </Col>
           <Col xl={3} lg={3} md={4} sn={12}>
             <Card>
-              <CardHeader>Article Settings</CardHeader>
+              <CardHeader>
+                <Label className={classes.Label}>Feature Image</Label>
+              </CardHeader>
               <CardBody>
                 <FormGroup>
-                  <Label className={classes.Label}>Publish</Label>
-                  <Input
-                    type="select"
-                    name="publish"
-                    id="publish"
-                    onChange={(e) => this.onChangePublish(e.target.value)}
-                  >
-                    <option>False</option>
-                    <option>True</option>
-                  </Input>
-                </FormGroup>
-
-                <FormGroup>
-                  <Label className={classes.Label}>Feature Image</Label>
                   <Input
                     type="file"
                     accept="image/*"

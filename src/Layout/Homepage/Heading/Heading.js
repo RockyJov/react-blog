@@ -80,7 +80,7 @@ class Heading extends Component {
                   size="sm"
                   href="/new-article"
                 >
-                  CREATE A POST
+                  CREATE AN ARTICLE
                 </Button>
               </NavItem>
             )}

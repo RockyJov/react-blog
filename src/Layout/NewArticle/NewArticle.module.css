@@ -1,7 +1,7 @@
 .Label {
-  float: left;
-  font-size: 12px;
+  font-size: 14px;
   color: #6c757c;
+  font-family: sans-serif;
 }
 .FeatureImg {
   width: 100%;
@@ -9,5 +9,5 @@
 }
 
 .NewArticleMain {
-  padding: 50px;
+  padding: 60px;
 }

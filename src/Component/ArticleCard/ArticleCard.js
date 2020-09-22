@@ -42,7 +42,6 @@ const ArticleCard = (props) => {
             {" "}
             {props.auth.isEmpty ? (
               <CardImg
-                style={{ borderRadius: 0 }}
                 src={props.data.featureImage}
                 alt="Card Image"
                 className={classes.CardImage}
@@ -57,7 +56,6 @@ const ArticleCard = (props) => {
               >
                 {" "}
                 <CardImg
-                  style={{ borderRadius: 0 }}
                   src={props.data.featureImage}
                   alt="Card Image"
                   className={classes.CardImage}
@@ -72,7 +70,7 @@ const ArticleCard = (props) => {
                 {props.data.title}
               </CardTitle>
               <CardSubtitle className={classes.CardSubtitle}>
-                {parse(props.data.content)}
+                {parse(props.data.content.slice(0, 145), { trim: true })}
               </CardSubtitle>
               <CardSubtitle classesName={classes.Badges}>
                 <Badge className={classes.CardBadge}>
