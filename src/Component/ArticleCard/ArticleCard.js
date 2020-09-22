@@ -31,7 +31,10 @@ const ArticleCard = (props) => {
       (props.data.negativeRatings + props.data.positiveRatings)) *
     100;
   return (
-    <Card style={{ borderRadius: 0 }} className={classes.ArticleCard}>
+    <Card
+      style={{ borderRadius: 0, borderColor: "black" }}
+      className={classes.ArticleCard}
+    >
       {" "}
       <Container>
         <Row>
@@ -69,17 +72,17 @@ const ArticleCard = (props) => {
                 {props.data.title}
               </CardTitle>
               <CardSubtitle className={classes.CardSubtitle}>
-                {props.data.content}
+                {parse(props.data.content)}
               </CardSubtitle>
               <CardSubtitle classesName={classes.Badges}>
                 <Badge className={classes.CardBadge}>
-                  Ratings Score : {Math.round(articleScore)}%
+                  {Math.round(articleScore)}%
                 </Badge>
                 <Badge className={classes.CardBadge}>
-                  Comments: {props.data.commentCount}
+                  {props.data.commentCount}
                 </Badge>
                 <Badge className={classes.CardBadge}>
-                  Created by: {props.data.createUserID.slice(0, 10)}
+                  {props.data.createUserID.slice(0, 10)}
                 </Badge>
 
                 <Badge className={classes.CardBadge}>
