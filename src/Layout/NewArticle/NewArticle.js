@@ -183,72 +183,83 @@ class NewArticle extends Component {
     return (
       <Container className={classes.NewArticleMain}>
         <Row>
-          <Col xl={9} lg={8} md={8} sn={12}>
+          <Col sn={12}>
             <FormGroup>
-              <Label className={classes.Label}>Title</Label>
+              <header class="border-bottom-0" className={classes.Label}>
+                Feature Image
+              </header>
               <Input
+                type="file"
+                accept="image/*"
+                className={classes.ImageUploader}
+                onChange={async (e) => {
+                  const uploadState = await this.uploadImageCallBack(e);
+                  if (uploadState.success) {
+                    this.setState({
+                      hasFeatureImage: true,
+                      article: {
+                        ...this.state.article,
+                        featureImage: uploadState.data.link,
+                      },
+                    });
+                  }
+                  console.log(
+                    "Image uploaded to firebase" + uploadState.data.link
+                  );
+                }}
+              ></Input>
+
+              {this.state.hasFeatureImage ? (
+                <header className={classes.ImageUploaded}>
+                  {" "}
+                  <img
+                    src={this.state.article.featureImage}
+                    className={classes.FeatureImg}
+                  />
+                </header>
+              ) : (
+                ""
+              )}
+            </FormGroup>
+            <FormGroup>
+              <header class="border-bottom-0" className={classes.Label}>
+                Title
+              </header>
+              <Input
+                style={{ borderRadius: 0 }}
                 type="text"
+                placeholder="Type in a title of you article..."
                 name="articleTitle"
                 id="articleTitle"
-                placeholder="Enter Title"
                 onChange={(e) => this.onChangeArticleTitle(e.target.value)}
                 value={this.state.article.title}
               />
             </FormGroup>
             <FormGroup>
+              <header class="border-bottom-0" className={classes.Label}>
+                Content
+              </header>
               <ReactQuill
                 ref={(el) => (this.quill = el)}
                 value={this.state.article.content}
                 onChange={(e) => this.onChangeArticleContent(e)}
+                placeholder="Type in something or upload a picture..."
                 theme="snow"
                 modules={this.modules}
                 formats={this.formats}
               />
             </FormGroup>
-          </Col>
-          <Col xl={3} lg={3} md={4} sn={12}>
-            <Card>
-              <CardHeader>
-                <Label className={classes.Label}>Feature Image</Label>
-              </CardHeader>
-              <CardBody>
-                <FormGroup>
-                  <Input
-                    type="file"
-                    accept="image/*"
-                    className={classes.ImageUploader}
-                    onChange={async (e) => {
-                      const uploadState = await this.uploadImageCallBack(e);
-                      if (uploadState.success) {
-                        this.setState({
-                          hasFeatureImage: true,
-                          article: {
-                            ...this.state.article,
-                            featureImage: uploadState.data.link,
-                          },
-                        });
-                      }
-                      console.log("sdfsdf" + uploadState.data.link);
-                    }}
-                  ></Input>
-
-                  {this.state.hasFeatureImage ? (
-                    <img
-                      src={this.state.article.featureImage}
-                      className={classes.FeatureImg}
-                    />
-                  ) : (
-                    ""
-                  )}
-                </FormGroup>
-                <FormGroup>
-                  <Button color="danger" onClick={(e) => this.submitArticle()}>
-                    {" "}
-                    Submit
-                  </Button>
-                </FormGroup>
-              </CardBody>
-            </Card>
+            <FormGroup>
+              <Button
+                style={{ borderRadius: 0 }}
+                outline
+                color="dark"
+                onClick={(e) => this.submitArticle()}
+              >
+                {" "}
+                Submit
+              </Button>
+            </FormGroup>
           </Col>
         </Row>
       </Container>

@@ -1,13 +1,32 @@
 .Label {
-  font-size: 14px;
-  color: #6c757c;
+  font-size: 18px;
+  color: black;
   font-family: sans-serif;
+  text-align: center;
+  background-color: #f7f7f7;
+  border-top: 1px solid lightgray;
+  border-left: 1px solid lightgray;
+  border-right: 1px solid lightgray;
 }
 .FeatureImg {
-  width: 100%;
+  width: 120px;
+  height: 120px;
   overflow: hidden;
 }
 
 .NewArticleMain {
-  padding: 60px;
+  padding: 65px;
+}
+
+.ImageUploaded {
+  border-left: 1px solid lightgray;
+  border-right: 1px solid lightgray;
+  text-align: center;
+  border-bottom: 1px solid lightgray;
+  padding: 2px;
+}
+
+.ImageUploader {
+  border: 1px solid lightgray;
+  padding: 3px;
 }

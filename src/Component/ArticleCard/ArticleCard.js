@@ -32,7 +32,7 @@ const ArticleCard = (props) => {
     100;
   return (
     <Card
-      style={{ borderRadius: 0, borderColor: "black" }}
+      style={{ borderRadius: 0, borderColor: "lightgray" }}
       className={classes.ArticleCard}
     >
       {" "}
