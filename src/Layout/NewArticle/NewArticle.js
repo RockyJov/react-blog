@@ -18,6 +18,7 @@ import "react-quill/dist/quill.snow.css";
 import firebase from "../../Config/firebase";
 import { v4 as uuidv4 } from "uuid";
 import Compressor from "compressorjs";
+import { isEmpty } from "react-redux-firebase";
 
 const db = firebase.firestore();
 const storageRef = firebase.storage();
@@ -45,7 +46,7 @@ class NewArticle extends Component {
         [{ size: [] }],
         ["bold", "italic", "underline", "strike", "blockquote"],
         [{ list: "ordered" }, { list: "bullet" }],
-        ["link", "image"],
+        ["link", "image", "video"],
         ["code-block"],
       ],
       handlers: {
@@ -180,6 +181,10 @@ class NewArticle extends Component {
   };
 
   render() {
+    const submitButtonCondition =
+      this.state.article.content.length >= 12 &&
+      this.state.article.title.length >= 1 &&
+      this.state.article.featureImage.length != 0;
     return (
       <Container className={classes.NewArticleMain}>
         <Row>
@@ -249,17 +254,30 @@ class NewArticle extends Component {
                 formats={this.formats}
               />
             </FormGroup>
-            <FormGroup>
-              <Button
-                style={{ borderRadius: 0 }}
-                outline
-                color="dark"
-                onClick={(e) => this.submitArticle()}
-              >
-                {" "}
-                Submit
-              </Button>
-            </FormGroup>
+            {!submitButtonCondition ? (
+              <FormGroup>
+                <Button
+                  style={{ borderRadius: 0 }}
+                  color="dark"
+                  onClick={(e) => this.submitArticle()}
+                  disabled
+                >
+                  {" "}
+                  SUBMIT
+                </Button>
+              </FormGroup>
+            ) : (
+              <FormGroup>
+                <Button
+                  style={{ borderRadius: 0 }}
+                  color="dark"
+                  onClick={(e) => this.submitArticle()}
+                >
+                  {" "}
+                  SUBMIT
+                </Button>
+              </FormGroup>
+            )}
           </Col>
         </Row>
       </Container>
