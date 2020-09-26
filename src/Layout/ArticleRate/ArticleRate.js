@@ -121,6 +121,7 @@ class ArticleRate extends Component {
             </Button>
           </div>
         </div>
+        <hr classeName={classes.HorLine} />
       </Container>
     );
   }
