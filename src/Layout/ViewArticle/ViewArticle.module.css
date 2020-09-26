@@ -1,48 +1,48 @@
-.Article {
-  margin: 10px;
-  outline-style: solid;
-}
-
 .MainViewArticle {
-  padding: 50px;
+  margin-top: 85px;
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+  border: 1px solid lightgray;
 }
 
-.ImageContainer {
+.Article {
+  overflow: auto;
+}
+
+/* .ImageContainer > img:hover {
   width: 100%;
-  position: relative;
+  height: 100%;
   text-align: center;
-}
+} */
 
-.Image {
-  opacity: 0.7;
-  border-radius: 3px;
-  object-fit: none;
-  max-height: 600px;
-  width: 100%;
+.Info {
+  font-size: 18px;
+  color: black;
+  font-family: sans-serif;
+  padding: 0 0 0 10px;
+  background-color: #f7f7f7;
+  border-top: 1px solid lightgray;
 }
 
 .Title {
-  font-weight: lighter;
-  text-shadow: -1 -1 0 #212121, 1 -1 0 #212121, -1 1 0 #212121, 1 1 0 #212121;
-}
-
-.ArticleInfo {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.Date {
+  font-size: 18px;
+  color: black;
+  font-family: sans-serif;
   text-align: center;
-  font-size: 15px;
-  font-weight: bold;
-  color: #e8e8e8;
+  background-color: #f7f7f7;
+  border-bottom: 1px solid lightgray;
+}
+
+.Image {
+  float: left;
+  width: 150px;
+  height: 150px;
+  margin: 0 10px 0 0;
 }
 
 .ArticleMain {
-  padding: 40px;
-  margin-left: 0;
-  width: 100%;
-  text-align: left;
+  text-align: justify;
+  font-family: sans-serif;
+  padding-right: 10px;
+  padding-left: 10px;
 }

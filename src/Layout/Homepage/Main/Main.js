@@ -24,7 +24,7 @@ class Main extends Component {
 
   getMyArticles = () => {
     db.collection("Articles")
-      .limit(10)
+      // .limit(10)
       .get()
       .then((docs) => {
         if (!docs.empty) {

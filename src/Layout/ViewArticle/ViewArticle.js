@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import classes from "./ViewArticle.module.css";
 import { withRouter } from "react-router-dom";
 import parse from "html-react-parser";
-import { Container } from "reactstrap";
+import { Container, Badge } from "reactstrap";
 import firebase from "../../../src/Config/firebase";
 
 const db = firebase.firestore();
@@ -69,25 +69,32 @@ class ViewArticle extends Component {
       return (
         <Container className={classes.MainViewArticle}>
           <div className={classes.Article}>
-            <div className={classes.ImageConainer}>
+            <div className={classes.ArticleInfo}>
+              <header className={classes.Title}>
+                {this.state.article.title}
+              </header>
+            </div>
+            <div className={classes.ImageContainer}>
               <img
                 className={classes.Image}
                 src={this.state.article.featureImage}
                 alt={this.state.article.title}
               />
             </div>
-            <div className={classes.ArticleInfo}>
-              <h1 className={classes.Title}>{this.state.article.title}</h1>
-              <div className={classes.Date}>
-                {" "}
-                {this.timeStampToString(this.state.article.createDate.seconds)}
-              </div>
-              <h2>Posted by: {this.state.article.createUserID.slice(0, 10)}</h2>
-              <h2>{this.props.match.params.id}</h2>
-            </div>
             <div className={classes.ArticleMain}>
               {parse(this.state.article.content)}
             </div>
+          </div>
+          <div className={classes.Info}>
+            {" "}
+            <Badge style={{ marginRight: 4 }}>
+              {this.state.article.createUserID.slice(0, 7)}
+            </Badge>
+            <Badge style={{ marginRight: 4 }}>
+              {" "}
+              {this.timeStampToString(this.state.article.createDate.seconds)}
+            </Badge>
+            <Badge>{this.state.article.commentCount}</Badge>
           </div>
         </Container>
       );

@@ -18,6 +18,10 @@
   padding: 65px;
 }
 
+.Info {
+  background-color: #f7f7f7;
+}
+
 .ImageUploaded {
   border-left: 1px solid lightgray;
   border-right: 1px solid lightgray;
