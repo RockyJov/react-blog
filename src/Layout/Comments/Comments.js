@@ -28,7 +28,7 @@ class Comments extends Component {
     db.collection("Articles")
       .doc(aid)
       .collection("Comments")
-      .limit(10)
+      // .limit(10)
       .get()
       .then((docs) => {
         if (!docs.empty) {

@@ -1,4 +1,4 @@
-.MainViewArticle {
+.ViewArticleContainer {
   margin-top: 85px;
   padding-left: 0px !important;
   padding-right: 0px !important;
@@ -14,7 +14,6 @@
   height: 100%;
   text-align: center;
 } */
-
 .Info {
   font-size: 18px;
   color: black;
@@ -33,6 +32,10 @@
   border-bottom: 1px solid lightgray;
 }
 
+.ImageContainer {
+  padding: 1px 0 0 1px;
+}
+
 .Image {
   float: left;
   width: 150px;
@@ -41,6 +44,7 @@
 }
 
 .ArticleMain {
+  word-wrap: break-word;
   text-align: justify;
   font-family: sans-serif;
   padding-right: 10px;

@@ -67,7 +67,7 @@ class ViewArticle extends Component {
   render() {
     if (this.state.isLoaded) {
       return (
-        <Container className={classes.MainViewArticle}>
+        <Container className={classes.ViewArticleContainer}>
           <div className={classes.Article}>
             <div className={classes.ArticleInfo}>
               <header className={classes.Title}>

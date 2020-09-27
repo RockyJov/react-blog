@@ -10,6 +10,5 @@
 }
 
 .HorLine {
-  border: 2px solid lightgray;
-  border-radius: 2px;
+  border: 1px solid lightgray;
 }

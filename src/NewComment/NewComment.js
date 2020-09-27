@@ -40,17 +40,10 @@ class NewComment extends Component {
   modules = {
     toolbar: {
       container: [
-        [{ header: "1" }, { header: "2" }, { font: [] }],
         [{ size: [] }],
         ["bold", "italic", "underline", "strike", "blockquote"],
-        [
-          { list: "ordered" },
-          { list: "bullet" },
-          { indent: "-1" },
-          { indent: "+1" },
-        ],
-        ["link", "image"],
-        ["clean"],
+        [{ list: "ordered" }, { list: "bullet" }],
+        ["link", "video"],
         ["code-block"],
       ],
       handlers: {
@@ -183,69 +176,68 @@ class NewComment extends Component {
 
   render() {
     return (
-      <Container>
+      <Container className={classes.NewCommentMain}>
         <Row>
-          <Col xl={9} lg={8} md={8} sn={12}>
-            <h2 className={classes.SectionTitle}>Comment</h2>
-
+          <Col sn={12}>
             <FormGroup>
+              <header className={classes.Label}> Feature Image</header>
+              <Input
+                type="file"
+                accept="image/*"
+                className={classes.ImageUploader}
+                onChange={async (e) => {
+                  const uploadState = await this.uploadImageCallBack(e);
+                  if (uploadState.success) {
+                    this.setState({
+                      hasFeatureImage: true,
+                      comment: {
+                        ...this.state.comment,
+                        featureImage: uploadState.data.link,
+                      },
+                    });
+                  }
+                  console.log(
+                    "Comment Image has been uploaded to:" +
+                      uploadState.data.link
+                  );
+                }}
+              ></Input>
+
+              {this.state.hasFeatureImage ? (
+                <header className={classes.ImageUploaded}>
+                  <img
+                    src={this.state.comment.featureImage}
+                    className={classes.FeatureImg}
+                  />
+                </header>
+              ) : (
+                ""
+              )}
+            </FormGroup>
+            <FormGroup>
+              <header class="border-bottom-0" className={classes.Label}>
+                Content
+              </header>
               <ReactQuill
-                // ref={(el) => (this.quill = el)}
-                // value={this.state.comment.content}
-                // onChange={(e) => this.onChangeCommentContent(e)}
-                // theme="snow"
-                // modules={this.modules}
-                // formats={this.formats}
-                // placeholder={"Enter your comment"}
-                value={this.state.value}
-                onChange={this.onValueUpdated}
+                ref={(el) => (this.quill = el)}
+                value={this.state.comment.content}
+                onChange={(e) => this.onChangeCommentContent(e)}
+                placeholder="Type in something or upload a picture..."
+                theme="snow"
+                modules={this.modules}
+                formats={this.formats}
               />
             </FormGroup>
-          </Col>
-
-          <Col xl={3} lg={3} md={4} sn={12}>
-            <Card>
-              <CardHeader>Comment Settings</CardHeader>
-
-              <CardBody>
-                <FormGroup>
-                  <Label className={classes.Label}>Feature Image</Label>
-                  <Input
-                    type="file"
-                    accept="image/*"
-                    className={classes.ImageUploader}
-                    onChange={async (e) => {
-                      const uploadState = await this.uploadImageCallBack(e);
-                      if (uploadState.success) {
-                        this.setState({
-                          hasFeatureImage: true,
-                          comment: {
-                            ...this.state.comment,
-                            featureImage: uploadState.data.link,
-                          },
-                        });
-                      }
-                      console.log("sdfsdf" + uploadState.data.link);
-                    }}
-                  ></Input>
-
-                  {this.state.hasFeatureImage ? (
-                    <img
-                      src={this.state.comment.featureImage}
-                      className={classes.FeatureImg}
-                    />
-                  ) : (
-                    ""
-                  )}
-                </FormGroup>
-                <FormGroup>
-                  <Button color="danger" onClick={(e) => this.submitComment()}>
-                    {" "}
-                    Submit
-                  </Button>
-                </FormGroup>
-              </CardBody>
-            </Card>
+            <FormGroup>
+              <Button
+                style={{ borderRadius: 0 }}
+                color="dark"
+                onClick={(e) => this.submitComment()}
+              >
+                {" "}
+                SUBMIT
+              </Button>
+            </FormGroup>
           </Col>
         </Row>
       </Container>
