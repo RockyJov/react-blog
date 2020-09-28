@@ -184,7 +184,9 @@ class NewArticle extends Component {
     const submitButtonCondition =
       this.state.article.content.length >= 12 &&
       this.state.article.title.length >= 1 &&
-      this.state.article.featureImage.length != 0;
+      this.state.article.featureImage.length != 0 &&
+      this.state.article.title.trim();
+
     return (
       <Container className={classes.NewArticleMain}>
         <Row>
@@ -254,14 +256,10 @@ class NewArticle extends Component {
                 formats={this.formats}
               />
             </FormGroup>
+
             {!submitButtonCondition ? (
               <FormGroup>
-                <Button
-                  style={{ borderRadius: 0 }}
-                  color="dark"
-                  onClick={(e) => this.submitArticle()}
-                  disabled
-                >
+                <Button style={{ borderRadius: 0 }} color="dark" disabled>
                   {" "}
                   SUBMIT
                 </Button>
