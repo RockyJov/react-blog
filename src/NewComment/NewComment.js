@@ -175,6 +175,9 @@ class NewComment extends Component {
   };
 
   render() {
+    const submitButtonCondition =
+      this.state.comment.content.length >= 12 ||
+      this.state.comment.featureImage.length != 0;
     return (
       <Container className={classes.NewCommentMain}>
         <Row>
@@ -228,16 +231,25 @@ class NewComment extends Component {
                 formats={this.formats}
               />
             </FormGroup>
-            <FormGroup>
-              <Button
-                style={{ borderRadius: 0 }}
-                color="dark"
-                onClick={(e) => this.submitComment()}
-              >
-                {" "}
-                SUBMIT
-              </Button>
-            </FormGroup>
+            {!submitButtonCondition ? (
+              <FormGroup>
+                <Button style={{ borderRadius: 0 }} color="dark" disabled>
+                  {" "}
+                  SUBMIT
+                </Button>
+              </FormGroup>
+            ) : (
+              <FormGroup>
+                <Button
+                  style={{ borderRadius: 0 }}
+                  color="dark"
+                  onClick={(e) => this.submitComment()}
+                >
+                  {" "}
+                  SUBMIT
+                </Button>
+              </FormGroup>
+            )}
           </Col>
         </Row>
       </Container>
