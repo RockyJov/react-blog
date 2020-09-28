@@ -67,7 +67,7 @@ const ArticleCard = (props) => {
             {" "}
             <CardBody className={classes.CardBody}>
               <CardTitle className={classes.CardTitle}>
-                {props.data.title}
+                <b> {props.data.title}</b>
               </CardTitle>
               <CardSubtitle className={classes.CardSubtitle}>
                 {parse(props.data.content.slice(0, 145), { trim: true })}

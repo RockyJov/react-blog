@@ -28,6 +28,7 @@ class Comments extends Component {
     db.collection("Articles")
       .doc(aid)
       .collection("Comments")
+      .orderBy("createDate", "asc")
       // .limit(10)
       .get()
       .then((docs) => {

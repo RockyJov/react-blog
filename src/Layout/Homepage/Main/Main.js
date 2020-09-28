@@ -24,6 +24,7 @@ class Main extends Component {
 
   getMyArticles = () => {
     db.collection("Articles")
+      .orderBy("createDate", "desc")
       // .limit(10)
       .get()
       .then((docs) => {
