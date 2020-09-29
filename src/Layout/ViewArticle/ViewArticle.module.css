@@ -9,11 +9,6 @@
   overflow: auto;
 }
 
-/* .ImageContainer > img:hover {
-  width: 100%;
-  height: 100%;
-  text-align: center;
-} */
 .Info {
   font-size: 18px;
   color: black;
@@ -34,6 +29,11 @@
 
 .ImageContainer {
   padding: 1px 0 0 1px;
+}
+
+.Image:target {
+  width: 100%;
+  height: 100%;
 }
 
 .Image {

@@ -9,10 +9,6 @@
   overflow: auto;
 }
 
-.ImageContainer {
-  padding: 1px 0 0 1px;
-}
-
 .Image {
   float: left;
   width: 150px;

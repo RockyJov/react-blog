@@ -1,48 +1,54 @@
-.ArticleCard {
-  width: 100%;
-  /*display: inline-block !important;*/
-  margin: 10px;
-  padding: 0px;
+.ViewArticleContainer {
+  margin-top: 85px;
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+  border: 1px solid lightgray;
 }
 
-.CardBody {
-  padding: 0px 0px 0px 0px !important;
-  float: left;
+.Article {
+  overflow: auto;
 }
 
-.CardImage {
-  min-height: 150px;
-  min-width: 54px;
-  max-height: 150px;
-  max-width: 150px;
-  border-radius: 0 !important;
-}
-
-.CardBadge {
-  margin: 0px 0px 0px 2px;
-}
-
-.Badges {
-  padding: 0px 0px 0px 0px;
-}
-
-.CardTitle {
-  font-size: 20px;
-  font-family: sans-serif;
-  padding: 5px 0px 0px 0px;
-  margin: 0px !important;
-  height: 71px;
-}
-
-.CardSubtitle {
-  padding: 0px 0px 0px 0px;
-  font-family: sans-serif;
-  font-size: 14px;
+.Info {
+  font-size: 18px;
   color: black;
-  height: 67px;
+  font-family: sans-serif;
+  padding: 0 0 0 10px;
+  background-color: #f7f7f7;
+  border-top: 1px solid lightgray;
 }
 
-.CardLink {
-  max-width: 180px;
-  max-height: 180px;
+.Title {
+  font-size: 18px;
+  color: black;
+  font-family: sans-serif;
+  text-align: center;
+  background-color: #f7f7f7;
+  border-bottom: 1px solid lightgray;
+}
+
+.ImageContainer {
+  padding: 1px 0 0 1px;
+}
+
+.Image:target {
+  width: 100%;
+  height: 100%;
+}
+
+.Image {
+  float: left;
+  width: 150px;
+  height: 150px;
+  margin: 0 10px 0 0;
+}
+
+.ArticleMain {
+  word-wrap: break-word;
+  text-align: justify;
+  font-family: sans-serif;
+  padding-right: 10px;
+  padding-left: 10px;
+  max-height: 150px;
+  overflow: hidden;
 }

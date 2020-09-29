@@ -232,6 +232,7 @@ class NewArticle extends Component {
               <header class="border-bottom-0" className={classes.Label}>
                 Title
               </header>
+
               <Input
                 style={{ borderRadius: 0 }}
                 type="text"
@@ -240,6 +241,7 @@ class NewArticle extends Component {
                 id="articleTitle"
                 onChange={(e) => this.onChangeArticleTitle(e.target.value)}
                 value={this.state.article.title}
+                maxLength="60"
               />
             </FormGroup>
             <FormGroup>
@@ -254,6 +256,7 @@ class NewArticle extends Component {
                 theme="snow"
                 modules={this.modules}
                 formats={this.formats}
+                maxLength="4"
               />
             </FormGroup>
 
