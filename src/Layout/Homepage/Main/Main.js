@@ -14,7 +14,7 @@ class Main extends Component {
     this.state = {
       isLoaded: false,
       articles: [],
-      limit: 1,
+      limit: 2,
       lastArticle: null,
       orderBy: "createDate",
     };
@@ -25,8 +25,8 @@ class Main extends Component {
     let last = this.state.lastArticle;
     db.collection("Articles")
       .orderBy(this.state.orderBy, "desc")
-      .startAfter(last)
-      .limit(this.state.limit)
+      .startAfter(last.createDate)
+      .limit(1)
       .get()
       .then((docs) => {
         if (!docs.empty) {
