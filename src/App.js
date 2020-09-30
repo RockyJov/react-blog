@@ -11,6 +11,7 @@
 // react-firebaseui
 // react-redux
 // redux
+// react-infinite-scroll-component
 // uuid
 // compressorjs
 //in react-blog-server(different directory): express; firebase-admin
