@@ -14,7 +14,7 @@ class Main extends Component {
     this.state = {
       isLoaded: false,
       articles: [],
-      limit: 2,
+      limit: 1,
       lastArticle: null,
       orderBy: "createDate",
     };
@@ -45,11 +45,13 @@ class Main extends Component {
           this.setState(
             {
               articles: updated_articles,
-              lastArticle: last,
             },
             () => {
               this.setState({
                 isLoaded: true,
+                lastArticle: this.state.articles[
+                  this.state.articles.length - 1
+                ],
               });
             }
           );
