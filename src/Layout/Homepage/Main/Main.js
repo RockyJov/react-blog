@@ -70,8 +70,7 @@ class Main extends Component {
     db.collection("Articles")
       .orderBy(this.state.orderBy, "desc")
       .limit(this.state.limit)
-      .get()
-      .then((docs) => {
+      .onSnapshot((docs) => {
         if (!docs.empty) {
           let allArticles = [];
           docs.forEach(function (doc) {

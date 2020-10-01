@@ -30,8 +30,7 @@ class Comments extends Component {
       .collection("Comments")
       .orderBy("createDate", "asc")
       // .limit(10)
-      .get()
-      .then((docs) => {
+      .onSnapshot((docs) => {
         if (!docs.empty) {
           let allComments = [];
           docs.forEach(function (doc) {

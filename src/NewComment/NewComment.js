@@ -41,10 +41,10 @@ class NewComment extends Component {
     toolbar: {
       container: [
         [{ size: [] }],
-        ["bold", "italic", "underline", "strike", "blockquote"],
-        [{ list: "ordered" }, { list: "bullet" }],
+        ["bold", "italic", "underline", "strike"],
+        // [{ list: "ordered" }, { list: "bullet" }],
         ["link", "video"],
-        ["code-block"],
+        // ["code-block"],
       ],
       handlers: {
         image: () => this.quillImageCallBack(),
@@ -175,8 +175,13 @@ class NewComment extends Component {
   };
 
   render() {
+    function removeTags(str) {
+      if (str === null || str === "") return false;
+      else str = str.toString();
+      return str.replace(/(<([^>]+)>)/gi, "");
+    }
     const submitButtonCondition =
-      this.state.comment.content.length >= 12 ||
+      removeTags(this.state.comment.content).length >= 1 ||
       this.state.comment.featureImage.length != 0;
     return (
       <Container className={classes.NewCommentMain}>

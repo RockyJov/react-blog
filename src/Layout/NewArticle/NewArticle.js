@@ -26,9 +26,7 @@ const storageRef = firebase.storage();
 class NewArticle extends Component {
   constructor(props) {
     super(props);
-    this.onChangeArticleContent = this.onChangeArticleContent.bind(this);
-    this.quillRef = null; // Quill instance
-    this.reactQuillRef = null;
+
     this.state = {
       article: {
         title: "",
@@ -86,27 +84,8 @@ class NewArticle extends Component {
       },
     });
   };
-  componentDidMount() {
-    this.attachQuillRefs();
-  }
-
-  componentDidUpdate() {
-    this.attachQuillRefs();
-  }
-
-  attachQuillRefs = () => {
-    if (typeof this.reactQuillRef.getEditor !== "function") return;
-    this.quillRef = this.reactQuillRef.getEditor();
-  };
 
   onChangeArticleContent = (value) => {
-    var limit = 10;
-    var quill = this.quillRef;
-    quill.on("text-change", function (delta, old, source) {
-      if (quill.getLength() > limit) {
-        quill.deleteText(limit, quill.getLength());
-      }
-    });
     this.setState({
       article: {
         ...this.state.article,
@@ -281,7 +260,7 @@ class NewArticle extends Component {
                 Content
               </header>
               <ReactQuill
-                ref={(el) => (this.reactQuillRef = el)}
+                ref={(el) => (this.quill = el)}
                 value={this.state.article.content}
                 onChange={(e) => this.onChangeArticleContent(e)}
                 placeholder="Type in something or upload a picture..."
