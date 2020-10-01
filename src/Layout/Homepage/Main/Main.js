@@ -14,7 +14,7 @@ class Main extends Component {
     this.state = {
       isLoaded: false,
       articles: [],
-      limit: 1,
+      limit: 5,
       lastArticle: null,
       orderBy: "createDate",
     };
@@ -57,6 +57,7 @@ class Main extends Component {
           );
         }
       });
+    window.scrollTo(0, document.body.scrollHeight);
   };
 
   componentDidMount() {
@@ -107,9 +108,19 @@ class Main extends Component {
                 return <ArticleCard key={index} data={article} />;
               })
             : ""}
+          <div className={classes.MoreButton}>
+            {" "}
+            <Button
+              size="sm"
+              outline
+              color="dark"
+              style={{ borderRadius: 0 }}
+              onClick={() => this.nextArticle()}
+            >
+              Show 1 more post...
+            </Button>
+          </div>
         </Container>
-        <button onClick={() => this.nextArticle()}>ss</button>
-        <button onClick={() => console.log(this.state.lastArticle)}>ss</button>
       </div>
     );
   }

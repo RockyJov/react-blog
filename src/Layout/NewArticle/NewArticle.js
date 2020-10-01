@@ -26,7 +26,9 @@ const storageRef = firebase.storage();
 class NewArticle extends Component {
   constructor(props) {
     super(props);
-
+    this.onChangeArticleContent = this.onChangeArticleContent.bind(this);
+    this.quillRef = null; // Quill instance
+    this.reactQuillRef = null;
     this.state = {
       article: {
         title: "",
@@ -44,10 +46,10 @@ class NewArticle extends Component {
     toolbar: {
       container: [
         [{ size: [] }],
-        ["bold", "italic", "underline", "strike", "blockquote"],
-        [{ list: "ordered" }, { list: "bullet" }],
+        ["bold", "italic", "underline", "strike"],
+        // [{ list: "ordered" }, { list: "bullet" }],
         ["link", "video"],
-        ["code-block"],
+        // ["code-block"],
       ],
       handlers: {
         image: () => this.quillImageCallBack(),
@@ -84,14 +86,39 @@ class NewArticle extends Component {
       },
     });
   };
+  componentDidMount() {
+    this.attachQuillRefs();
+  }
+
+  componentDidUpdate() {
+    this.attachQuillRefs();
+  }
+
+  attachQuillRefs = () => {
+    if (typeof this.reactQuillRef.getEditor !== "function") return;
+    this.quillRef = this.reactQuillRef.getEditor();
+  };
 
   onChangeArticleContent = (value) => {
+    var limit = 10;
+    var quill = this.quillRef;
+    quill.on("text-change", function (delta, old, source) {
+      if (quill.getLength() > limit) {
+        quill.deleteText(limit, quill.getLength());
+      }
+    });
     this.setState({
       article: {
         ...this.state.article,
         content: value,
       },
     });
+    function removeTags(str) {
+      if (str === null || str === "") return false;
+      else str = str.toString();
+      return str.replace(/(<([^>]+)>)/gi, "");
+    }
+    console.log(removeTags(this.state.article.content).length);
   };
 
   // seconds not defined
@@ -181,10 +208,15 @@ class NewArticle extends Component {
   };
 
   render() {
+    function removeTags(str) {
+      if (str === null || str === "") return false;
+      else str = str.toString();
+      return str.replace(/(<([^>]+)>)/gi, "");
+    }
     const submitButtonCondition =
-      this.state.article.content.length >= 12 &&
+      removeTags(this.state.article.content).length >= 1 &&
       this.state.article.title.length >= 1 &&
-      this.state.article.featureImage.length != 0 &&
+      // this.state.article.featureImage.length != 0 &&
       this.state.article.title.trim();
 
     return (
@@ -249,14 +281,13 @@ class NewArticle extends Component {
                 Content
               </header>
               <ReactQuill
-                ref={(el) => (this.quill = el)}
+                ref={(el) => (this.reactQuillRef = el)}
                 value={this.state.article.content}
                 onChange={(e) => this.onChangeArticleContent(e)}
                 placeholder="Type in something or upload a picture..."
                 theme="snow"
                 modules={this.modules}
                 formats={this.formats}
-                maxLength="4"
               />
             </FormGroup>
 

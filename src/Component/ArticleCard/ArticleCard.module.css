@@ -1,5 +1,5 @@
 .ViewArticleContainer {
-  margin-top: 85px;
+  margin-top: 0px;
   padding-left: 0px !important;
   padding-right: 0px !important;
   border: 1px solid lightgray;
@@ -51,4 +51,8 @@
   padding-left: 10px;
   max-height: 150px;
   overflow: hidden;
+}
+
+.HorLine {
+  border-top: 1px solid lightgray;
 }

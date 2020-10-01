@@ -31,53 +31,56 @@ const ArticleCard = (props) => {
       (props.data.negativeRatings + props.data.positiveRatings)) *
     100;
   return (
-    <Container className={classes.ViewArticleContainer}>
-      <div className={classes.Article}>
-        <div className={classes.ArticleInfo}>
-          <header className={classes.Title}>{props.data.title}</header>
-        </div>
-        {props.auth.isEmpty ? (
-          <div className={classes.ImageContainer}>
-            <img
-              className={classes.Image}
-              src={props.data.featureImage}
-              alt="Feature Image"
-            />
+    <div>
+      <Container className={classes.ViewArticleContainer}>
+        <div className={classes.Article}>
+          <div className={classes.ArticleInfo}>
+            <header className={classes.Title}>{props.data.title}</header>
           </div>
-        ) : (
-          <Link
-            className={classes.ImageLink}
-            to={{
-              pathname: "article/" + props.data.id,
-              state: { article: props.data },
-            }}
-          >
+          {props.auth.isEmpty ? (
             <div className={classes.ImageContainer}>
-              {" "}
               <img
-                src={props.data.featureImage}
-                alt="Card Image"
                 className={classes.Image}
+                src={props.data.featureImage}
+                alt="Feature Image"
               />
             </div>
-          </Link>
-        )}
+          ) : (
+            <Link
+              className={classes.ImageLink}
+              to={{
+                pathname: "article/" + props.data.id,
+                state: { article: props.data },
+              }}
+            >
+              <div className={classes.ImageContainer}>
+                {" "}
+                <img
+                  src={props.data.featureImage}
+                  alt="Card Image"
+                  className={classes.Image}
+                />
+              </div>
+            </Link>
+          )}
 
-        <div className={classes.ArticleMain}>{parse(props.data.content)}</div>
-      </div>
-      <div className={classes.Info}>
-        {" "}
-        <Badge style={{ marginRight: 4 }}> {Math.round(articleScore)}%</Badge>
-        <Badge style={{ marginRight: 4 }}>{props.data.commentCount}</Badge>
-        <Badge style={{ marginRight: 4 }}>
-          {props.data.createUserID.slice(0, 7)}
-        </Badge>
-        <Badge style={{ marginRight: 4 }}>
+          <div className={classes.ArticleMain}>{parse(props.data.content)}</div>
+        </div>
+        <div className={classes.Info}>
           {" "}
-          {timeStampToString(props.data.createDate.seconds)}
-        </Badge>
-      </div>
-    </Container>
+          <Badge style={{ marginRight: 4 }}> {Math.round(articleScore)}%</Badge>
+          <Badge style={{ marginRight: 4 }}>{props.data.commentCount}</Badge>
+          <Badge style={{ marginRight: 4 }}>
+            {props.data.createUserID.slice(0, 7)}
+          </Badge>
+          <Badge style={{ marginRight: 4 }}>
+            {" "}
+            {timeStampToString(props.data.createDate.seconds)}
+          </Badge>
+        </div>
+      </Container>
+      <hr className={classes.HorLine} />
+    </div>
 
     // <Container className={classes.ArticleCardContainer}>
     //   <Row>

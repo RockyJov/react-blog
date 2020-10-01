@@ -1,4 +1,9 @@
 .MoreButton {
   text-align: center;
   margin-top: 25px;
+  margin-bottom: 25px;
+}
+
+.Main {
+  margin-top: 85px;
 }
