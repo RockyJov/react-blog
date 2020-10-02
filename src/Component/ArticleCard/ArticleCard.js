@@ -21,7 +21,17 @@ import firebase from "../../Config/firebase";
 export function timeStampToString(ts) {
   const date = new Date(ts * 1000);
   return (
-    date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate()
+    date.getFullYear() +
+    "/" +
+    (date.getMonth() + 1) +
+    "/" +
+    date.getDate() +
+    " " +
+    date.getHours() +
+    ":" +
+    date.getMinutes() +
+    ":" +
+    date.getSeconds()
   );
 }
 
@@ -66,6 +76,7 @@ const ArticleCard = (props) => {
 
           <div className={classes.ArticleMain}>{parse(props.data.content)}</div>
         </div>
+
         <div className={classes.Info}>
           {" "}
           <Badge style={{ marginRight: 4 }}> {Math.round(articleScore)}%</Badge>

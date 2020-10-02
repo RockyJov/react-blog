@@ -26,7 +26,17 @@ const CommentCard = (props) => {
   timeStampToString = (ts) => {
     const date = new Date(ts * 1000);
     return (
-      date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate()
+      date.getFullYear() +
+      "/" +
+      (date.getMonth() + 1) +
+      "/" +
+      date.getDate() +
+      " " +
+      date.getHours() +
+      ":" +
+      date.getMinutes() +
+      ":" +
+      date.getSeconds()
     );
   };
   return (
@@ -50,7 +60,12 @@ const CommentCard = (props) => {
           <Badge style={{ marginRight: 4 }}>
             {props.data.createUserID.slice(0, 7)}
           </Badge>
-          <Badge style={{ marginRight: 4 }}>
+          <Badge
+            style={{ marginRight: 4 }}
+            data-toggle="tooltip"
+            data-placement="bottom"
+            title={props.data.createDate.seconds}
+          >
             {" "}
             {timeStampToString(props.data.createDate.seconds)}
           </Badge>

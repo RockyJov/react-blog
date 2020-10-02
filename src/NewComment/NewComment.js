@@ -30,7 +30,7 @@ class NewComment extends Component {
       comment: {
         commentID: "",
         content: "",
-        createDate: new Date(),
+        createDate: "",
         featureImage: "",
         createUserID: "",
       },
@@ -83,18 +83,42 @@ class NewComment extends Component {
     console.log(this.state.comment.content);
   };
 
+  callback = () => {
+    this.setState(
+      {
+        comment: {
+          ...this.state.comment,
+          createDate: new Date(),
+        },
+      },
+      () => {
+        console.log(this.state.comment);
+      }
+    );
+  };
+
   submitComment = () => {
     const aid = this.props.location.pathname.slice(9);
-    const comment = this.state.comment;
-    comment.createUserID = this.props.auth.uid;
-    db.collection("Articles")
-      .doc(aid)
-      .collection("Comments")
-      .add(comment)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => console.log(err));
+    // const comment = this.state.comment;
+    this.state.comment.createUserID = this.props.auth.uid;
+    this.setState(
+      {
+        comment: {
+          ...this.state.comment,
+          createDate: new Date(),
+        },
+      },
+      () => {
+        db.collection("Articles")
+          .doc(aid)
+          .collection("Comments")
+          .add(this.state.comment)
+          .then((res) => {
+            console.log(res);
+          })
+          .catch((err) => console.log(err));
+      }
+    );
 
     const articleRef = db.collection("Articles").doc(aid);
     articleRef.update({
@@ -253,6 +277,7 @@ class NewComment extends Component {
                   {" "}
                   SUBMIT
                 </Button>
+                <Button onClick={() => this.callback()}>Date</Button>K
               </FormGroup>
             )}
           </Col>

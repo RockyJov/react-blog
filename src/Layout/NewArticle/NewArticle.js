@@ -11,6 +11,7 @@ import {
   Input,
   Button,
   Form,
+  Modal,
 } from "reactstrap";
 import classes from "./NewArticle.module.css";
 import ReactQuill from "react-quill";
@@ -195,7 +196,7 @@ class NewArticle extends Component {
     const submitButtonCondition =
       removeTags(this.state.article.content).length >= 1 &&
       this.state.article.title.length >= 1 &&
-      // this.state.article.featureImage.length != 0 &&
+      this.state.article.featureImage.length != 0 &&
       this.state.article.title.trim();
 
     return (

@@ -12,6 +12,7 @@ import {
   DropdownMenu,
   Button,
   Collapse,
+  Modal,
 } from "reactstrap";
 import classes from "./Heading.module.css";
 import { connect } from "react-redux";
@@ -25,6 +26,7 @@ class Heading extends Component {
     super(props);
     this.state = {
       isOpen: false,
+      modalShow: false,
     };
   }
 
@@ -78,6 +80,7 @@ class Heading extends Component {
                   outline
                   color="dark"
                   size="sm"
+                  onClick={() => this.handleModal}
                   href="/new-article"
                 >
                   CREATE AN ARTICLE
