@@ -13,6 +13,7 @@ import {
   Form,
   Modal,
 } from "reactstrap";
+import Recaptcha from "react-recaptcha";
 import classes from "./NewArticle.module.css";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
@@ -27,8 +28,12 @@ const storageRef = firebase.storage();
 class NewArticle extends Component {
   constructor(props) {
     super(props);
+    this.reCaptchaLoaded = this.reCaptchaLoaded.bind(this);
+    this.verifyCallback = this.verifyCallback.bind(this);
+    this.expiredCallback = this.expiredCallback.bind(this);
 
     this.state = {
+      isVerified: false,
       article: {
         title: "",
         content: "",
@@ -102,6 +107,29 @@ class NewArticle extends Component {
   };
 
   // seconds not defined
+  captcha = () => {
+    if (!this.state.isVerified) {
+      alert("Captcha verification failed!");
+    } else {
+      alert("Captcha passed!");
+    }
+  };
+
+  reCaptchaLoaded() {
+    console.log("ReCaptcha has loaded.");
+  }
+  verifyCallback(response) {
+    if (response) {
+      this.setState({
+        isVerified: true,
+      });
+    }
+  }
+  expiredCallback() {
+    this.setState({
+      isVerified: false,
+    });
+  }
 
   submitArticle = () => {
     const article = this.state.article;
@@ -274,9 +302,25 @@ class NewArticle extends Component {
 
             {!submitButtonCondition ? (
               <FormGroup>
+                <Recaptcha
+                  sitekey="6LeF59IZAAAAAK3nudAyu9wQDemGRHGN1LltZ95C"
+                  render="explicit"
+                  onloadCallback={this.reCaptchaLoaded}
+                  verifyCallback={this.verifyCallback}
+                  expiredCallback={this.expiredCallback}
+                />
+                ,
                 <Button style={{ borderRadius: 0 }} color="dark" disabled>
                   {" "}
                   SUBMIT
+                </Button>
+                <Button
+                  onClick={() => this.captcha()}
+                  style={{ borderRadius: 0 }}
+                  color="dark"
+                >
+                  {" "}
+                  RECAPTCHA
                 </Button>
               </FormGroup>
             ) : (

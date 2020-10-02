@@ -9,6 +9,7 @@
 // react-quill
 // react-redux-firebase
 // react-firebaseui
+// react-recaptcha
 // react-redux
 // redux
 // react-infinite-scroll-component
