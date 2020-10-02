@@ -9,6 +9,7 @@ import {
   FormGroup,
   Label,
   Input,
+  Alert,
   Button,
   Form,
 } from "reactstrap";
@@ -81,20 +82,6 @@ class NewComment extends Component {
       },
     });
     console.log(this.state.comment.content);
-  };
-
-  callback = () => {
-    this.setState(
-      {
-        comment: {
-          ...this.state.comment,
-          createDate: new Date(),
-        },
-      },
-      () => {
-        console.log(this.state.comment);
-      }
-    );
   };
 
   submitComment = () => {
@@ -277,7 +264,6 @@ class NewComment extends Component {
                   {" "}
                   SUBMIT
                 </Button>
-                <Button onClick={() => this.callback()}>Date</Button>K
               </FormGroup>
             )}
           </Col>

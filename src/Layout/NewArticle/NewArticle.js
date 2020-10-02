@@ -207,6 +207,7 @@ class NewArticle extends Component {
               <header class="border-bottom-0" className={classes.Label}>
                 Feature Image
               </header>
+
               <Input
                 type="file"
                 accept="image/*"

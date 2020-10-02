@@ -60,7 +60,20 @@ class ViewArticle extends Component {
   timeStampToString = (ts) => {
     const date = new Date(ts * 1000);
     return (
-      date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate()
+      date.getFullYear() +
+      "/" +
+      (date.getMonth() + 1) +
+      "/" +
+      date.getDate() +
+      " " +
+      (date.getHours() < 10 ? "0" : "") +
+      date.getHours() +
+      ":" +
+      (date.getMinutes() < 10 ? "0" : "") +
+      date.getMinutes() +
+      ":" +
+      (date.getSeconds() < 10 ? "0" : "") +
+      date.getSeconds()
     );
   };
 

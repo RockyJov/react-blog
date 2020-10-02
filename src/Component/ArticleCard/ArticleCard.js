@@ -27,19 +27,29 @@ export function timeStampToString(ts) {
     "/" +
     date.getDate() +
     " " +
+    (date.getHours() < 10 ? "0" : "") +
     date.getHours() +
     ":" +
+    (date.getMinutes() < 10 ? "0" : "") +
     date.getMinutes() +
     ":" +
+    (date.getSeconds() < 10 ? "0" : "") +
     date.getSeconds()
   );
 }
 
 const ArticleCard = (props) => {
+  function removeTags(str) {
+    if (str === null || str === "") return false;
+    else str = str.toString();
+    return str.replace(/(<([^>]+)>)/gi, "");
+  }
+
   const articleScore =
     (props.data.positiveRatings /
       (props.data.negativeRatings + props.data.positiveRatings)) *
     100;
+
   return (
     <div>
       <Container className={classes.ViewArticleContainer}>
@@ -74,19 +84,32 @@ const ArticleCard = (props) => {
             </Link>
           )}
 
-          <div className={classes.ArticleMain}>{parse(props.data.content)}</div>
+          <div className={classes.ArticleMain}>
+            {parse(removeTags(props.data.content))}
+          </div>
         </div>
 
         <div className={classes.Info}>
           {" "}
-          <Badge style={{ marginRight: 4 }}> {Math.round(articleScore)}%</Badge>
-          <Badge style={{ marginRight: 4 }}>{props.data.commentCount}</Badge>
-          <Badge style={{ marginRight: 4 }}>
+          {!articleScore ? (
+            <Badge style={{ marginRight: 4, borderRadius: 10 }} color="dark">
+              %:0
+            </Badge>
+          ) : (
+            <Badge color="dark" style={{ marginRight: 4, borderRadius: 10 }}>
+              %:{Math.round(articleScore)}
+            </Badge>
+          )}
+          <Badge color="dark" style={{ marginRight: 4, borderRadius: 10 }}>
+            R:{props.data.commentCount}
+          </Badge>
+          <Badge color="dark" style={{ marginRight: 4, borderRadius: 10 }}>
+            P:
             {props.data.createUserID.slice(0, 7)}
           </Badge>
-          <Badge style={{ marginRight: 4 }}>
+          <Badge color="dark" style={{ marginRight: 4, borderRadius: 10 }}>
             {" "}
-            {timeStampToString(props.data.createDate.seconds)}
+            D:{timeStampToString(props.data.createDate.seconds)}
           </Badge>
         </div>
       </Container>
