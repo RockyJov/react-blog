@@ -33,7 +33,9 @@ class NewComment extends Component {
     this.expiredCallback = this.expiredCallback.bind(this);
 
     this.state = {
-      isVerified: true,
+      isVerified: false,
+      hasFeatureImage: false,
+
       comment: {
         commentID: "",
         content: "",
@@ -110,6 +112,7 @@ class NewComment extends Component {
     this.state.comment.createUserID = this.props.auth.uid;
     this.setState(
       {
+        hasFeatureImage: false,
         comment: {
           ...this.state.comment,
           createDate: new Date(),
@@ -125,6 +128,13 @@ class NewComment extends Component {
         this.quill
           .getEditor()
           .deleteText(0, this.quill.getEditor().getLength());
+        this.setState({
+          comment: {
+            ...this.state.comment,
+            featureImage: "",
+            content: "",
+          },
+        });
       }
     );
 
@@ -243,8 +253,8 @@ class NewComment extends Component {
         <Row>
           <Col sn={12}>
             <FormGroup>
-              <header className={classes.Label}> Feature Image</header>
-              <Button onClick={() => this.deleteImageCallBack()}>X</Button>
+              {/* <header className={classes.Label}> Feature Image</header> */}
+
               <Input
                 type="file"
                 accept="image/*"
@@ -273,15 +283,16 @@ class NewComment extends Component {
                     src={this.state.comment.featureImage}
                     className={classes.FeatureImg}
                   />
+                  <Button onClick={() => this.deleteImageCallBack()}>X</Button>
                 </header>
               ) : (
                 ""
               )}
             </FormGroup>
             <FormGroup>
-              <header class="border-bottom-0" className={classes.Label}>
+              {/* <header class="border-bottom-0" className={classes.Label}>
                 Content
-              </header>
+              </header> */}
               <ReactQuill
                 ref={(el) => (this.quill = el)}
                 value={this.state.comment.content}

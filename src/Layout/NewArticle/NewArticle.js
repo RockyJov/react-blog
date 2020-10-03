@@ -220,9 +220,9 @@ class NewArticle extends Component {
         <Row>
           <Col sn={12}>
             <FormGroup>
-              <header class="border-bottom-0" className={classes.Label}>
+              {/* <header class="border-bottom-0" className={classes.Label}>
                 Feature Image
-              </header>
+              </header> */}
 
               <Input
                 type="file"
@@ -258,9 +258,9 @@ class NewArticle extends Component {
               )}
             </FormGroup>
             <FormGroup>
-              <header class="border-bottom-0" className={classes.Label}>
+              {/* <header class="border-bottom-0" className={classes.Label}>
                 Title
-              </header>
+              </header> */}
 
               <Input
                 style={{ borderRadius: 0 }}
@@ -274,9 +274,9 @@ class NewArticle extends Component {
               />
             </FormGroup>
             <FormGroup>
-              <header class="border-bottom-0" className={classes.Label}>
+              {/* <header class="border-bottom-0" className={classes.Label}>
                 Content
-              </header>
+              </header> */}
               <ReactQuill
                 ref={(el) => (this.quill = el)}
                 value={this.state.article.content}
