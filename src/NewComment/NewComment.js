@@ -15,6 +15,8 @@ import {
 } from "reactstrap";
 import classes from "./NewComment.module.css";
 import ReactQuill from "react-quill";
+import Recaptcha from "react-recaptcha";
+
 import "react-quill/dist/quill.snow.css";
 import firebase from "../Config/firebase";
 import { v4 as uuidv4 } from "uuid";
@@ -22,12 +24,16 @@ import Compressor from "compressorjs";
 
 const db = firebase.firestore();
 const storageRef = firebase.storage();
+let recaptchaInstance;
 
 class NewComment extends Component {
   constructor(props) {
     super(props);
+    this.verifyCallback = this.verifyCallback.bind(this);
+    this.expiredCallback = this.expiredCallback.bind(this);
 
     this.state = {
+      isVerified: true,
       comment: {
         commentID: "",
         content: "",
@@ -84,8 +90,22 @@ class NewComment extends Component {
     console.log(this.state.comment.content);
   };
 
+  verifyCallback(response) {
+    if (response) {
+      this.setState({
+        isVerified: true,
+      });
+    }
+  }
+  expiredCallback() {
+    this.setState({
+      isVerified: false,
+    });
+  }
+
   submitComment = () => {
     const aid = this.props.location.pathname.slice(9);
+
     // const comment = this.state.comment;
     this.state.comment.createUserID = this.props.auth.uid;
     this.setState(
@@ -100,10 +120,11 @@ class NewComment extends Component {
           .doc(aid)
           .collection("Comments")
           .add(this.state.comment)
-          .then((res) => {
-            console.log(res);
-          })
+          .then((res) => {})
           .catch((err) => console.log(err));
+        this.quill
+          .getEditor()
+          .deleteText(0, this.quill.getEditor().getLength());
       }
     );
 
@@ -111,6 +132,7 @@ class NewComment extends Component {
     articleRef.update({
       commentCount: firebase.firestore.FieldValue.increment(1),
     });
+    recaptchaInstance.reset();
   };
 
   fileCompress = (file) => {
@@ -164,6 +186,27 @@ class NewComment extends Component {
     };
   };
 
+  deleteImageCallBack = (e) => {
+    const fileName = this.state.comment.featureImage.slice(86, 122);
+    storageRef
+      .ref()
+      .child("Comments/" + fileName)
+      .delete()
+      .then(() => {
+        this.setState({
+          hasFeatureImage: false,
+          comment: {
+            ...this.state.comment,
+            featureImage: "",
+          },
+        });
+        console.log("file deleted!" + this.state.comment.featureImage);
+      })
+      .catch(function (error) {
+        console.log("nothing to delete!");
+      });
+  };
+
   uploadImageCallBack = (e) => {
     return new Promise(async (resolve, reject) => {
       const file = e.target.files[0];
@@ -192,14 +235,16 @@ class NewComment extends Component {
       return str.replace(/(<([^>]+)>)/gi, "");
     }
     const submitButtonCondition =
-      removeTags(this.state.comment.content).length >= 1 ||
-      this.state.comment.featureImage.length != 0;
+      this.state.isVerified &&
+      (removeTags(this.state.comment.content).length >= 1 ||
+        this.state.comment.featureImage.length != 0);
     return (
       <Container className={classes.NewCommentMain}>
         <Row>
           <Col sn={12}>
             <FormGroup>
               <header className={classes.Label}> Feature Image</header>
+              <Button onClick={() => this.deleteImageCallBack()}>X</Button>
               <Input
                 type="file"
                 accept="image/*"
@@ -214,11 +259,11 @@ class NewComment extends Component {
                         featureImage: uploadState.data.link,
                       },
                     });
+                    console.log(
+                      "Comment Image has been uploaded to:" +
+                        uploadState.data.link
+                    );
                   }
-                  console.log(
-                    "Comment Image has been uploaded to:" +
-                      uploadState.data.link
-                  );
                 }}
               ></Input>
 
@@ -245,6 +290,15 @@ class NewComment extends Component {
                 theme="snow"
                 modules={this.modules}
                 formats={this.formats}
+              />
+            </FormGroup>
+            <FormGroup>
+              <Recaptcha
+                ref={(e) => (recaptchaInstance = e)}
+                sitekey="6LeF59IZAAAAAK3nudAyu9wQDemGRHGN1LltZ95C"
+                render="explicit"
+                verifyCallback={this.verifyCallback}
+                expiredCallback={this.expiredCallback}
               />
             </FormGroup>
             {!submitButtonCondition ? (

@@ -80,7 +80,6 @@ class Heading extends Component {
                   outline
                   color="dark"
                   size="sm"
-                  onClick={() => this.handleModal}
                   href="/new-article"
                 >
                   CREATE AN ARTICLE

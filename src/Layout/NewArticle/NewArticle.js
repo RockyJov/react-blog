@@ -28,7 +28,6 @@ const storageRef = firebase.storage();
 class NewArticle extends Component {
   constructor(props) {
     super(props);
-    this.reCaptchaLoaded = this.reCaptchaLoaded.bind(this);
     this.verifyCallback = this.verifyCallback.bind(this);
     this.expiredCallback = this.expiredCallback.bind(this);
 
@@ -106,18 +105,6 @@ class NewArticle extends Component {
     console.log(removeTags(this.state.article.content).length);
   };
 
-  // seconds not defined
-  captcha = () => {
-    if (!this.state.isVerified) {
-      alert("Captcha verification failed!");
-    } else {
-      alert("Captcha passed!");
-    }
-  };
-
-  reCaptchaLoaded() {
-    console.log("ReCaptcha has loaded.");
-  }
   verifyCallback(response) {
     if (response) {
       this.setState({
@@ -225,7 +212,8 @@ class NewArticle extends Component {
       removeTags(this.state.article.content).length >= 1 &&
       this.state.article.title.length >= 1 &&
       this.state.article.featureImage.length != 0 &&
-      this.state.article.title.trim();
+      this.state.article.title.trim() &&
+      this.state.isVerified;
 
     return (
       <Container className={classes.NewArticleMain}>
@@ -277,7 +265,7 @@ class NewArticle extends Component {
               <Input
                 style={{ borderRadius: 0 }}
                 type="text"
-                placeholder="Type in a title of you article..."
+                placeholder="Title of the post..."
                 name="articleTitle"
                 id="articleTitle"
                 onChange={(e) => this.onChangeArticleTitle(e.target.value)}
@@ -293,34 +281,26 @@ class NewArticle extends Component {
                 ref={(el) => (this.quill = el)}
                 value={this.state.article.content}
                 onChange={(e) => this.onChangeArticleContent(e)}
-                placeholder="Type in something or upload a picture..."
+                placeholder="Content of the post..."
                 theme="snow"
                 modules={this.modules}
                 formats={this.formats}
               />
             </FormGroup>
+            <FormGroup>
+              <Recaptcha
+                sitekey="6LeF59IZAAAAAK3nudAyu9wQDemGRHGN1LltZ95C"
+                render="explicit"
+                verifyCallback={this.verifyCallback}
+                expiredCallback={this.expiredCallback}
+              />
+            </FormGroup>
 
             {!submitButtonCondition ? (
               <FormGroup>
-                <Recaptcha
-                  sitekey="6LeF59IZAAAAAK3nudAyu9wQDemGRHGN1LltZ95C"
-                  render="explicit"
-                  onloadCallback={this.reCaptchaLoaded}
-                  verifyCallback={this.verifyCallback}
-                  expiredCallback={this.expiredCallback}
-                />
-                ,
                 <Button style={{ borderRadius: 0 }} color="dark" disabled>
                   {" "}
                   SUBMIT
-                </Button>
-                <Button
-                  onClick={() => this.captcha()}
-                  style={{ borderRadius: 0 }}
-                  color="dark"
-                >
-                  {" "}
-                  RECAPTCHA
                 </Button>
               </FormGroup>
             ) : (
