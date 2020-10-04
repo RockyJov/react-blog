@@ -71,14 +71,14 @@ class NewArticle extends Component {
     "italic",
     "underline",
     "strike",
-    "blockquote",
-    "list",
-    "bullet",
-    "indent",
+    // "blockquote",
+    // "list",
+    // "bullet",
+    // "indent",
     "link",
-    "image",
+    // "image",
     "video",
-    "code-block",
+    // "code-block",
   ];
 
   onChangeArticleTitle = (value) => {
