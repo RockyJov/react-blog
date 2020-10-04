@@ -31,6 +31,9 @@ class NewComment extends Component {
     super(props);
     this.verifyCallback = this.verifyCallback.bind(this);
     this.expiredCallback = this.expiredCallback.bind(this);
+    this.onChangeCommentContent = this.onChangeCommentContent.bind(this);
+    this.quillRef = null; // Quill instance
+    this.reactQuillRef = null;
 
     this.state = {
       isVerified: false,
@@ -52,7 +55,7 @@ class NewComment extends Component {
         [{ size: [] }],
         ["bold", "italic", "underline", "strike"],
         // [{ list: "ordered" }, { list: "bullet" }],
-        ["link", "video"],
+        ["link"],
         // ["code-block"],
       ],
       handlers: {
@@ -78,18 +81,37 @@ class NewComment extends Component {
     // "indent",
     "link",
     // "image",
-    "video",
+    // "video",
     // "code-block",
   ];
 
+  componentDidMount() {
+    this.attachQuillRefs();
+  }
+
+  componentDidUpdate() {
+    this.attachQuillRefs();
+  }
+
+  attachQuillRefs = () => {
+    if (typeof this.reactQuillRef.getEditor !== "function") return;
+    this.quillRef = this.reactQuillRef.getEditor();
+  };
+
   onChangeCommentContent = (value) => {
+    const limit = 10000;
+    var quill = this.quillRef;
+    quill.on("text-change", function (delta, old, source) {
+      if (quill.getLength() > limit) {
+        quill.deleteText(limit, quill.getLength());
+      }
+    });
     this.setState({
       comment: {
         ...this.state.comment,
         content: value,
       },
     });
-    console.log(this.state.comment.content);
   };
 
   verifyCallback(response) {
@@ -294,10 +316,10 @@ class NewComment extends Component {
                 Content
               </header> */}
               <ReactQuill
-                ref={(el) => (this.quill = el)}
+                ref={(el) => (this.reactQuillRef = el)}
                 value={this.state.comment.content}
                 onChange={(e) => this.onChangeCommentContent(e)}
-                placeholder="Type in something or upload a picture..."
+                placeholder="Type in a comment..."
                 theme="snow"
                 modules={this.modules}
                 formats={this.formats}

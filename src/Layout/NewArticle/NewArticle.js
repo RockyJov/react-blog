@@ -30,6 +30,9 @@ class NewArticle extends Component {
     super(props);
     this.verifyCallback = this.verifyCallback.bind(this);
     this.expiredCallback = this.expiredCallback.bind(this);
+    this.onChangeArticleContent = this.onChangeArticleContent.bind(this);
+    this.quillRef = null; // Quill instance
+    this.reactQuillRef = null;
 
     this.state = {
       isVerified: false,
@@ -51,7 +54,7 @@ class NewArticle extends Component {
         [{ size: [] }],
         ["bold", "italic", "underline", "strike"],
         // [{ list: "ordered" }, { list: "bullet" }],
-        ["link", "video"],
+        ["link"],
         // ["code-block"],
       ],
       handlers: {
@@ -77,9 +80,22 @@ class NewArticle extends Component {
     // "indent",
     "link",
     // "image",
-    "video",
+    // "video",
     // "code-block",
   ];
+
+  componentDidMount() {
+    this.attachQuillRefs();
+  }
+
+  componentDidUpdate() {
+    this.attachQuillRefs();
+  }
+
+  attachQuillRefs = () => {
+    if (typeof this.reactQuillRef.getEditor !== "function") return;
+    this.quillRef = this.reactQuillRef.getEditor();
+  };
 
   onChangeArticleTitle = (value) => {
     this.setState({
@@ -91,18 +107,19 @@ class NewArticle extends Component {
   };
 
   onChangeArticleContent = (value) => {
+    const limit = 15000;
+    var quill = this.quillRef;
+    quill.on("text-change", function (delta, old, source) {
+      if (quill.getLength() > limit) {
+        quill.deleteText(limit, quill.getLength());
+      }
+    });
     this.setState({
       article: {
         ...this.state.article,
         content: value,
       },
     });
-    function removeTags(str) {
-      if (str === null || str === "") return false;
-      else str = str.toString();
-      return str.replace(/(<([^>]+)>)/gi, "");
-    }
-    console.log(removeTags(this.state.article.content).length);
   };
 
   verifyCallback(response) {
@@ -278,10 +295,10 @@ class NewArticle extends Component {
                 Content
               </header> */}
               <ReactQuill
-                ref={(el) => (this.quill = el)}
+                ref={(el) => (this.reactQuillRef = el)}
                 value={this.state.article.content}
                 onChange={(e) => this.onChangeArticleContent(e)}
-                placeholder="Content of the post..."
+                placeholder="Type in an article..."
                 theme="snow"
                 modules={this.modules}
                 formats={this.formats}
