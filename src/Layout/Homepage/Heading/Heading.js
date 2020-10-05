@@ -18,7 +18,6 @@ import classes from "./Heading.module.css";
 import { connect } from "react-redux";
 import firebase from "../../../Config/firebase";
 import { Link } from "react-router-dom";
-
 // kokia sios klases paskirtis? Naudoju kelis reactstrap componentus headeri. Collapse componentas turi isOpen property, kuri default bus
 // false. naudojant toggle metoda, paspaudus atnaujinam isOpen property is false i true, kodel? nezinau
 class Heading extends Component {
@@ -26,7 +25,6 @@ class Heading extends Component {
     super(props);
     this.state = {
       isOpen: false,
-      modalShow: false,
     };
   }
 
@@ -61,6 +59,16 @@ class Heading extends Component {
         <NavbarToggler onClick={this.toggle} />
         <Collapse isOpen={this.state.isOpen} navbar>
           <Nav className="mr-auto" navbar>
+            <NavItem>
+              <Button
+                style={{ borderRadius: 0 }}
+                outline
+                color="dark"
+                size="sm"
+              >
+                CREATE A COMMENT
+              </Button>
+            </NavItem>
             {this.props.auth.isEmpty ? (
               <NavItem>
                 <Button

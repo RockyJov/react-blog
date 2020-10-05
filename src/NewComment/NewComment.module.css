@@ -34,3 +34,7 @@
   border: 1px solid lightgray;
   padding: 3px;
 }
+
+.TextEditor {
+  display: none;
+}

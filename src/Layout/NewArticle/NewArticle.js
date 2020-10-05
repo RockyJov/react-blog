@@ -12,6 +12,9 @@ import {
   Button,
   Form,
   Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
 } from "reactstrap";
 import Recaptcha from "react-recaptcha";
 import classes from "./NewArticle.module.css";
@@ -36,6 +39,7 @@ class NewArticle extends Component {
 
     this.state = {
       isVerified: false,
+      isModalOpen: true,
       article: {
         title: "",
         content: "",
@@ -198,6 +202,27 @@ class NewArticle extends Component {
     };
   };
 
+  deleteImageCallBack = (e) => {
+    const fileName = this.state.article.featureImage.slice(86, 122);
+    storageRef
+      .ref()
+      .child("Articles/" + fileName)
+      .delete()
+      .then(() => {
+        this.setState({
+          hasFeatureImage: false,
+          article: {
+            ...this.state.article,
+            featureImage: "",
+          },
+        });
+        console.log("file deleted!" + this.state.article.featureImage);
+      })
+      .catch(function (error) {
+        console.log("nothing to delete!");
+      });
+  };
+
   uploadImageCallBack = (e) => {
     return new Promise(async (resolve, reject) => {
       const file = e.target.files[0];
@@ -236,6 +261,7 @@ class NewArticle extends Component {
       <Container className={classes.NewArticleMain}>
         <Row>
           <Col sn={12}>
+            {" "}
             <FormGroup>
               {/* <header class="border-bottom-0" className={classes.Label}>
                 Feature Image
@@ -269,6 +295,7 @@ class NewArticle extends Component {
                     src={this.state.article.featureImage}
                     className={classes.FeatureImg}
                   />
+                  <Button onClick={() => this.deleteImageCallBack()}>X</Button>
                 </header>
               ) : (
                 ""
@@ -311,8 +338,7 @@ class NewArticle extends Component {
                 verifyCallback={this.verifyCallback}
                 expiredCallback={this.expiredCallback}
               />
-            </FormGroup>
-
+            </FormGroup>{" "}
             {!submitButtonCondition ? (
               <FormGroup>
                 <Button style={{ borderRadius: 0 }} color="dark" disabled>

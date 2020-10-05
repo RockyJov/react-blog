@@ -12,6 +12,10 @@ import {
   Alert,
   Button,
   Form,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
 } from "reactstrap";
 import classes from "./NewComment.module.css";
 import ReactQuill from "react-quill";
@@ -36,6 +40,7 @@ class NewComment extends Component {
     this.reactQuillRef = null;
 
     this.state = {
+      isModalOpen: false,
       isVerified: false,
       hasFeatureImage: false,
 
@@ -147,10 +152,11 @@ class NewComment extends Component {
           .add(this.state.comment)
           .then((res) => {})
           .catch((err) => console.log(err));
-        this.quill
+        this.reactQuillRef
           .getEditor()
-          .deleteText(0, this.quill.getEditor().getLength());
+          .deleteText(0, this.reactQuillRef.getEditor().getLength());
         this.setState({
+          isModalOpen: !this.state.isModalOpen,
           comment: {
             ...this.state.comment,
             featureImage: "",
@@ -188,34 +194,6 @@ class NewComment extends Component {
         },
       });
     });
-  };
-
-  quillImageCallBack = () => {
-    const input = document.createElement("input");
-    input.setAttribute("type", "file");
-    input.setAttribute("accept", "image/*");
-    input.click();
-
-    input.onchange = async () => {
-      const file = input.files[0];
-      const compressState = await this.fileCompress(file);
-      if (compressState.success) {
-        const fileName = uuidv4();
-        storageRef
-          .ref()
-          .child("Comments/" + fileName)
-          .put(compressState.file)
-          .then(async (snapshot) => {
-            const downloadURL = await storageRef
-              .ref()
-              .child("Articles/" + fileName)
-              .getDownloadURL();
-            let quill = this.quill.getEditor();
-            const range = quill.getSelection(true);
-            quill.insertEmbed(range.index, "image", downloadURL);
-          });
-      }
-    };
   };
 
   deleteImageCallBack = (e) => {
@@ -260,6 +238,12 @@ class NewComment extends Component {
     });
   };
 
+  toggleModal = () => {
+    this.setState({
+      isModalOpen: !this.state.isModalOpen,
+    });
+  };
+
   render() {
     function removeTags(str) {
       if (str === null || str === "") return false;
@@ -272,11 +256,15 @@ class NewComment extends Component {
         this.state.comment.featureImage.length != 0);
     return (
       <Container className={classes.NewCommentMain}>
-        <Row>
-          <Col sn={12}>
+        <Modal isOpen={this.state.isModalOpen}>
+          <ModalHeader
+            toggle={() =>
+              this.setState({ isModalOpen: !this.state.isModalOpen })
+            }
+          >
+            {" "}
             <FormGroup>
               {/* <header className={classes.Label}> Feature Image</header> */}
-
               <Input
                 type="file"
                 accept="image/*"
@@ -311,6 +299,9 @@ class NewComment extends Component {
                 ""
               )}
             </FormGroup>
+          </ModalHeader>
+          <ModalBody>
+            {" "}
             <FormGroup>
               {/* <header class="border-bottom-0" className={classes.Label}>
                 Content
@@ -334,6 +325,9 @@ class NewComment extends Component {
                 expiredCallback={this.expiredCallback}
               />
             </FormGroup>
+          </ModalBody>
+          <ModalFooter>
+            {" "}
             {!submitButtonCondition ? (
               <FormGroup>
                 <Button style={{ borderRadius: 0 }} color="dark" disabled>
@@ -353,6 +347,22 @@ class NewComment extends Component {
                 </Button>
               </FormGroup>
             )}
+          </ModalFooter>
+        </Modal>
+        <Row>
+          <Col sn={12}>
+            <Button onClick={this.toggleModal}>CREATE A REPLY</Button>
+
+            <ReactQuill
+              className={classes.TextEditor}
+              ref={(el) => (this.reactQuillRef = el)}
+              value={this.state.comment.content}
+              onChange={(e) => this.onChangeCommentContent(e)}
+              placeholder="Type in a comment..."
+              theme="snow"
+              modules={this.modules}
+              formats={this.formats}
+            />
           </Col>
         </Row>
       </Container>
