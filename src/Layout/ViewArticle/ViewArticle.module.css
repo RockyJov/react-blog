@@ -1,5 +1,5 @@
 .ViewArticleContainer {
-  margin-top: 85px;
+  margin-top: 80px;
   padding-left: 0px !important;
   padding-right: 0px !important;
   border: 1px solid lightgray;
@@ -28,7 +28,7 @@
 }
 
 .ImageContainer {
-  padding: 1px 0 0 1px;
+  padding: 0px 0 0 0px;
 }
 
 .Image:target {
@@ -50,4 +50,8 @@
   padding-right: 10px;
   padding-left: 10px;
   padding-top: 0px;
+}
+
+.NewCommentRef {
+  display: none;
 }

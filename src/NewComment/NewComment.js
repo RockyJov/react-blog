@@ -133,10 +133,11 @@ class NewComment extends Component {
   }
 
   submitComment = () => {
-    const aid = this.props.location.pathname.slice(9);
+    const aid = window.location.pathname.slice(9);
+    this.state.comment.createUserID = firebase.auth().currentUser.uid;
 
     // const comment = this.state.comment;
-    this.state.comment.createUserID = this.props.auth.uid;
+
     this.setState(
       {
         hasFeatureImage: false,
@@ -349,22 +350,31 @@ class NewComment extends Component {
             )}
           </ModalFooter>
         </Modal>
-        <Row>
-          <Col sn={12}>
-            <Button onClick={this.toggleModal}>CREATE A REPLY</Button>
 
-            <ReactQuill
-              className={classes.TextEditor}
-              ref={(el) => (this.reactQuillRef = el)}
-              value={this.state.comment.content}
-              onChange={(e) => this.onChangeCommentContent(e)}
-              placeholder="Type in a comment..."
-              theme="snow"
-              modules={this.modules}
-              formats={this.formats}
-            />
-          </Col>
-        </Row>
+        <FormGroup style={{ textAlign: "center" }}>
+          {" "}
+          <Button
+            style={{ borderRadius: 0 }}
+            size="sm"
+            outline
+            color="dark"
+            onClick={(e) => this.toggleModal()}
+          >
+            {" "}
+            CREATE A REPLY
+          </Button>
+        </FormGroup>
+        <ReactQuill
+          //
+          className={classes.TextEditor}
+          ref={(el) => (this.reactQuillRef = el)}
+          value={this.state.comment.content}
+          onChange={(e) => this.onChangeCommentContent(e)}
+          placeholder="Type in a comment..."
+          theme="snow"
+          modules={this.modules}
+          formats={this.formats}
+        />
       </Container>
     );
   }

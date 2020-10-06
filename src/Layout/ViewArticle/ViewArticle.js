@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import classes from "./ViewArticle.module.css";
 import { withRouter } from "react-router-dom";
 import parse from "html-react-parser";
-import { Container, Badge } from "reactstrap";
+import { Container, Badge, Button } from "reactstrap";
 import firebase from "../../../src/Config/firebase";
+import NewComment from "../../NewComment/NewComment";
 
 const db = firebase.firestore();
 
@@ -33,6 +34,14 @@ class ViewArticle extends Component {
       this.getArticleByID(this.props.match.params.id);
     }
   }
+
+  modalRef = ({ toggleModal }) => {
+    this.showModal = toggleModal;
+  };
+
+  onCommentClick = () => {
+    this.showModal();
+  };
 
   // ka sita funkcija daro??
   getArticleByID = (aid) => {
@@ -80,36 +89,38 @@ class ViewArticle extends Component {
   render() {
     if (this.state.isLoaded) {
       return (
-        <Container className={classes.ViewArticleContainer}>
-          <div className={classes.Article}>
-            <div className={classes.ArticleInfo}>
-              <header className={classes.Title}>
-                {this.state.article.title}
-              </header>
+        <div>
+          <Container className={classes.ViewArticleContainer}>
+            <div className={classes.Article}>
+              <div className={classes.ArticleInfo}>
+                <header className={classes.Title}>
+                  {this.state.article.title}
+                </header>
+              </div>
+              <div className={classes.ImageContainer}>
+                <img
+                  className={classes.Image}
+                  src={this.state.article.featureImage}
+                  alt={this.state.article.title}
+                />
+              </div>
+              <div className={classes.ArticleMain}>
+                {parse(this.state.article.content)}
+              </div>
             </div>
-            <div className={classes.ImageContainer}>
-              <img
-                className={classes.Image}
-                src={this.state.article.featureImage}
-                alt={this.state.article.title}
-              />
-            </div>
-            <div className={classes.ArticleMain}>
-              {parse(this.state.article.content)}
-            </div>
-          </div>
-          <div className={classes.Info}>
-            {" "}
-            <Badge style={{ marginRight: 4 }}>
-              {this.state.article.createUserID.slice(0, 7)}
-            </Badge>
-            <Badge style={{ marginRight: 4 }}>
+            <div className={classes.Info}>
               {" "}
-              {this.timeStampToString(this.state.article.createDate.seconds)}
-            </Badge>
-            <Badge>{this.state.article.commentCount}</Badge>
-          </div>
-        </Container>
+              <Badge style={{ marginRight: 4 }}>
+                {this.state.article.createUserID.slice(0, 7)}
+              </Badge>
+              <Badge style={{ marginRight: 4 }}>
+                {" "}
+                {this.timeStampToString(this.state.article.createDate.seconds)}
+              </Badge>
+              <Badge>{this.state.article.commentCount}</Badge>
+            </div>
+          </Container>
+        </div>
       );
     } else {
       return <div>loading...</div>;

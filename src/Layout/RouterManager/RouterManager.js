@@ -4,6 +4,7 @@ import {
   Switch,
   Route,
   withRouter,
+  Redirect,
 } from "react-router-dom";
 import LoginPage from "../LoginPage/LoginPage";
 import ViewArticle from "../ViewArticle/ViewArticle";
@@ -46,11 +47,13 @@ const AdminOnly = (ComposedComponent, auth) => {
     render() {
       if (this.state.isPass) {
         return (
-          <ComposedComponent
-            location={this.props.location}
-            history={this.props.history}
-            auth={auth}
-          />
+          <div>
+            <ComposedComponent
+              location={this.props.location}
+              history={this.props.history}
+              auth={auth}
+            />
+          </div>
         );
       } else {
         return <div>checking...</div>;
@@ -72,7 +75,7 @@ class RouterManager extends Component {
         <Heading />
         {this.props.auth.isLoaded ? (
           <Switch>
-            <Route path="/" exact>
+            <Route exact path="/">
               <Main />
             </Route>
             <Route path="/article/:id">
@@ -80,10 +83,12 @@ class RouterManager extends Component {
                 path="/article/:id"
                 component={AdminOnly(ViewArticle, this.props.auth)}
               />
+
               <Route
                 path="/article/:id"
                 component={AdminOnly(ArticleRate, this.props.auth)}
               />
+
               <Route
                 path="/article/:id"
                 component={AdminOnly(Comments, this.props.auth)}
@@ -94,9 +99,10 @@ class RouterManager extends Component {
               />
             </Route>
             <Route
-              path="/new-article"
+              path="/new-post"
               component={AdminOnly(NewArticle, this.props.auth)}
             />
+            <Route render={() => <Redirect to={{ pathname: "/" }} />} />
           </Switch>
         ) : (
           ""
