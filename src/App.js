@@ -16,7 +16,7 @@
 // uuid
 // compressorjs
 //in react-blog-server(different directory): express; firebase-admin
-import React from "react";
+import * as React from "react";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Provider } from "react-redux";

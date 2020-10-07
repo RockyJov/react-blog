@@ -9,6 +9,7 @@ import {
   Col,
   Row,
   Container,
+  Tooltip,
 } from "reactstrap";
 import { connect } from "react-redux";
 import classes from "./ArticleCard.module.css";
@@ -55,7 +56,9 @@ const ArticleCard = (props) => {
       <Container className={classes.ViewArticleContainer}>
         <div className={classes.Article}>
           <div className={classes.ArticleInfo}>
-            <header className={classes.Title}>{props.data.title}</header>
+            <header className={classes.Title}>
+              <h3>{props.data.title}</h3>
+            </header>
           </div>
           {props.auth.isEmpty ? (
             <div className={classes.ImageContainer}>
@@ -92,22 +95,28 @@ const ArticleCard = (props) => {
         <div className={classes.Info}>
           {" "}
           {!articleScore ? (
-            <Badge style={{ marginRight: 4, borderRadius: 10 }} color="dark">
-              %:0
+            <Badge style={{ marginRight: 4, borderRadius: 0 }} color="dark">
+              Not Rated
             </Badge>
           ) : (
-            <Badge color="dark" style={{ marginRight: 4, borderRadius: 10 }}>
-              %:{Math.round(articleScore)}
+            <Badge style={{ marginRight: 4, borderRadius: 0 }} color="dark">
+              {Math.round(articleScore)} %
             </Badge>
           )}
-          <Badge color="dark" style={{ marginRight: 4, borderRadius: 10 }}>
-            R:{props.data.commentCount}
-          </Badge>
-          <Badge color="dark" style={{ marginRight: 4, borderRadius: 10 }}>
+          {props.data.commentCount ? (
+            <Badge style={{ marginRight: 4, borderRadius: 0 }} color="dark">
+              R:{props.data.commentCount}
+            </Badge>
+          ) : (
+            <Badge style={{ marginRight: 4, borderRadius: 0 }} color="dark">
+              No Replies
+            </Badge>
+          )}
+          <Badge style={{ marginRight: 4, borderRadius: 0 }} color="dark">
             P:
             {props.data.createUserID.slice(0, 7)}
           </Badge>
-          <Badge color="dark" style={{ marginRight: 4, borderRadius: 10 }}>
+          <Badge style={{ marginRight: 4, borderRadius: 0 }} color="dark">
             {" "}
             D:{timeStampToString(props.data.createDate.seconds)}
           </Badge>

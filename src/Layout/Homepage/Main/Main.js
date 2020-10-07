@@ -100,27 +100,25 @@ class Main extends Component {
   render() {
     // jei isLoaded yra true, tada einu per kiekviena article ir renderinu kievkiena article, jei isLoaded yra flase, nedarau nieko
     return (
-      <div>
-        <Container className={classes.Main}>
-          {this.state.isLoaded
-            ? this.state.articles.map((article, index) => {
-                return <ArticleCard key={index} data={article} />;
-              })
-            : ""}
-          <div className={classes.MoreButton}>
-            {" "}
-            <Button
-              size="sm"
-              outline
-              color="dark"
-              style={{ borderRadius: 0 }}
-              onClick={() => this.nextArticle()}
-            >
-              Show 1 more post...
-            </Button>
-          </div>
-        </Container>
-      </div>
+      <Container className={classes.Main}>
+        {this.state.isLoaded
+          ? this.state.articles.map((article, index) => {
+              return <ArticleCard key={index} data={article} />;
+            })
+          : ""}
+        <div className={classes.MoreButton}>
+          {" "}
+          <Button
+            size="sm"
+            outline
+            color="dark"
+            style={{ borderRadius: 0 }}
+            onClick={() => this.nextArticle()}
+          >
+            Show 1 more post...
+          </Button>
+        </div>
+      </Container>
     );
   }
 }

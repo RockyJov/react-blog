@@ -10,19 +10,18 @@
 }
 
 .Info {
-  font-size: 18px;
-  color: black;
-  font-family: sans-serif;
-  padding: 0 0 0 10px;
+  font-size: 20px;
+  font-family: monospace;
+  padding: 0 0 0 0px;
   background-color: #f7f7f7;
   border-top: 1px solid lightgray;
 }
 
 .Title {
-  font-size: 18px;
-  color: black;
-  font-family: sans-serif;
-  text-align: center;
+  font-size: 20px;
+  padding-left: 0.4rem;
+  color: #3b3b3b;
+  font-family: monospace;
   background-color: #f7f7f7;
   border-bottom: 1px solid lightgray;
 }
@@ -46,14 +45,18 @@
 .ArticleMain {
   word-wrap: break-word;
   text-align: justify;
-  font-family: sans-serif;
+  font-family: monospace;
   padding-right: 10px;
   padding-left: 10px;
   padding-top: 10px;
   max-height: 150px;
+  color: #3b3b3b;
+  font-size: 17px;
   overflow: hidden;
+  line-height: 1.5;
 }
 
 .HorLine {
   border-top: 1px solid lightgray;
+  width: 5rem;
 }

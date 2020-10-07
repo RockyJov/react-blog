@@ -50,44 +50,49 @@ class Heading extends Component {
   render() {
     return (
       <div>
-        <Navbar color="light" light expand="md" fixed="top">
-          <NavbarBrand href="/">
+        <Navbar
+          className={classes.Navbar}
+          expand="xs"
+          color="light"
+          fixed="top"
+        >
+          <NavbarBrand style={{ marginRight: 0 }} href="/">
             {" "}
             <img
               className={classes.Logo}
               src="https://firebasestorage.googleapis.com/v0/b/react-blog-a39d2.appspot.com/o/LogoMakr_85Wfsy.png?alt=media&token=46c44cf2-16d2-4636-ac42-1e4ef459c9c1"
             />
           </NavbarBrand>
-          <NavbarToggler onClick={this.toggle} />
+          <Nav className="mr-auto" navbar>
+            {this.props.auth.isEmpty ? (
+              <NavItem>
+                <Button
+                  style={{ borderRadius: 0 }}
+                  outline
+                  color="dark"
+                  size="sm"
+                  onClick={() => firebase.auth().signInAnonymously()}
+                >
+                  CREATE ID
+                </Button>
+              </NavItem>
+            ) : (
+              <NavItem>
+                <Button
+                  style={{ borderRadius: 0 }}
+                  outline
+                  color="dark"
+                  size="sm"
+                  href="/new-post"
+                >
+                  CREATE POST
+                </Button>
+              </NavItem>
+            )}
+          </Nav>
+          <NavbarToggler onClick={this.toggle}></NavbarToggler>
           <Collapse isOpen={this.state.isOpen} navbar>
-            <Nav className="mr-auto" navbar>
-              {this.props.auth.isEmpty ? (
-                <NavItem>
-                  <Button
-                    style={{ borderRadius: 0 }}
-                    outline
-                    color="dark"
-                    size="sm"
-                    onClick={() => firebase.auth().signInAnonymously()}
-                  >
-                    CREATE MY ID
-                  </Button>
-                </NavItem>
-              ) : (
-                <NavItem>
-                  <Button
-                    style={{ borderRadius: 0 }}
-                    outline
-                    color="dark"
-                    size="sm"
-                    href="/new-post"
-                  >
-                    CREATE A POST
-                  </Button>
-                </NavItem>
-              )}
-            </Nav>
-            <Nav navbar>
+            <Nav navbar className="ml-auto">
               {this.props.auth.isEmpty ? (
                 <NavItem>
                   {" "}
