@@ -47,6 +47,12 @@ class Heading extends Component {
     }
   }
 
+  login = () => {
+    // firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION).then(()=> {
+      return firebase.auth().signInAnonymously()
+    // })
+  }
+
   render() {
     return (
       <div>
@@ -71,9 +77,9 @@ class Heading extends Component {
                   outline
                   color="dark"
                   size="sm"
-                  onClick={() => firebase.auth().signInAnonymously()}
+                  onClick={()=> this.login()}
                 >
-                  CREATE ID
+                  CREATE POST
                 </Button>
               </NavItem>
             ) : (
