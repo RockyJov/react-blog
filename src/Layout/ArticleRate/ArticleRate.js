@@ -99,29 +99,35 @@ class ArticleRate extends Component {
   render() {
     return (
       <Container style={{ paddingLeft: 0, paddingRight: 0 }}>
-        <div className={classes.Rate}>
-          <div className={classes.Button}>
-            <Button
-              style={{ marginRight: 3 }}
-              size="sm"
-              outline
-              color="dark"
-              onClick={() => this.positiveRating()}
-            >
-              +
-            </Button>
-            <Button
-              style={{ marginLeft: 3 }}
-              size="sm"
-              outline
-              color="dark"
-              onClick={() => this.negativeRating()}
-            >
-              -
-            </Button>
-          </div>
+        <div className={classes.Button}>
+          <Button
+            style={{
+              fontFamily: "monospace",
+              borderRadius: 0,
+              fontSize: "14px",
+              width: "6rem",
+              marginRight: "1rem",
+            }}
+            outline
+            color="success"
+            onClick={() => this.positiveRating()}
+          >
+            <srong>GOOD</srong>
+          </Button>
+          <Button
+            style={{
+              fontFamily: "monospace",
+              borderRadius: 0,
+              fontSize: "14px",
+              width: "6rem",
+            }}
+            outline
+            color="danger"
+            onClick={() => this.negativeRating()}
+          >
+            <strong>UNGOOD</strong>
+          </Button>
         </div>
-        <hr classeName={classes.HorLine} />
       </Container>
     );
   }

@@ -1,14 +1,4 @@
-.Rate {
-  border: 1px solid lightgray;
-  border-top: none;
-  background-color: #f7f7f7;
-}
-
 .Button {
   text-align: center;
-  padding: 3px;
-}
-
-.HorLine {
-  border: 1px solid lightgray;
+  padding-top: 1px;
 }

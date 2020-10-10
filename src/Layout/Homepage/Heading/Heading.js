@@ -48,10 +48,13 @@ class Heading extends Component {
   }
 
   login = () => {
-    // firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION).then(()=> {
-      return firebase.auth().signInAnonymously()
-    // })
-  }
+    firebase
+      .auth()
+      .setPersistence(firebase.auth.Auth.Persistence.SESSION)
+      .then(() => {
+        return firebase.auth().signInAnonymously();
+      });
+  };
 
   render() {
     return (
@@ -69,29 +72,29 @@ class Heading extends Component {
               src="https://firebasestorage.googleapis.com/v0/b/react-blog-a39d2.appspot.com/o/LogoMakr_85Wfsy.png?alt=media&token=46c44cf2-16d2-4636-ac42-1e4ef459c9c1"
             />
           </NavbarBrand>
-          <Nav className="mr-auto" navbar>
+          <Nav cla ssName="mr-auto" navbar>
             {this.props.auth.isEmpty ? (
               <NavItem>
                 <Button
-                  style={{ borderRadius: 0 }}
+                  style={{ borderRadius: 0, fontFamily: "monospace" }}
                   outline
                   color="dark"
                   size="sm"
-                  onClick={()=> this.login()}
+                  onClick={() => this.login()}
                 >
-                  CREATE POST
+                  <strong>CREATE POST</strong>
                 </Button>
               </NavItem>
             ) : (
               <NavItem>
                 <Button
-                  style={{ borderRadius: 0 }}
+                  style={{ borderRadius: 0, fontFamily: "monospace" }}
                   outline
                   color="dark"
                   size="sm"
-                  href="/new-post"
+                  href="/new-article"
                 >
-                  CREATE POST
+                  <strong>CREATE POST</strong>
                 </Button>
               </NavItem>
             )}
@@ -103,25 +106,25 @@ class Heading extends Component {
                 <NavItem>
                   {" "}
                   <Button
-                    style={{ borderRadius: 0 }}
+                    style={{ borderRadius: 0, fontFamily: "monospace" }}
                     outline
                     color="dark"
                     size="sm"
                   >
-                    INFO
+                    <strong>INFO</strong>
                   </Button>
                 </NavItem>
               ) : (
                 <NavItem>
                   {" "}
                   <Button
-                    style={{ borderRadius: 0 }}
+                    style={{ borderRadius: 0, fontFamily: "monospace" }}
                     outline
                     color="dark"
                     size="sm"
                     onClick={() => firebase.auth().signOut()}
                   >
-                    LOGOUT
+                    <strong>LOGOUT</strong>
                   </Button>
                 </NavItem>
               )}
