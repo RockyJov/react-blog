@@ -54,13 +54,13 @@ const ArticleCard = (props) => {
   return (
     <div>
       <Container className={classes.ViewArticleContainer}>
-        <div className={classes.Article}>
-          <div className={classes.ArticleInfo}>
-            <header className={classes.Title}>
-              <h3>{props.data.title}</h3>
-            </header>
-          </div>
-          {props.auth.isEmpty ? (
+        {props.auth.isEmpty ? (
+          <div className={classes.Article}>
+            <div className={classes.ArticleInfo}>
+              <header className={classes.Title}>
+                <h3>{props.data.title}</h3>
+              </header>
+            </div>
             <div className={classes.ImageContainer}>
               <img
                 className={classes.Image}
@@ -68,30 +68,40 @@ const ArticleCard = (props) => {
                 alt="Feature Image"
               />
             </div>
-          ) : (
-            <Link
-              className={classes.ImageLink}
-              to={{
-                pathname: "article/" + props.data.id,
-                state: { article: props.data },
-              }}
-            >
+
+            <div className={classes.ArticleMain}>
+              {parse(removeTags(props.data.content))}
+            </div>
+          </div>
+        ) : (
+          <Link
+            className={classes.Link}
+            to={{
+              pathname: "article/" + props.data.id,
+              state: { article: props.data },
+            }}
+          >
+            {" "}
+            <div className={classes.Article}>
+              <div className={classes.ArticleInfo}>
+                <header className={classes.Title}>
+                  <h3>{props.data.title}</h3>
+                </header>
+              </div>
               <div className={classes.ImageContainer}>
-                {" "}
                 <img
-                  src={props.data.featureImage}
-                  alt="Card Image"
                   className={classes.Image}
+                  src={props.data.featureImage}
+                  alt="Feature Image"
                 />
               </div>
-            </Link>
-          )}
 
-          <div className={classes.ArticleMain}>
-            {parse(removeTags(props.data.content))}
-          </div>
-        </div>
-
+              <div className={classes.ArticleMain}>
+                {parse(removeTags(props.data.content))}
+              </div>
+            </div>
+          </Link>
+        )}
         <div className={classes.Info}>
           {" "}
           {!articleScore ? (

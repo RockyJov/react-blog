@@ -5,6 +5,10 @@
   border: 1px solid lightgray;
 }
 
+.ViewArticleContainer:hover {
+  border: 1px solid black;
+}
+
 .Article {
   overflow: auto;
 }
@@ -59,4 +63,8 @@
 .HorLine {
   border-top: 1px solid lightgray;
   width: 5rem;
+}
+
+.Link {
+  text-decoration: none !important;
 }
