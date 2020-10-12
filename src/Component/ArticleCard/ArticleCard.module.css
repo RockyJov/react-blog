@@ -6,7 +6,8 @@
 }
 
 .ViewArticleContainer:hover {
-  border: 1px solid black;
+  box-shadow: 0px 0px 15px -3px #3b3b3b;
+  transition: 0.5s;
 }
 
 .Article {
