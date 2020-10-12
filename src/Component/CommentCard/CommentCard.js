@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   Card,
   CardImg,
@@ -23,6 +23,8 @@ export function timeStampToString(ts) {
 }
 
 const CommentCard = (props) => {
+  const [clicked, setClicked] = useState(false);
+
   timeStampToString = (ts) => {
     const date = new Date(ts * 1000);
     return (
@@ -42,37 +44,59 @@ const CommentCard = (props) => {
       date.getSeconds()
     );
   };
+
   return (
     <div>
       <Container className={classes.CommentCardContainer}>
-        <div className={classes.Comment}>
-          {props.data.featureImage !== "" ? (
-            <div className={classes.ImageContainer}>
-              <img
-                className={classes.Image}
-                src={props.data.featureImage}
-                alt={props.data.title}
-              />
-            </div>
-          ) : null}
-
-          <div className={classes.CommentMain}>{parse(props.data.content)}</div>
-        </div>
-        <div className={classes.Info}>
-          {" "}
-          <Badge style={{ marginRight: 4 }}>
-            {props.data.createUserID.slice(0, 7)}
-          </Badge>
-          <Badge
-            style={{ marginRight: 4 }}
-            data-toggle="tooltip"
-            data-placement="bottom"
-            title={props.data.createDate.seconds}
-          >
+        <Row>
+          <Col sm="12" md={{ size: 10, offset: 1 }}>
             {" "}
-            {timeStampToString(props.data.createDate.seconds)}
-          </Badge>
-        </div>
+            <div className={classes.Comment}>
+              {props.data.featureImage !== "" ? (
+                <div className={classes.ImageContainer}>
+                  {clicked ? (
+                    <img
+                      className={classes.ImageEnlarged}
+                      src={props.data.featureImage}
+                      alt={props.data.title}
+                      onClick={() => {
+                        setClicked(!clicked);
+                      }}
+                    />
+                  ) : (
+                    <img
+                      className={classes.Image}
+                      src={props.data.featureImage}
+                      alt={props.data.title}
+                      onClick={() => {
+                        setClicked(!clicked);
+                      }}
+                    />
+                  )}
+                </div>
+              ) : null}
+
+              <div className={classes.CommentMain}>
+                {parse(props.data.content)}
+              </div>
+            </div>
+            <div className={classes.Info}>
+              {" "}
+              <Badge style={{ marginRight: 4 }}>
+                {props.data.createUserID.slice(0, 7)}
+              </Badge>
+              <Badge
+                style={{ marginRight: 4 }}
+                data-toggle="tooltip"
+                data-placement="bottom"
+                title={props.data.createDate.seconds}
+              >
+                {" "}
+                {timeStampToString(props.data.createDate.seconds)}
+              </Badge>
+            </div>
+          </Col>
+        </Row>
       </Container>
       <hr className={classes.HorLine} />
     </div>

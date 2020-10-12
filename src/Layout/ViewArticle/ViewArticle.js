@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import classes from "./ViewArticle.module.css";
 import { withRouter } from "react-router-dom";
 import parse from "html-react-parser";
-import { Container, Badge, Button } from "reactstrap";
+import { Container, Badge, Button, Row, Col } from "reactstrap";
 import firebase from "../../../src/Config/firebase";
 import NewComment from "../../NewComment/NewComment";
 
@@ -15,6 +15,7 @@ class ViewArticle extends Component {
     this.state = {
       article: {},
       isLoaded: false,
+      isEnlarged: false,
     };
   }
 
@@ -86,41 +87,61 @@ class ViewArticle extends Component {
     );
   };
 
+  handleIsEnlarged = () => {
+    this.setState({ isEnlarged: !this.state.isEnlarged });
+  };
+
   render() {
     if (this.state.isLoaded) {
       return (
-        <div>
-          <Container className={classes.ViewArticleContainer}>
-            <div className={classes.Article}>
-              <div className={classes.ArticleInfo}>
-                <header className={classes.Title}>
-                  {this.state.article.title}
-                </header>
-              </div>
-              <div className={classes.ImageContainer}>
-                <img
-                  className={classes.Image}
-                  src={this.state.article.featureImage}
-                  alt={this.state.article.title}
-                />
-              </div>
-              <div className={classes.ArticleMain}>
-                {parse(this.state.article.content)}
-              </div>
-            </div>
-            <div className={classes.Info}>
+        <Container className={classes.ViewArticleContainer}>
+          <Row>
+            <Col sm="12" md={{ size: 10, offset: 1 }}>
               {" "}
-              <Badge style={{ marginRight: 4 }}>
-                {this.state.article.createUserID.slice(0, 7)}
-              </Badge>
-              <Badge style={{ marginRight: 4 }}>
+              <div className={classes.Article}>
+                <div className={classes.ArticleInfo}>
+                  <header className={classes.Title}>
+                    {this.state.article.title}
+                  </header>
+                </div>
+                <div className={classes.ImageContainer}>
+                  {this.state.isEnlarged ? (
+                    <img
+                      className={classes.ImageEnlarged}
+                      src={this.state.article.featureImage}
+                      onClick={this.handleIsEnlarged}
+                      alt={this.state.article.title}
+                    />
+                  ) : (
+                    <img
+                      className={classes.Image}
+                      src={this.state.article.featureImage}
+                      alt={this.state.article.title}
+                      onClick={this.handleIsEnlarged}
+                    />
+                  )}
+                </div>
+
+                <div className={classes.ArticleMain}>
+                  {parse(this.state.article.content)}
+                </div>
+              </div>
+              <div className={classes.Info}>
                 {" "}
-                {this.timeStampToString(this.state.article.createDate.seconds)}
-              </Badge>
-              <Badge>{this.state.article.commentCount}</Badge>
-            </div>
-          </Container>
-        </div>
+                <Badge style={{ marginRight: 4 }}>
+                  {this.state.article.createUserID.slice(0, 7)}
+                </Badge>
+                <Badge style={{ marginRight: 4 }}>
+                  {" "}
+                  {this.timeStampToString(
+                    this.state.article.createDate.seconds
+                  )}
+                </Badge>
+                <Badge>{this.state.article.commentCount}</Badge>
+              </div>
+            </Col>
+          </Row>
+        </Container>
       );
     } else {
       return <div>loading...</div>;
