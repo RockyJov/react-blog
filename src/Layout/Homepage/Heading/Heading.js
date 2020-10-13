@@ -4,7 +4,6 @@ import {
   NavbarBrand,
   Nav,
   NavItem,
-  NavLink,
   NavbarToggler,
   UncontrolledDropdown,
   DropdownToggle,
@@ -12,7 +11,6 @@ import {
   DropdownMenu,
   Button,
   Collapse,
-  Modal,
   Badge,
 } from "reactstrap";
 import classes from "./Heading.module.css";

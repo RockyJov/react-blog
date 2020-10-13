@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import firebase from "../../Config/firebase";
 import classes from "./ArticleRate.module.css";
-import { Button, Container } from "reactstrap";
+import { Button, Container, Spinner } from "reactstrap";
 import { isEmpty } from "react-redux-firebase";
 
 const db = firebase.firestore();
@@ -12,6 +12,7 @@ class ArticleRate extends Component {
     this.state = {
       hasRatedPositive: false,
       hasRatedNegative: false,
+      hasLoaded: false,
     };
   }
 
@@ -24,7 +25,7 @@ class ArticleRate extends Component {
           .data()
           .positiveRatings.includes(this.props.location.pathname.slice(9))
       ) {
-        this.setState({ hasRatedPositive: true });
+        this.setState({ hasRatedPositive: true, hasLoaded: true });
         console.log(
           "User has already rated. hasRatedPositive is set to: " +
             this.state.hasRatedPositive
@@ -37,12 +38,13 @@ class ArticleRate extends Component {
           .data()
           .negativeRatings.includes(this.props.location.pathname.slice(9))
       ) {
-        this.setState({ hasRatedNegative: true });
+        this.setState({ hasRatedNegative: true, hasLoaded: true });
         console.log(
           "User has already rated. hasRatedNegative is set to: " +
             this.state.hasRatedNegative
         );
       } else {
+        this.setState({ hasLoaded: true });
         console.log("user has not yet rated negative");
       }
     });
@@ -136,78 +138,84 @@ class ArticleRate extends Component {
   render() {
     const hasNotRated =
       this.state.hasRatedPositive || this.state.hasRatedNegative;
-
-    return (
-      <Container style={{ paddingLeft: 0, paddingRight: 0 }}>
-        <div className={classes.Button}>
-          {!hasNotRated ? (
-            <div>
-              <Button
-                style={{
-                  fontFamily: "monospace",
-                  borderRadius: 0,
-                  fontSize: "14px",
-                  width: "6rem",
-                  marginRight: "1rem",
-                }}
-                outline
-                color="success"
-                onClick={() => this.positiveRating()}
-              >
-                <srong>GOOD</srong>
-              </Button>
-
-              <Button
-                style={{
-                  fontFamily: "monospace",
-                  borderRadius: 0,
-                  fontSize: "14px",
-                  width: "6rem",
-                }}
-                outline
-                color="danger"
-                onClick={() => this.negativeRating()}
-              >
-                <strong>UNGOOD</strong>
-              </Button>
-            </div>
-          ) : null}
-          {this.state.hasRatedPositive ? (
-            <div>
-              <Button
-                style={{
-                  fontFamily: "monospace",
-                  borderRadius: 0,
-                  fontSize: "14px",
-                  width: "6rem",
-                  // marginRight: "1rem",
-                }}
-                color="success"
-                disabled
-              >
-                <srong>GOOD</srong>
-              </Button>
-            </div>
-          ) : null}
-          {this.state.hasRatedNegative ? (
-            <div>
-              <Button
-                style={{
-                  fontFamily: "monospace",
-                  borderRadius: 0,
-                  fontSize: "14px",
-                  width: "6rem",
-                }}
-                color="danger"
-                disabled
-              >
-                <strong>UNGOOD</strong>
-              </Button>
-            </div>
-          ) : null}
+    if (this.state.hasLoaded) {
+      return (
+        <Container style={{ paddingLeft: 0, paddingRight: 0 }}>
+          <div className={classes.Button}>
+            {!hasNotRated ? (
+              <div>
+                <Button
+                  style={{
+                    fontFamily: "monospace",
+                    borderRadius: 0,
+                    fontSize: "14px",
+                    width: "6rem",
+                    marginRight: "1rem",
+                  }}
+                  outline
+                  color="success"
+                  onClick={() => this.positiveRating()}
+                >
+                  <srong>GOOD</srong>
+                </Button>
+                <Button
+                  style={{
+                    fontFamily: "monospace",
+                    borderRadius: 0,
+                    fontSize: "14px",
+                    width: "6rem",
+                  }}
+                  outline
+                  color="danger"
+                  onClick={() => this.negativeRating()}
+                >
+                  <strong>UNGOOD</strong>
+                </Button>
+              </div>
+            ) : null}
+            {this.state.hasRatedPositive ? (
+              <div>
+                <Button
+                  style={{
+                    fontFamily: "monospace",
+                    borderRadius: 0,
+                    fontSize: "14px",
+                    width: "6rem",
+                    // marginRight: "1rem",
+                  }}
+                  color="success"
+                  disabled
+                >
+                  <srong>GOOD</srong>
+                </Button>
+              </div>
+            ) : null}
+            {this.state.hasRatedNegative ? (
+              <div>
+                <Button
+                  style={{
+                    fontFamily: "monospace",
+                    borderRadius: 0,
+                    fontSize: "14px",
+                    width: "6rem",
+                  }}
+                  color="danger"
+                  disabled
+                >
+                  <strong>UNGOOD</strong>
+                </Button>
+              </div>
+            ) : null}
+          </div>
+        </Container>
+      );
+    } else {
+      return (
+        <div className={classes.Spinner}>
+          <Spinner color="dark" />
         </div>
-      </Container>
-    );
+      );
+    }
   }
 }
 
