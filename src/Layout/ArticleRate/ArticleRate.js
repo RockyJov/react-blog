@@ -134,67 +134,77 @@ class ArticleRate extends Component {
   };
 
   render() {
+    const hasNotRated =
+      this.state.hasRatedPositive || this.state.hasRatedNegative;
+
     return (
       <Container style={{ paddingLeft: 0, paddingRight: 0 }}>
         <div className={classes.Button}>
+          {!hasNotRated ? (
+            <div>
+              <Button
+                style={{
+                  fontFamily: "monospace",
+                  borderRadius: 0,
+                  fontSize: "14px",
+                  width: "6rem",
+                  marginRight: "1rem",
+                }}
+                outline
+                color="success"
+                onClick={() => this.positiveRating()}
+              >
+                <srong>GOOD</srong>
+              </Button>
+
+              <Button
+                style={{
+                  fontFamily: "monospace",
+                  borderRadius: 0,
+                  fontSize: "14px",
+                  width: "6rem",
+                }}
+                outline
+                color="danger"
+                onClick={() => this.negativeRating()}
+              >
+                <strong>UNGOOD</strong>
+              </Button>
+            </div>
+          ) : null}
           {this.state.hasRatedPositive ? (
-            <Button
-              style={{
-                fontFamily: "monospace",
-                borderRadius: 0,
-                fontSize: "14px",
-                width: "6rem",
-                marginRight: "1rem",
-              }}
-              color="success"
-              disabled
-            >
-              <srong>GOOD</srong>
-            </Button>
-          ) : (
-            <Button
-              style={{
-                fontFamily: "monospace",
-                borderRadius: 0,
-                fontSize: "14px",
-                width: "6rem",
-                marginRight: "1rem",
-              }}
-              outline
-              color="success"
-              onClick={() => this.positiveRating()}
-            >
-              <srong>GOOD</srong>
-            </Button>
-          )}
+            <div>
+              <Button
+                style={{
+                  fontFamily: "monospace",
+                  borderRadius: 0,
+                  fontSize: "14px",
+                  width: "6rem",
+                  // marginRight: "1rem",
+                }}
+                color="success"
+                disabled
+              >
+                <srong>GOOD</srong>
+              </Button>
+            </div>
+          ) : null}
           {this.state.hasRatedNegative ? (
-            <Button
-              style={{
-                fontFamily: "monospace",
-                borderRadius: 0,
-                fontSize: "14px",
-                width: "6rem",
-              }}
-              color="danger"
-              disabled
-            >
-              <strong>UNGOOD</strong>
-            </Button>
-          ) : (
-            <Button
-              style={{
-                fontFamily: "monospace",
-                borderRadius: 0,
-                fontSize: "14px",
-                width: "6rem",
-              }}
-              outline
-              color="danger"
-              onClick={() => this.negativeRating()}
-            >
-              <strong>UNGOOD</strong>
-            </Button>
-          )}
+            <div>
+              <Button
+                style={{
+                  fontFamily: "monospace",
+                  borderRadius: 0,
+                  fontSize: "14px",
+                  width: "6rem",
+                }}
+                color="danger"
+                disabled
+              >
+                <strong>UNGOOD</strong>
+              </Button>
+            </div>
+          ) : null}
         </div>
       </Container>
     );

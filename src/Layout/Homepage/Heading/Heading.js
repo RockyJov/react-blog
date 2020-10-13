@@ -13,6 +13,7 @@ import {
   Button,
   Collapse,
   Modal,
+  Badge,
 } from "reactstrap";
 import classes from "./Heading.module.css";
 import { connect } from "react-redux";
@@ -50,7 +51,7 @@ class Heading extends Component {
   login = () => {
     firebase
       .auth()
-      .setPersistence(firebase.auth.Auth.Persistence.SESSION)
+      .setPersistence(firebase.auth.Auth.Persistence.LOCAL)
       .then(() => {
         return firebase.auth().signInAnonymously();
       });
@@ -116,7 +117,7 @@ class Heading extends Component {
                 </NavItem>
               ) : (
                 <NavItem>
-                  {" "}
+                  <Badge> Logged in as: {this.props.auth.uid}</Badge>{" "}
                   <Button
                     style={{ borderRadius: 0, fontFamily: "monospace" }}
                     outline
