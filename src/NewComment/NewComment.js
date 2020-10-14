@@ -258,11 +258,7 @@ class NewComment extends Component {
     return (
       <Container className={classes.NewCommentMain}>
         <Modal isOpen={this.state.isModalOpen}>
-          <ModalHeader
-            toggle={() =>
-              this.setState({ isModalOpen: !this.state.isModalOpen })
-            }
-          >
+          <ModalHeader>
             {" "}
             <FormGroup>
               {/* <header className={classes.Label}> Feature Image</header> */}
@@ -331,7 +327,12 @@ class NewComment extends Component {
             {" "}
             {!submitButtonCondition ? (
               <FormGroup>
-                <Button style={{ borderRadius: 0 }} color="dark" disabled>
+                <Button
+                  className="mr-auto"
+                  style={{ borderRadius: 0 }}
+                  color="dark"
+                  disabled
+                >
                   {" "}
                   SUBMIT
                 </Button>
@@ -339,6 +340,7 @@ class NewComment extends Component {
             ) : (
               <FormGroup>
                 <Button
+                  className="mr-auto"
                   style={{ borderRadius: 0 }}
                   color="dark"
                   onClick={(e) => this.submitComment()}
@@ -348,6 +350,17 @@ class NewComment extends Component {
                 </Button>
               </FormGroup>
             )}
+            <Button
+              className="ml-auto"
+              style={{ borderRadius: 0 }}
+              color="dark"
+              onClick={(e) =>
+                this.setState({ isModalOpen: !this.state.isModalOpen })
+              }
+            >
+              {" "}
+              CLOSE
+            </Button>
           </ModalFooter>
         </Modal>
 

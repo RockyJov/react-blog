@@ -12,10 +12,19 @@ import {
   Button,
   Collapse,
   Badge,
+  Modal,
+  ModalBody,
+  ModalFooter,
+  Row,
+  Col,
+  ModalHeader,
+  TabContent,
+  TabPane,
 } from "reactstrap";
 import classes from "./Heading.module.css";
 import { connect } from "react-redux";
 import firebase from "../../../Config/firebase";
+import Info from "../../Info/Info";
 // kokia sios klases paskirtis? Naudoju kelis reactstrap componentus headeri. Collapse componentas turi isOpen property, kuri default bus
 // false. naudojant toggle metoda, paspaudus atnaujinam isOpen property is false i true, kodel? nezinau
 class Heading extends Component {
@@ -24,6 +33,7 @@ class Heading extends Component {
     this.state = {
       //navbar  toggler
       isOpen: false,
+      isInfoOpen: false,
     };
   }
 
@@ -69,9 +79,10 @@ class Heading extends Component {
               <img
                 className={classes.Logo}
                 src="https://firebasestorage.googleapis.com/v0/b/react-blog-a39d2.appspot.com/o/LogoMakr_85Wfsy.png?alt=media&token=46c44cf2-16d2-4636-ac42-1e4ef459c9c1"
+                alt="Logo"
               />
             </NavbarBrand>
-            <Nav cla ssName="mr-auto" navbar>
+            <Nav className="mr-auto" navbar>
               {this.props.auth.isEmpty ? (
                 <NavItem>
                   <Button
@@ -102,7 +113,19 @@ class Heading extends Component {
             <NavbarToggler onClick={this.toggle}></NavbarToggler>
             <Collapse isOpen={this.state.isOpen} navbar>
               <Nav navbar className="ml-auto">
-                {this.props.auth.isEmpty ? (
+                <NavItem>
+                  {" "}
+                  <Button
+                    style={{ borderRadius: 0, fontFamily: "monospace" }}
+                    outline
+                    color="dark"
+                    size="sm"
+                    onClick={() => this.setState({ isInfoOpen: true })}
+                  >
+                    <strong>INFO</strong>
+                  </Button>
+                </NavItem>
+                {/* {this.props.auth.isEmpty ? (
                   <NavItem>
                     {" "}
                     <Button
@@ -127,11 +150,34 @@ class Heading extends Component {
                       <strong>LOGOUT</strong>
                     </Button>
                   </NavItem>
-                )}
+                )} */}
               </Nav>
             </Collapse>
           </Navbar>
         )}
+        <Modal backdrop="true" centered="true" isOpen={this.state.isInfoOpen}>
+          {/* <ModalHeader
+            toggle={() => {
+             
+            }}
+          ></ModalHeader> */}
+          <ModalBody>
+            <Info />
+          </ModalBody>
+          <ModalFooter style={{ padding: 0 }}>
+            Contact me @ mail.com
+            <Button
+              onClick={() =>
+                this.setState({ isInfoOpen: !this.state.isInfoOpen })
+              }
+              size="sm"
+              color="danger"
+              className="ml-auto"
+            >
+              CLOSE{" "}
+            </Button>
+          </ModalFooter>
+        </Modal>
       </div>
     );
   }
