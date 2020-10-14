@@ -257,7 +257,10 @@ class NewComment extends Component {
         this.state.comment.featureImage.length != 0);
     return (
       <Container className={classes.NewCommentMain}>
-        <Modal isOpen={this.state.isModalOpen}>
+        <Modal
+          toggle={() => this.setState({ isModalOpen: !this.state.isModalOpen })}
+          isOpen={this.state.isModalOpen}
+        >
           <ModalHeader>
             {" "}
             <FormGroup>

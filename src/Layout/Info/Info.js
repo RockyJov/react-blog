@@ -59,21 +59,21 @@ const Info = (props) => {
         <TabPane tabId="1">
           <Row>
             <Col sm="12">
-              <h4>Tab 1 Contents</h4>
+              <h4 style={{ textAlign: "center" }}>Questions...</h4>
             </Col>
           </Row>
         </TabPane>
         <TabPane tabId="2">
           <Row>
             <Col sm="12">
-              <h4>Tab 1 contents</h4>
+              <h4 style={{ textAlign: "center" }}>Rules...</h4>
             </Col>
           </Row>
         </TabPane>
         <TabPane tabId="3">
           <Row>
             <Col sm="12">
-              <h4>Tab 1 contents</h4>
+              <h4 style={{ textAlign: "center" }}>News...</h4>
             </Col>
           </Row>
         </TabPane>

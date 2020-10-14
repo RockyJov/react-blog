@@ -37,12 +37,6 @@ class Heading extends Component {
     };
   }
 
-  toggle = () => {
-    this.setState({
-      isOpen: !this.state.isOpen,
-    });
-  };
-
   //react-blog-server folder
   componentWillReceiveProps(nextProps, nextContext) {
     if (!nextProps.auth.isEmpty) {
@@ -155,7 +149,11 @@ class Heading extends Component {
             </Collapse>
           </Navbar>
         )}
-        <Modal backdrop="true" centered="true" isOpen={this.state.isInfoOpen}>
+        <Modal
+          toggle={() => this.setState({ isInfoOpen: !this.state.isInfoOpen })}
+          centered="true"
+          isOpen={this.state.isInfoOpen}
+        >
           {/* <ModalHeader
             toggle={() => {
              
