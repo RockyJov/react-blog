@@ -153,13 +153,19 @@ class Heading extends Component {
           toggle={() => this.setState({ isInfoOpen: !this.state.isInfoOpen })}
           centered="true"
           isOpen={this.state.isInfoOpen}
+          size="lg"
         >
           {/* <ModalHeader
             toggle={() => {
              
             }}
           ></ModalHeader> */}
-          <ModalBody>
+          <ModalBody
+            style={{
+              "max-height": "calc(100vh - 210px)",
+              "overflow-y": "auto",
+            }}
+          >
             <Info />
           </ModalBody>
           <ModalFooter style={{ padding: 0 }}>
