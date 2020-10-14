@@ -99,7 +99,7 @@ class RouterManager extends Component {
               />
             </Route>
             <Route
-              path="/new-post"
+              path="/new-article"
               component={AdminOnly(NewArticle, this.props.auth)}
             />
             <Route render={() => <Redirect to={{ pathname: "/" }} />} />

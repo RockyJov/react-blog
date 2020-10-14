@@ -14,15 +14,19 @@ class Main extends Component {
     this.state = {
       isLoaded: false,
       articles: [],
-      limit: 10,
+      limit: 1,
       lastArticle: null,
       orderBy: "createDate",
+      buttonDisabled: false,
     };
   }
 
   nextArticle = () => {
     //get last state we added from getUsers()
     let last = this.state.lastArticle;
+    this.setState({ buttonDisabled: true });
+    // setTimeout(this.setState({ buttonDisabled: false }), 2000);
+
     db.collection("Articles")
       .orderBy(this.state.orderBy, "desc")
       .startAfter(last.createDate)
@@ -48,6 +52,7 @@ class Main extends Component {
             },
             () => {
               this.setState({
+                buttonDisabled: false,
                 isLoaded: true,
                 lastArticle: this.state.articles[
                   this.state.articles.length - 1
@@ -56,8 +61,8 @@ class Main extends Component {
             }
           );
         }
+        window.scrollTo(0, document.body.scrollHeight);
       });
-    window.scrollTo(0, document.body.scrollHeight);
   };
 
   componentDidMount() {
@@ -108,15 +113,27 @@ class Main extends Component {
           : ""}
         <div className={classes.MoreButton}>
           {" "}
-          <Button
-            size="sm"
-            outline
-            color="dark"
-            style={{ borderRadius: 0 }}
-            onClick={() => this.nextArticle()}
-          >
-            Show 1 more post...
-          </Button>
+          {this.state.buttonDisabled ? (
+            <Button
+              size="sm"
+              outline
+              color="dark"
+              style={{ borderRadius: 0 }}
+              disabled
+            >
+              Show 1 more article...
+            </Button>
+          ) : (
+            <Button
+              size="sm"
+              outline
+              color="dark"
+              style={{ borderRadius: 0 }}
+              onClick={() => this.nextArticle()}
+            >
+              Show 1 more article...
+            </Button>
+          )}
         </div>
       </Container>
     );
