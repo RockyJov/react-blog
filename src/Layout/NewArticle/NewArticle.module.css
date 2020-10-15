@@ -14,12 +14,10 @@
   overflow: hidden;
 }
 
-.NewArticleMain {
-  padding: 65px;
-}
-
-.Info {
-  background-color: #f7f7f7;
+.ImageButton {
+  /* position: absolute; */
+  top: 9%;
+  left: 55%;
 }
 
 .ImageUploaded {

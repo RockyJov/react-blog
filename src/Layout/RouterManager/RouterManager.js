@@ -98,10 +98,10 @@ class RouterManager extends Component {
                 component={AdminOnly(NewComment, this.props.auth)}
               />
             </Route>
-            <Route
+            {/* <Route
               path="/new-article"
               component={AdminOnly(NewArticle, this.props.auth)}
-            />
+            /> */}
             <Route render={() => <Redirect to={{ pathname: "/" }} />} />
           </Switch>
         ) : (

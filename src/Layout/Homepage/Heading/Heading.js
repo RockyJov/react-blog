@@ -25,6 +25,7 @@ import classes from "./Heading.module.css";
 import { connect } from "react-redux";
 import firebase from "../../../Config/firebase";
 import Info from "../../Info/Info";
+import NewArticle from "../../NewArticle/NewArticle";
 // kokia sios klases paskirtis? Naudoju kelis reactstrap componentus headeri. Collapse componentas turi isOpen property, kuri default bus
 // false. naudojant toggle metoda, paspaudus atnaujinam isOpen property is false i true, kodel? nezinau
 class Heading extends Component {
@@ -34,8 +35,13 @@ class Heading extends Component {
       //navbar  toggler
       isOpen: false,
       isInfoOpen: false,
+      isNewArticleOpen: false,
     };
   }
+
+  handleClick = (isNewArticleOpen) => {
+    this.setState({ isNewArticleOpen: !this.state.isNewArticleOpen });
+  };
 
   //react-blog-server folder
   componentWillReceiveProps(nextProps, nextContext) {
@@ -96,7 +102,11 @@ class Heading extends Component {
                     outline
                     color="dark"
                     size="sm"
-                    href="/new-article"
+                    onClick={() =>
+                      this.setState({
+                        isNewArticleOpen: !this.state.isNewArticleOpen,
+                      })
+                    }
                   >
                     <strong>CREATE POST</strong>
                   </Button>
@@ -155,11 +165,6 @@ class Heading extends Component {
           isOpen={this.state.isInfoOpen}
           size="lg"
         >
-          {/* <ModalHeader
-            toggle={() => {
-             
-            }}
-          ></ModalHeader> */}
           <ModalBody
             style={{
               "max-height": "calc(100vh - 210px)",
@@ -182,6 +187,20 @@ class Heading extends Component {
             </Button>
           </ModalFooter>
         </Modal>
+        {/* <Modal
+          toggle={() =>
+            this.setState({ isNewArticleOpen: !this.state.isNewArticleOpen })
+          }
+          isOpen={this.state.isNewArticleOpen}
+        >
+          <ModalBody>
+            <NewArticle
+              isNewArticleOpen={this.state.isNewArticleOpen}
+              onArticleToggle={this.handleClick}
+              uid={this.props.auth.uid}
+            />
+          </ModalBody>
+        </Modal> */}
       </div>
     );
   }

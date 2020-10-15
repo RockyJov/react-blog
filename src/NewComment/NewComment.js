@@ -261,7 +261,7 @@ class NewComment extends Component {
           toggle={() => this.setState({ isModalOpen: !this.state.isModalOpen })}
           isOpen={this.state.isModalOpen}
         >
-          <ModalHeader>
+          <ModalBody>
             {" "}
             <FormGroup>
               {/* <header className={classes.Label}> Feature Image</header> */}
@@ -299,9 +299,6 @@ class NewComment extends Component {
                 ""
               )}
             </FormGroup>
-          </ModalHeader>
-          <ModalBody>
-            {" "}
             <FormGroup>
               {/* <header class="border-bottom-0" className={classes.Label}>
                 Content
@@ -324,12 +321,9 @@ class NewComment extends Component {
                 verifyCallback={this.verifyCallback}
                 expiredCallback={this.expiredCallback}
               />
-            </FormGroup>
-          </ModalBody>
-          <ModalFooter>
-            {" "}
-            {!submitButtonCondition ? (
-              <FormGroup>
+            </FormGroup>{" "}
+            <FormGroup>
+              {!submitButtonCondition ? (
                 <Button
                   className="mr-auto"
                   style={{ borderRadius: 0 }}
@@ -339,9 +333,7 @@ class NewComment extends Component {
                   {" "}
                   SUBMIT
                 </Button>
-              </FormGroup>
-            ) : (
-              <FormGroup>
+              ) : (
                 <Button
                   className="mr-auto"
                   style={{ borderRadius: 0 }}
@@ -351,20 +343,20 @@ class NewComment extends Component {
                   {" "}
                   SUBMIT
                 </Button>
-              </FormGroup>
-            )}
-            <Button
-              className="ml-auto"
-              style={{ borderRadius: 0 }}
-              color="dark"
-              onClick={(e) =>
-                this.setState({ isModalOpen: !this.state.isModalOpen })
-              }
-            >
-              {" "}
-              CLOSE
-            </Button>
-          </ModalFooter>
+              )}
+              <Button
+                className="ml-auto"
+                style={{ borderRadius: 0 }}
+                color="dark"
+                onClick={(e) =>
+                  this.setState({ isModalOpen: !this.state.isModalOpen })
+                }
+              >
+                {" "}
+                CLOSE
+              </Button>
+            </FormGroup>
+          </ModalBody>
         </Modal>
 
         <FormGroup style={{ textAlign: "center" }}>

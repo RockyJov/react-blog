@@ -14,7 +14,7 @@ class Main extends Component {
     this.state = {
       isLoaded: false,
       articles: [],
-      limit: 1,
+      limit: 3,
       lastArticle: null,
       orderBy: "createDate",
       buttonDisabled: false,
