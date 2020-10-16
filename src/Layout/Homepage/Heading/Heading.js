@@ -187,7 +187,7 @@ class Heading extends Component {
             </Button>
           </ModalFooter>
         </Modal>
-        {/* <Modal
+        <Modal
           toggle={() =>
             this.setState({ isNewArticleOpen: !this.state.isNewArticleOpen })
           }
@@ -200,7 +200,7 @@ class Heading extends Component {
               uid={this.props.auth.uid}
             />
           </ModalBody>
-        </Modal> */}
+        </Modal>
       </div>
     );
   }
