@@ -273,7 +273,7 @@ class NewArticle extends Component {
 
           <Input
             type="file"
-            accept="image/*"
+            accept="image/*,video/*"
             className={classes.ImageUploader}
             onChange={async (e) => {
               const uploadState = await this.uploadImageCallBack(e);
