@@ -10,10 +10,13 @@ import {
   Col,
   Row,
   Container,
+  Modal,
+  ModalBody,
 } from "reactstrap";
 import parse from "html-react-parser";
 import classes from "./CommentCard.module.css";
 import { Link } from "react-router-dom";
+import NewReply from "../../NewReply/NewReply";
 
 export function timeStampToString(ts) {
   const date = new Date(ts * 1000);
@@ -24,6 +27,10 @@ export function timeStampToString(ts) {
 
 const CommentCard = (props) => {
   const [clicked, setClicked] = useState(false);
+
+  const [isReplyModalOpen, setIsReplyModalOpen] = useState(false);
+
+  const [reply, setReply] = useState(props.data.content);
 
   timeStampToString = (ts) => {
     const date = new Date(ts * 1000);
@@ -45,12 +52,25 @@ const CommentCard = (props) => {
     );
   };
 
+  function removeTags(str) {
+    if (str === null || str === "") return false;
+    else str = str.toString();
+    return str.replace(/(<([^>]+)>)/gi, "");
+  }
+
   return (
     <div>
       <Container className={classes.CommentCardContainer}>
         <Row>
           <Col sm="12" md={{ size: 10, offset: 1 }}>
-            {" "}
+            {props.data.replyContent ? (
+              <div className={classes.Replied}>
+                {" "}
+                Replied to:
+                {removeTags(props.data.replyContent)}{" "}
+              </div>
+            ) : null}
+
             <div className={classes.Comment}>
               {props.data.featureImage !== "" ? (
                 <div className={classes.ImageContainer}>
@@ -94,7 +114,27 @@ const CommentCard = (props) => {
                 {" "}
                 {timeStampToString(props.data.createDate.seconds)}
               </Badge>
+              <Button
+                onClick={() => {
+                  setIsReplyModalOpen(!isReplyModalOpen);
+                }}
+                style={{ float: "right" }}
+              >
+                Reply
+              </Button>
             </div>
+            <Modal
+              centered
+              toggle={() => setIsReplyModalOpen(!isReplyModalOpen)}
+              isOpen={isReplyModalOpen}
+            >
+              <ModalBody>
+                <NewReply
+                  reply={reply}
+                  onReplyToggle={() => setIsReplyModalOpen(!isReplyModalOpen)}
+                />
+              </ModalBody>
+            </Modal>
           </Col>
         </Row>
       </Container>

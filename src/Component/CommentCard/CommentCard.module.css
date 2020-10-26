@@ -43,6 +43,10 @@
   border-top: 1px solid lightgray;
 }
 
+.Replied {
+  font-size: 14px;
+}
+
 .HorLine {
   border-top: 1px solid lightgray;
 }
