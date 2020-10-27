@@ -49,6 +49,7 @@ class NewComment extends Component {
         content: "",
         createDate: "",
         featureImage: "",
+        featureExtension: "",
         createUserID: "",
       },
     };
@@ -231,9 +232,13 @@ class NewComment extends Component {
             .ref()
             .child("Comments/" + fileName)
             .getDownloadURL();
+          const extension = await storageRef
+            .ref()
+            .child("Comments/" + fileName)
+            .getMetadata();
           resolve({
             success: true,
-            data: { link: downloadURL },
+            data: { link: downloadURL, fileExtension: extension.contentType },
           });
         });
     });
@@ -267,7 +272,7 @@ class NewComment extends Component {
               {/* <header className={classes.Label}> Feature Image</header> */}
               <Input
                 type="file"
-                accept="image/*"
+                accept="image/*,video/*"
                 className={classes.ImageUploader}
                 onChange={async (e) => {
                   const uploadState = await this.uploadImageCallBack(e);
@@ -277,22 +282,33 @@ class NewComment extends Component {
                       comment: {
                         ...this.state.comment,
                         featureImage: uploadState.data.link,
+                        featureExtension: uploadState.data.fileExtension,
                       },
                     });
                     console.log(
                       "Comment Image has been uploaded to:" +
                         uploadState.data.link
                     );
+                    console.log("Extension: " + uploadState.data.fileExtension);
                   }
                 }}
               ></Input>
 
               {this.state.hasFeatureImage ? (
                 <header className={classes.ImageUploaded}>
-                  <img
-                    src={this.state.comment.featureImage}
-                    className={classes.FeatureImg}
-                  />
+                  {this.state.comment.featureExtension.includes("image") && (
+                    <img
+                      src={this.state.comment.featureImage}
+                      className={classes.FeatureImg}
+                    />
+                  )}
+                  {this.state.comment.featureExtension.includes("video") && (
+                    <video
+                      src={this.state.comment.featureImage}
+                      className={classes.FeatureImg}
+                    />
+                  )}
+
                   <Button onClick={() => this.deleteImageCallBack()}>X</Button>
                 </header>
               ) : (

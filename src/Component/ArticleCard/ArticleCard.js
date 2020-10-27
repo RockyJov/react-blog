@@ -62,11 +62,20 @@ const ArticleCard = (props) => {
               </header>
             </div>
             <div className={classes.ImageContainer}>
-              <img
-                className={classes.Image}
-                src={props.data.featureImage}
-                alt="Feature Image"
-              />
+              {props.data.featureExtension.includes("image") && (
+                <img
+                  className={classes.Image}
+                  src={props.data.featureImage}
+                  alt="Feature Image"
+                />
+              )}
+              {props.data.featureExtension.includes("video") && (
+                <video
+                  className={classes.Image}
+                  src={props.data.featureImage}
+                  alt="Feature Image"
+                />
+              )}
             </div>
 
             <div className={classes.ArticleMain}>
@@ -89,11 +98,20 @@ const ArticleCard = (props) => {
                 </header>
               </div>
               <div className={classes.ImageContainer}>
-                <img
-                  className={classes.Image}
-                  src={props.data.featureImage}
-                  alt="Feature Image"
-                />
+                {props.data.featureExtension.includes("image") && (
+                  <img
+                    className={classes.Image}
+                    src={props.data.featureImage}
+                    alt="Feature Image"
+                  />
+                )}
+                {props.data.featureExtension.includes("video") && (
+                  <video
+                    className={classes.Image}
+                    src={props.data.featureImage}
+                    alt="Feature Image"
+                  />
+                )}
               </div>
 
               <div className={classes.ArticleMain}>
@@ -126,7 +144,11 @@ const ArticleCard = (props) => {
             P:
             {props.data.createUserID.slice(0, 7)}
           </Badge>
-          <Badge style={{ marginRight: 4, borderRadius: 0 }} color="dark">
+          <Badge
+            onClick={() => console.log(props.data)}
+            style={{ marginRight: 4, borderRadius: 0 }}
+            color="dark"
+          >
             {" "}
             D:{timeStampToString(props.data.createDate.seconds)}
           </Badge>

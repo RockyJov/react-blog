@@ -63,27 +63,31 @@ const CommentCard = (props) => {
       <Container className={classes.CommentCardContainer}>
         <Row>
           <Col sm="12" md={{ size: 10, offset: 1 }}>
-            {props.data.replyContent ? (
-              <div className={classes.Replied}>
-                {" "}
-                Replied to:
-                {removeTags(props.data.replyContent)}{" "}
-              </div>
-            ) : null}
-
             <div className={classes.Comment}>
               {props.data.featureImage !== "" ? (
                 <div className={classes.ImageContainer}>
                   {clicked ? (
-                    <img
-                      className={classes.ImageEnlarged}
-                      src={props.data.featureImage}
-                      alt={props.data.title}
-                      onClick={() => {
-                        setClicked(!clicked);
-                      }}
-                    />
-                  ) : (
+                    props.data.featureExtension.includes("image") ? (
+                      <img
+                        className={classes.ImageEnlarged}
+                        src={props.data.featureImage}
+                        alt={props.data.title}
+                        onClick={() => {
+                          setClicked(!clicked);
+                        }}
+                      />
+                    ) : (
+                      <video
+                        controls
+                        className={classes.ImageEnlarged}
+                        src={props.data.featureImage}
+                        alt={props.data.title}
+                        onClick={() => {
+                          setClicked(!clicked);
+                        }}
+                      />
+                    )
+                  ) : props.data.featureExtension.includes("image") ? (
                     <img
                       className={classes.Image}
                       src={props.data.featureImage}
@@ -92,7 +96,23 @@ const CommentCard = (props) => {
                         setClicked(!clicked);
                       }}
                     />
+                  ) : (
+                    <video
+                      className={classes.Image}
+                      src={props.data.featureImage}
+                      alt={props.data.title}
+                      onClick={() => {
+                        setClicked(!clicked);
+                      }}
+                    />
                   )}
+                </div>
+              ) : null}
+              {props.data.replyContent ? (
+                <div className={classes.Replied}>
+                  {" "}
+                  Replied to:
+                  {removeTags(props.data.replyContent)}{" "}
                 </div>
               ) : null}
 

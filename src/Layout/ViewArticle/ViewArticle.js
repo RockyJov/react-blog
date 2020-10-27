@@ -104,23 +104,36 @@ class ViewArticle extends Component {
                     {this.state.article.title}
                   </header>
                 </div>
-                <div className={classes.ImageContainer}>
-                  {this.state.isEnlarged ? (
-                    <img
+                {this.state.article.featureExtension.includes("image") && (
+                  <div className={classes.ImageContainer}>
+                    {this.state.isEnlarged ? (
+                      <img
+                        className={classes.ImageEnlarged}
+                        src={this.state.article.featureImage}
+                        onClick={this.handleIsEnlarged}
+                        alt={this.state.article.title}
+                      />
+                    ) : (
+                      <img
+                        className={classes.Image}
+                        src={this.state.article.featureImage}
+                        alt={this.state.article.title}
+                        onClick={this.handleIsEnlarged}
+                      />
+                    )}
+                  </div>
+                )}
+                {this.state.article.featureExtension.includes("video") && (
+                  <div className={classes.ImageContainer}>
+                    <video
+                      controls
                       className={classes.ImageEnlarged}
                       src={this.state.article.featureImage}
                       onClick={this.handleIsEnlarged}
                       alt={this.state.article.title}
                     />
-                  ) : (
-                    <img
-                      className={classes.Image}
-                      src={this.state.article.featureImage}
-                      alt={this.state.article.title}
-                      onClick={this.handleIsEnlarged}
-                    />
-                  )}
-                </div>
+                  </div>
+                )}
 
                 <div className={classes.ArticleMain}>
                   {parse(this.state.article.content)}

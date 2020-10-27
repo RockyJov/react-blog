@@ -46,6 +46,7 @@ class NewArticle extends Component {
         content: "",
         createDate: new Date(),
         featureImage: "",
+        featureExtension: "",
         positiveRatings: 0,
         negativeRatings: 0,
         createUserID: "",
@@ -238,9 +239,13 @@ class NewArticle extends Component {
             .ref()
             .child("Articles/" + fileName)
             .getDownloadURL();
+          const extension = await storageRef
+            .ref()
+            .child("Articles/" + fileName)
+            .getMetadata();
           resolve({
             success: true,
-            data: { link: downloadURL },
+            data: { link: downloadURL, fileExtension: extension.contentType },
           });
         });
     });
@@ -283,20 +288,32 @@ class NewArticle extends Component {
                   article: {
                     ...this.state.article,
                     featureImage: uploadState.data.link,
+                    featureExtension: uploadState.data.fileExtension,
                   },
                 });
               }
-              console.log("Image uploaded to firebase" + uploadState.data.link);
+              console.log(
+                "Image uploaded to firebase: " + uploadState.data.link
+              );
+              console.log("Extension: " + uploadState.data.fileExtension);
             }}
           ></Input>
 
           {this.state.hasFeatureImage ? (
             <header className={classes.ImageUploaded}>
               {" "}
-              <img
-                src={this.state.article.featureImage}
-                className={classes.FeatureImg}
-              />
+              {this.state.article.featureExtension.includes("image") && (
+                <img
+                  src={this.state.article.featureImage}
+                  className={classes.FeatureImg}
+                />
+              )}
+              {this.state.article.featureExtension.includes("video") && (
+                <video
+                  src={this.state.article.featureImage}
+                  className={classes.FeatureImg}
+                />
+              )}
               <Button
                 close
                 className={classes.ImageButton}
