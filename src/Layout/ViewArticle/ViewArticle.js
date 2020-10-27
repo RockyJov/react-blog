@@ -125,22 +125,14 @@ class ViewArticle extends Component {
                 )}
                 {this.state.article.featureExtension.includes("video") && (
                   <div className={classes.ImageContainer}>
-                    {this.state.isEnlarged ? (
-                      <video
-                        controls
-                        className={classes.ImageEnlarged}
-                        src={this.state.article.featureImage}
-                        onClick={this.handleIsEnlarged}
-                        alt={this.state.article.title}
-                      />
-                    ) : (
-                      <video
-                        className={classes.Image}
-                        src={this.state.article.featureImage}
-                        alt={this.state.article.title}
-                        onClick={this.handleIsEnlarged}
-                      />
-                    )}
+                    <video
+                      controls
+                      className={classes.ImageEnlarged}
+                      src={this.state.article.featureImage}
+                      onClick={this.handleIsEnlarged}
+                      alt={this.state.article.title}
+                    />
+                    )
                   </div>
                 )}
 
