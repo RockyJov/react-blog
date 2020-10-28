@@ -45,6 +45,11 @@
 
 .Replied {
   font-size: 14px;
+  font-style: italic;
+  color: darkgrey;
+  font-family: sans-serif;
+  padding: 0 0 0 10px;
+  background-color: #f7f7f7;
 }
 
 .HorLine {

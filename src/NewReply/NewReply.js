@@ -51,7 +51,6 @@ class NewReply extends Component {
         replyContent: "",
         createDate: "",
         featureImage: "",
-        featureExtension: "",
         createUserID: "",
       },
     };
@@ -265,6 +264,22 @@ class NewReply extends Component {
         this.state.comment.featureImage.length != 0);
     return (
       <Container className={classes.NewReplyMain}>
+        <Alert
+          style={{
+            paddingTop: "none !important",
+            fontSize: "14px",
+            fontStyle: "italic",
+            overflowX: "hidden",
+          }}
+          color="warning"
+        >
+          <div style={{ borderBottom: "1px solid white" }}>Replying to: </div>
+
+          <div style={{ paddingTop: "2px" }}>
+            {" "}
+            {removeTags(this.props.reply.slice(0, 100))}
+          </div>
+        </Alert>
         <FormGroup>
           {/* <header className={classes.Label}> Feature Image</header> */}
           <Input
@@ -316,9 +331,6 @@ class NewReply extends Component {
                 Content
               </header> */}
 
-          <Alert style={{}} color="warning">
-            Replying to: {removeTags(this.props.reply.slice(0, 100))} (...)
-          </Alert>
           <ReactQuill
             ref={(el) => (this.reactQuillRef = el)}
             value={this.state.comment.content}

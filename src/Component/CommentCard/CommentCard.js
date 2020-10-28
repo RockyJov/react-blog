@@ -63,7 +63,14 @@ const CommentCard = (props) => {
       <Container className={classes.CommentCardContainer}>
         <Row>
           <Col sm="12" md={{ size: 10, offset: 1 }}>
-            <div className={classes.Comment}>
+            <div className={classes.Comment} onClick={() => console.log("hi")}>
+              {props.data.replyContent ? (
+                <div className={classes.Replied}>
+                  {" "}
+                  "{removeTags(props.data.replyContent)}"
+                </div>
+              ) : null}
+
               {props.data.featureImage !== "" ? (
                 <div className={classes.ImageContainer}>
                   {clicked ? (
@@ -106,13 +113,6 @@ const CommentCard = (props) => {
                       }}
                     />
                   )}
-                </div>
-              ) : null}
-              {props.data.replyContent ? (
-                <div className={classes.Replied}>
-                  {" "}
-                  Replied to:
-                  {removeTags(props.data.replyContent)}{" "}
                 </div>
               ) : null}
 
