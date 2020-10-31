@@ -49,6 +49,7 @@ class NewReply extends Component {
         commentID: "",
         content: "",
         replyContent: "",
+
         createDate: "",
         featureImage: "",
         createUserID: "",
