@@ -32,6 +32,11 @@ const CommentCard = (props) => {
 
   const [reply, setReply] = useState(props.data.content);
 
+  const [replyImage, setReplyImage] = useState(props.data.featureImage);
+  const [replyImageExtension, setReplyImageExtension] = useState(
+    props.data.featureExtension
+  );
+
   timeStampToString = (ts) => {
     const date = new Date(ts * 1000);
     return (
@@ -63,7 +68,10 @@ const CommentCard = (props) => {
       <Container className={classes.CommentCardContainer}>
         <Row>
           <Col sm="12" md={{ size: 10, offset: 1 }}>
-            <div className={classes.Comment} onClick={() => console.log("hi")}>
+            <div className={classes.Comment}>
+              {/* {props.data.replyImageExtension.includes("image") && (
+                <img src={props.data.replyImage} />
+              )} */}
               {props.data.replyContent ? (
                 <div className={classes.Replied}>
                   {" "}
@@ -148,9 +156,16 @@ const CommentCard = (props) => {
               toggle={() => setIsReplyModalOpen(!isReplyModalOpen)}
               isOpen={isReplyModalOpen}
             >
-              <ModalBody>
+              <ModalBody
+                style={{
+                  "max-height": "calc(100vh - 210px)",
+                  "overflow-y": "auto",
+                }}
+              >
                 <NewReply
                   reply={reply}
+                  replyImage={replyImage}
+                  replyImageExtension={replyImageExtension}
                   onReplyToggle={() => setIsReplyModalOpen(!isReplyModalOpen)}
                 />
               </ModalBody>

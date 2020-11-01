@@ -18,6 +18,13 @@
   padding-top: 0px;
 }
 
+.ReplyImage {
+  float: left;
+  width: 80px;
+  height: 80px;
+  margin: 0 10px 0 0;
+}
+
 .ImageUploaded {
   border-left: 1px solid lightgray;
   border-right: 1px solid lightgray;

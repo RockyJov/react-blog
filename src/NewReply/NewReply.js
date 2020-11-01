@@ -49,9 +49,11 @@ class NewReply extends Component {
         commentID: "",
         content: "",
         replyContent: "",
-
+        replyImage: "",
+        replyImageExt: "",
         createDate: "",
         featureImage: "",
+        featureExtension: "",
         createUserID: "",
       },
     };
@@ -148,6 +150,8 @@ class NewReply extends Component {
           ...this.state.comment,
           createDate: new Date(),
           replyContent: this.props.reply,
+          replyImage: this.props.replyImage,
+          replyImageExt: this.props.replyImageExtension,
         },
       },
       () => {
@@ -168,6 +172,8 @@ class NewReply extends Component {
             featureImage: "",
             content: "",
             replyContent: "",
+            replyImage: "",
+            replyImageExt: "",
           },
         });
       }
@@ -275,11 +281,25 @@ class NewReply extends Component {
           color="warning"
         >
           <div style={{ borderBottom: "1px solid white" }}>Replying to: </div>
-
-          <div style={{ paddingTop: "2px" }}>
-            {" "}
-            {removeTags(this.props.reply.slice(0, 100))}
-          </div>
+          {this.props.replyImageExtension.includes("image") && (
+            <img className={classes.ReplyImage} src={this.props.replyImage} />
+          )}
+          {this.props.replyImageExtension.includes("video") && (
+            <video className={classes.ReplyImage} src={this.props.replyImage} />
+          )}
+          {this.props.replyImageExtension}
+          {this.props.reply.length > 300 ? (
+            <div style={{ paddingTop: "2px" }}>
+              {" "}
+              {removeTags(this.props.reply.slice(0, 300))}...{" "}
+              <b>({this.props.reply.length - 200})</b>
+            </div>
+          ) : (
+            <div style={{ paddingTop: "2px" }}>
+              {" "}
+              {removeTags(this.props.reply)}
+            </div>
+          )}
         </Alert>
         <FormGroup>
           {/* <header className={classes.Label}> Feature Image</header> */}
